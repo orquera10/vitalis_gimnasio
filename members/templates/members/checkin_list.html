@@ -12,13 +12,13 @@
         background: rgba(16, 185, 129, 0.12);
         border: 1px solid rgba(16, 185, 129, 0.35);
         color: #10b981;
-        padding: 0.45rem 1rem;
+        padding: 0.35rem 0.85rem;
         border-radius: 9999px;
-        font-size: 0.78rem;
+        font-size: 0.75rem;
         font-weight: 700;
         letter-spacing: 1px;
         text-transform: uppercase;
-        box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
+        box-shadow: 0 0 15px rgba(16, 185, 129, 0.15);
     }
 
     .pulse-dot-live {
@@ -35,29 +35,29 @@
         50% { transform: scale(1.6); opacity: 0.4; }
     }
 
-    /* Luxury KPI Cards */
+    /* KPI Cards */
     .access-kpi-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 1.25rem;
-        margin-bottom: 1.75rem;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1rem;
+        margin-bottom: 1.5rem;
     }
 
     .access-kpi-card {
         background: var(--bg-card);
         border: 1px solid var(--border-subtle);
         border-radius: var(--radius-lg);
-        padding: 1.5rem;
+        padding: 1.25rem 1.35rem;
         position: relative;
         overflow: hidden;
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        transition: all 0.25s ease;
     }
 
     .access-kpi-card:hover {
-        transform: translateY(-3px);
+        transform: translateY(-2px);
         border-color: var(--border-gold);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45), 0 0 25px rgba(245, 184, 46, 0.1);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
     }
 
     .access-kpi-card::before {
@@ -77,25 +77,25 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 0.75rem;
+        margin-bottom: 0.5rem;
     }
 
     .access-kpi-title {
-        font-size: 0.82rem;
+        font-size: 0.78rem;
         font-weight: 700;
         color: var(--text-muted);
-        letter-spacing: 1px;
+        letter-spacing: 0.8px;
         text-transform: uppercase;
     }
 
     .access-kpi-icon {
-        width: 44px;
-        height: 44px;
+        width: 38px;
+        height: 38px;
         border-radius: var(--radius-md);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.25rem;
+        font-size: 1.1rem;
     }
 
     .access-kpi-icon.gold {
@@ -118,41 +118,147 @@
 
     .access-kpi-number {
         font-family: 'Outfit', sans-serif;
-        font-size: 2.35rem;
+        font-size: 2.1rem;
         font-weight: 800;
         color: #ffffff;
         line-height: 1;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.35rem;
     }
 
     .access-kpi-desc {
-        font-size: 0.8rem;
+        font-size: 0.78rem;
         color: var(--text-secondary);
         display: flex;
         align-items: center;
         gap: 0.4rem;
     }
 
+    /* Compact Avatar */
+    .table-avatar-compact {
+        width: 38px !important;
+        height: 38px !important;
+        min-width: 38px !important;
+        max-width: 38px !important;
+        min-height: 38px !important;
+        max-height: 38px !important;
+        border-radius: 50% !important;
+        object-fit: cover !important;
+        flex-shrink: 0 !important;
+        display: block !important;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    /* High Density Table Rows */
+    .access-compact-table th {
+        padding: 0.75rem 0.85rem !important;
+        font-size: 0.75rem !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.8px !important;
+    }
+
+    .access-compact-table td {
+        padding: 0.55rem 0.85rem !important;
+        font-size: 0.85rem !important;
+        vertical-align: middle !important;
+    }
+
+    .access-compact-table tr:hover {
+        background: rgba(245, 184, 46, 0.04) !important;
+    }
+
+    /* Search and Filters Bar */
+    .access-search-box {
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-lg);
+        padding: 1.15rem 1.35rem;
+        margin-bottom: 1.25rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    }
+
+    .search-flex-container {
+        display: flex;
+        gap: 0.85rem;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .search-input-col {
+        flex: 1;
+        min-width: 260px;
+        position: relative;
+    }
+
+    .search-icon-inside {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--primary-gold);
+        font-size: 0.95rem;
+        pointer-events: none;
+    }
+
+    .access-text-input {
+        width: 100%;
+        background: rgba(0, 0, 0, 0.35);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-md);
+        padding: 0.7rem 1rem 0.7rem 2.6rem;
+        color: #ffffff;
+        font-size: 0.9rem;
+        outline: none;
+        transition: all 0.2s ease;
+    }
+
+    .access-text-input:focus {
+        border-color: var(--primary-gold);
+        background: rgba(0, 0, 0, 0.5);
+        box-shadow: 0 0 15px rgba(245, 184, 46, 0.2);
+    }
+
+    .access-text-input::placeholder {
+        color: var(--text-muted);
+        font-size: 0.85rem;
+    }
+
+    .access-select-box {
+        background: rgba(0, 0, 0, 0.35);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-md);
+        padding: 0.7rem 1rem;
+        color: #ffffff;
+        font-size: 0.85rem;
+        outline: none;
+        cursor: pointer;
+        min-width: 160px;
+    }
+
+    .access-select-box:focus {
+        border-color: var(--primary-gold);
+    }
+
     /* Filter Chips Bar */
     .filter-chips-row {
         display: flex;
-        gap: 0.5rem;
+        gap: 0.45rem;
         flex-wrap: wrap;
         margin-top: 0.75rem;
         padding-top: 0.75rem;
         border-top: 1px solid rgba(255, 255, 255, 0.05);
+        align-items: center;
     }
 
     .chip-btn {
         background: rgba(255, 255, 255, 0.03);
         border: 1px solid var(--border-subtle);
         color: var(--text-muted);
-        padding: 0.35rem 0.85rem;
+        padding: 0.3rem 0.75rem;
         border-radius: 9999px;
-        font-size: 0.78rem;
+        font-size: 0.75rem;
         font-weight: 600;
         text-decoration: none;
-        transition: all 0.2s ease;
+        transition: all 0.15s ease;
         display: inline-flex;
         align-items: center;
         gap: 0.35rem;
@@ -168,7 +274,7 @@
         background: rgba(245, 184, 46, 0.2);
         color: var(--primary-gold);
         border-color: var(--primary-gold);
-        box-shadow: 0 0 12px rgba(245, 184, 46, 0.2);
+        box-shadow: 0 0 10px rgba(245, 184, 46, 0.25);
     }
 
     /* OLED Time Pill */
@@ -176,13 +282,13 @@
         display: inline-flex;
         align-items: center;
         gap: 0.4rem;
-        background: rgba(0, 0, 0, 0.4);
+        background: rgba(0, 0, 0, 0.45);
         border: 1px solid rgba(255, 255, 255, 0.08);
         border-radius: var(--radius-sm);
-        padding: 0.35rem 0.65rem;
+        padding: 0.25rem 0.55rem;
         font-family: monospace;
-        font-size: 0.85rem;
-        color: #ffffff;
+        font-size: 0.8rem;
+        color: #e2e8f0;
     }
 
     .time-pill-oled strong {
@@ -195,12 +301,13 @@
         border: 1px solid rgba(16, 185, 129, 0.4);
         color: #34d399;
         font-weight: 700;
-        padding: 0.35rem 0.85rem;
+        padding: 0.25rem 0.7rem;
         border-radius: 9999px;
-        box-shadow: 0 0 12px rgba(16, 185, 129, 0.2);
+        font-size: 0.75rem;
         display: inline-flex;
         align-items: center;
-        gap: 0.35rem;
+        gap: 0.3rem;
+        white-space: nowrap;
     }
 
     .badge-glow-rose {
@@ -208,12 +315,13 @@
         border: 1px solid rgba(239, 68, 68, 0.4);
         color: #f87171;
         font-weight: 700;
-        padding: 0.35rem 0.85rem;
+        padding: 0.25rem 0.7rem;
         border-radius: 9999px;
-        box-shadow: 0 0 12px rgba(239, 68, 68, 0.2);
+        font-size: 0.75rem;
         display: inline-flex;
         align-items: center;
-        gap: 0.35rem;
+        gap: 0.3rem;
+        white-space: nowrap;
     }
 
     .badge-glow-amber {
@@ -221,12 +329,13 @@
         border: 1px solid rgba(245, 158, 11, 0.4);
         color: #fbbf24;
         font-weight: 700;
-        padding: 0.35rem 0.85rem;
+        padding: 0.25rem 0.7rem;
         border-radius: 9999px;
-        box-shadow: 0 0 12px rgba(245, 158, 11, 0.2);
+        font-size: 0.75rem;
         display: inline-flex;
         align-items: center;
-        gap: 0.35rem;
+        gap: 0.3rem;
+        white-space: nowrap;
     }
 </style>
 {% endblock %}
@@ -234,29 +343,25 @@
 {% block content %}
 <div class="page-container">
     
-    <!-- Header y Acciones Principales con Radar en Vivo -->
-    <div class="page-header-flex">
+    <!-- Header Limpio con Radar de Estado -->
+    <div class="page-header-flex" style="margin-bottom: 1.25rem;">
         <div>
-            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.4rem; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.35rem; flex-wrap: wrap;">
                 <div class="live-status-pill">
                     <span class="pulse-dot-live"></span>
                     <span>Feed de Acceso en Vivo</span>
                 </div>
-                <span style="font-size: 0.8rem; color: var(--text-muted);">Actualizado al instante</span>
+                <span style="font-size: 0.78rem; color: var(--text-muted);">Sincronizado en tiempo real</span>
             </div>
-            <h1 class="page-title">Control de Accesos & Molinetes</h1>
-            <p class="page-subtitle">Monitoreo en tiempo real de ingresos por DNI registrados en el terminal de recepción</p>
+            <h1 class="page-title" style="font-size: 1.65rem;">Control de Accesos & Molinetes</h1>
+            <p class="page-subtitle">Monitoreo cronológico de ingresos por DNI registrados en la puerta de entrada</p>
         </div>
         
-        <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
-            <button type="button" class="btn-outline" onclick="location.reload();" title="Recargar Registros" style="display: flex; align-items: center; gap: 0.4rem;">
+        <div style="display: flex; gap: 0.6rem; align-items: center;">
+            <button type="button" class="btn-outline" onclick="location.reload();" title="Recargar Registros" style="display: flex; align-items: center; gap: 0.4rem; padding: 0.55rem 1rem; font-size: 0.85rem;">
                 <i class="fa-solid fa-arrows-rotate"></i>
                 <span>Actualizar</span>
             </button>
-            <a href="{% url 'members:terminal' %}" target="_blank" class="btn-gold" style="text-decoration: none; padding: 0.65rem 1.35rem; display: flex; align-items: center; gap: 0.5rem; box-shadow: 0 8px 20px rgba(245, 184, 46, 0.3);">
-                <span>🚪</span>
-                <span>Abrir Terminal Kiosko ↗</span>
-            </a>
         </div>
     </div>
 
@@ -264,7 +369,7 @@
     <div class="access-kpi-grid">
         <div class="access-kpi-card gold">
             <div class="access-kpi-top">
-                <span class="access-kpi-title">Ingresos Registrados Hoy</span>
+                <span class="access-kpi-title">Ingresos Hoy</span>
                 <div class="access-kpi-icon gold">
                     <i class="fa-solid fa-id-card-clip"></i>
                 </div>
@@ -272,7 +377,7 @@
             <div class="access-kpi-number">{{ today_total }}</div>
             <div class="access-kpi-desc">
                 <i class="fa-regular fa-calendar-check" style="color: var(--primary-gold);"></i>
-                <span>Total de escaneos y DNIs ingresados hoy</span>
+                <span>Total de escaneos y DNIs hoy</span>
             </div>
         </div>
 
@@ -286,7 +391,7 @@
             <div class="access-kpi-number" style="color: #10b981;">{{ today_allowed }}</div>
             <div class="access-kpi-desc">
                 <i class="fa-solid fa-shield-halved" style="color: #10b981;"></i>
-                <span>Socios activos con membresía al día</span>
+                <span>Socios con cuota al día</span>
             </div>
         </div>
 
@@ -300,49 +405,46 @@
             <div class="access-kpi-number" style="color: #ef4444;">{{ today_denied }}</div>
             <div class="access-kpi-desc">
                 <i class="fa-solid fa-hand-holding-dollar" style="color: #ef4444;"></i>
-                <span>Requieren regularizar cuota en recepción</span>
+                <span>Requieren regularizar en mostrador</span>
             </div>
         </div>
     </div>
 
-    <!-- Barra de Filtros y Búsqueda -->
-    <div class="filter-card" style="margin-bottom: 1.5rem;">
-        <form method="get" class="filter-form">
-            <div class="search-input-wrapper">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon">
-                    <circle cx="11" cy="11" r="8"/>
-                    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                </svg>
-                <input 
-                    type="text" 
-                    name="q" 
-                    placeholder="Buscar por nombre, apellido o DNI del socio..." 
-                    value="{{ search_query }}" 
-                    class="filter-input"
-                >
-            </div>
+    <!-- Barra de Búsqueda & Filtros Integrada -->
+    <div class="access-search-box">
+        <form method="get">
+            <div class="search-flex-container">
+                <div class="search-input-col">
+                    <i class="fa-solid fa-magnifying-glass search-icon-inside"></i>
+                    <input 
+                        type="text" 
+                        name="q" 
+                        placeholder="Buscar socio por nombre, apellido o número de DNI..." 
+                        value="{{ search_query }}" 
+                        class="access-text-input"
+                    >
+                </div>
 
-            <div class="filter-group">
-                <select name="status" class="filter-select" onchange="this.form.submit()">
+                <select name="status" class="access-select-box" onchange="this.form.submit()">
                     <option value="">Todos los Estados</option>
-                    <option value="PERMITIDO" {% if current_status == 'PERMITIDO' %}selected{% endif %}>✓ Solo Permitidos (Al día)</option>
-                    <option value="VENCIDO" {% if current_status == 'VENCIDO' %}selected{% endif %}>⚠️ Solo Vencidos</option>
+                    <option value="PERMITIDO" {% if current_status == 'PERMITIDO' %}selected{% endif %}>🟢 Solo Permitidos</option>
+                    <option value="VENCIDO" {% if current_status == 'VENCIDO' %}selected{% endif %}>🔴 Solo Vencidos</option>
                     <option value="PENDIENTE" {% if current_status == 'PENDIENTE' %}selected{% endif %}>⏳ Cuotas Pendientes</option>
                     <option value="INACTIVO" {% if current_status == 'INACTIVO' %}selected{% endif %}>⛔ Inactivos</option>
                 </select>
 
-                <select name="date" class="filter-select" onchange="this.form.submit()">
+                <select name="date" class="access-select-box" onchange="this.form.submit()">
                     <option value="">Todas las Fechas</option>
                     <option value="today" {% if current_date_filter == 'today' %}selected{% endif %}>📅 Solo Hoy</option>
                     <option value="week" {% if current_date_filter == 'week' %}selected{% endif %}>📅 Últimos 7 Días</option>
                 </select>
 
-                <button type="submit" class="btn-gold" style="padding: 0.65rem 1.25rem;">
-                    Filtrar
+                <button type="submit" class="btn-gold" style="padding: 0.65rem 1.25rem; font-size: 0.85rem;">
+                    Buscar
                 </button>
 
                 {% if search_query or current_status or current_date_filter %}
-                    <a href="{% url 'members:checkin_list' %}" class="btn-outline" style="text-decoration: none; padding: 0.65rem 1rem;">
+                    <a href="{% url 'members:checkin_list' %}" class="btn-outline" style="text-decoration: none; padding: 0.65rem 0.9rem; font-size: 0.85rem;">
                         Limpiar
                     </a>
                 {% endif %}
@@ -351,7 +453,7 @@
 
         <!-- Filtros Rápidos en Chips -->
         <div class="filter-chips-row">
-            <span style="font-size: 0.75rem; color: var(--text-muted); display: flex; align-items: center; margin-right: 0.25rem;">Filtros rápidos:</span>
+            <span style="font-size: 0.75rem; color: var(--text-muted);">Acceso rápido:</span>
             <a href="{% url 'members:checkin_list' %}" class="chip-btn {% if not current_status and not current_date_filter %}active{% endif %}">
                 Todos
             </a>
@@ -370,29 +472,27 @@
         </div>
     </div>
 
-    <!-- Tabla Principal de Registros de Acceso -->
-    <div class="table-card">
-        <div class="card-header-flex">
+    <!-- Tabla de Registros Compacta para Visualizar Más Registros -->
+    <div class="table-card" style="padding: 1.25rem;">
+        <div class="card-header-flex" style="margin-bottom: 0.85rem;">
             <div>
-                <h3 class="card-title" style="display: flex; align-items: center; gap: 0.5rem;">
-                    <span>Historial de Accesos Registrados</span>
-                </h3>
-                <p class="card-subtitle">Registro cronológico de entradas con validación de membresía en puerta</p>
+                <h3 class="card-title" style="font-size: 1.05rem;">Historial de Ingresos Registrados</h3>
+                <p class="card-subtitle" style="font-size: 0.8rem;">Mostrando hasta 50 ingresos por página</p>
             </div>
-            <span class="badge badge-info" style="font-size: 0.85rem; padding: 0.4rem 0.9rem;">
-                {{ page_obj.paginator.count }} ingresos en total
+            <span class="badge badge-info" style="font-size: 0.8rem; padding: 0.35rem 0.75rem;">
+                {{ page_obj.paginator.count }} registros
             </span>
         </div>
 
         {% if checkins %}
             <div class="table-responsive">
-                <table class="custom-table">
+                <table class="custom-table access-compact-table">
                     <thead>
                         <tr>
                             <th>Fecha y Hora</th>
                             <th>Socio</th>
                             <th>DNI / Cédula</th>
-                            <th>Plan de Membresía</th>
+                            <th>Plan</th>
                             <th>Resultado</th>
                             <th>Detalles / Observaciones</th>
                             <th style="text-align: right;">Acciones</th>
@@ -409,28 +509,28 @@
                                 </div>
                             </td>
                             <td>
-                                <div class="table-user-cell">
-                                    <img src="{{ ci.member.avatar_url }}" alt="{{ ci.member.full_name }}" class="table-avatar" style="border: 2px solid {% if ci.status == 'PERMITIDO' %}#10b981{% elif ci.status == 'VENCIDO' %}#ef4444{% else %}#f59e0b{% endif %};">
+                                <div style="display: flex; align-items: center; gap: 0.65rem;">
+                                    <img src="{{ ci.member.avatar_url }}" alt="{{ ci.member.full_name }}" class="table-avatar-compact" style="border: 2px solid {% if ci.status == 'PERMITIDO' %}#10b981{% elif ci.status == 'VENCIDO' %}#ef4444{% else %}#f59e0b{% endif %};">
                                     <div>
-                                        <a href="{% url 'members:detail' ci.member.pk %}" style="font-weight: 700; color: #ffffff; text-decoration: none; font-size: 0.95rem;">
+                                        <a href="{% url 'members:detail' ci.member.pk %}" style="font-weight: 700; color: #ffffff; text-decoration: none; font-size: 0.88rem; display: block; line-height: 1.2;">
                                             {{ ci.member.full_name }}
                                         </a>
-                                        <div style="font-size: 0.75rem; color: var(--text-muted);">
+                                        <div style="font-size: 0.72rem; color: var(--text-muted);">
                                             {{ ci.member.email }}
                                         </div>
                                     </div>
                                 </div>
                             </td>
-                            <td style="font-family: monospace; font-size: 0.85rem; color: var(--text-secondary); font-weight: 600;">
+                            <td style="font-family: monospace; font-size: 0.85rem; color: var(--text-secondary); font-weight: 700; white-space: nowrap;">
                                 {{ ci.member.dni }}
                             </td>
-                            <td>
+                            <td style="white-space: nowrap;">
                                 {% if ci.member.plan %}
-                                    <span class="badge" style="background: rgba(245, 184, 46, 0.1); border: 1px solid var(--border-gold); color: var(--gold-primary);">
+                                    <span class="badge" style="background: rgba(245, 184, 46, 0.1); border: 1px solid var(--border-gold); color: var(--gold-primary); font-size: 0.75rem;">
                                         {{ ci.member.plan.name }}
                                     </span>
                                 {% else %}
-                                    <span style="font-size: 0.85rem; color: var(--text-muted);">Sin Plan</span>
+                                    <span style="font-size: 0.75rem; color: var(--text-muted);">Sin Plan</span>
                                 {% endif %}
                             </td>
                             <td>
@@ -450,15 +550,15 @@
                                     <span class="badge badge-secondary">{{ ci.get_status_display }}</span>
                                 {% endif %}
                             </td>
-                            <td style="font-size: 0.85rem; color: var(--text-secondary);">
+                            <td style="font-size: 0.82rem; color: var(--text-secondary); max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                                 {{ ci.notes|default:"Ingreso correcto" }}
                             </td>
                             <td style="text-align: right; white-space: nowrap;">
-                                <a href="{% url 'members:detail' ci.member.pk %}" class="btn-outline" style="padding: 0.35rem 0.75rem; font-size: 0.8rem; text-decoration: none;" title="Ver Ficha Técnica">
+                                <a href="{% url 'members:detail' ci.member.pk %}" class="btn-outline" style="padding: 0.3rem 0.65rem; font-size: 0.75rem; text-decoration: none;" title="Ver Ficha Técnica">
                                     👤 Ficha
                                 </a>
                                 {% if ci.status != 'PERMITIDO' %}
-                                    <a href="{% url 'payments:create' %}?member={{ ci.member.pk }}" class="btn-gold" style="padding: 0.35rem 0.85rem; font-size: 0.8rem; text-decoration: none; margin-left: 0.35rem; box-shadow: 0 4px 12px rgba(245, 184, 46, 0.35);" title="Cobrar y Habilitar Socio">
+                                    <a href="{% url 'payments:create' %}?member={{ ci.member.pk }}" class="btn-gold" style="padding: 0.3rem 0.75rem; font-size: 0.75rem; text-decoration: none; margin-left: 0.25rem; box-shadow: 0 4px 12px rgba(245, 184, 46, 0.35);" title="Cobrar y Habilitar Socio">
                                         💳 Cobrar
                                     </a>
                                 {% endif %}
@@ -471,18 +571,18 @@
 
             <!-- Paginación -->
             {% if is_paginated %}
-                <div class="pagination-container" style="margin-top: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
-                    <span style="font-size: 0.85rem; color: var(--text-muted);">
+                <div class="pagination-container" style="margin-top: 1.25rem; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 0.8rem; color: var(--text-muted);">
                         Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
                     </span>
-                    <div style="display: flex; gap: 0.5rem;">
+                    <div style="display: flex; gap: 0.4rem;">
                         {% if page_obj.has_previous %}
-                            <a href="?page={{ page_obj.previous_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}{% if current_status %}&status={{ current_status }}{% endif %}{% if current_date_filter %}&date={{ current_date_filter }}{% endif %}" class="btn-outline" style="padding: 0.4rem 0.85rem; font-size: 0.85rem; text-decoration: none;">
+                            <a href="?page={{ page_obj.previous_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}{% if current_status %}&status={{ current_status }}{% endif %}{% if current_date_filter %}&date={{ current_date_filter }}{% endif %}" class="btn-outline" style="padding: 0.35rem 0.75rem; font-size: 0.8rem; text-decoration: none;">
                                 &larr; Anterior
                             </a>
                         {% endif %}
                         {% if page_obj.has_next %}
-                            <a href="?page={{ page_obj.next_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}{% if current_status %}&status={{ current_status }}{% endif %}{% if current_date_filter %}&date={{ current_date_filter }}{% endif %}" class="btn-outline" style="padding: 0.4rem 0.85rem; font-size: 0.85rem; text-decoration: none;">
+                            <a href="?page={{ page_obj.next_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}{% if current_status %}&status={{ current_status }}{% endif %}{% if current_date_filter %}&date={{ current_date_filter }}{% endif %}" class="btn-outline" style="padding: 0.35rem 0.75rem; font-size: 0.8rem; text-decoration: none;">
                                 Siguiente &rarr;
                             </a>
                         {% endif %}
@@ -491,18 +591,14 @@
             {% endif %}
 
         {% else %}
-            <div style="text-align: center; padding: 3.5rem 1.5rem;">
-                <div style="width: 72px; height: 72px; border-radius: 50%; background: rgba(245, 184, 46, 0.1); border: 2px solid rgba(245, 184, 46, 0.3); display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 1.25rem; color: var(--primary-gold);">
+            <div style="text-align: center; padding: 3rem 1.5rem;">
+                <div style="width: 60px; height: 60px; border-radius: 50%; background: rgba(245, 184, 46, 0.1); border: 2px solid rgba(245, 184, 46, 0.3); display: flex; align-items: center; justify-content: center; font-size: 1.75rem; margin: 0 auto 1rem; color: var(--primary-gold);">
                     <i class="fa-solid fa-door-open"></i>
                 </div>
-                <h4 style="color: #ffffff; font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">No se encontraron ingresos</h4>
-                <p style="color: var(--text-muted); font-size: 0.9rem; max-width: 450px; margin: 0 auto 1.75rem; line-height: 1.5;">
+                <h4 style="color: #ffffff; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.4rem;">No se encontraron ingresos</h4>
+                <p style="color: var(--text-muted); font-size: 0.85rem; max-width: 450px; margin: 0 auto; line-height: 1.4;">
                     Los socios que ingresen su DNI en el terminal de recepción aparecerán registrados en esta pantalla automáticamente.
                 </p>
-                <a href="{% url 'members:terminal' %}" target="_blank" class="btn-gold" style="text-decoration: none; padding: 0.75rem 1.5rem; display: inline-flex; align-items: center; gap: 0.5rem; box-shadow: 0 10px 25px rgba(245, 184, 46, 0.3);">
-                    <span>🚪</span>
-                    <span>Abrir Terminal de Entrada en Kiosko</span>
-                </a>
             </div>
         {% endif %}
     </div>

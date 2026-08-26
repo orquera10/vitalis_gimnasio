@@ -290,7 +290,7 @@ class MemberCheckInListView(StaffRequiredMixin, ListView):
     model = MemberCheckIn
     template_name = 'members/checkin_list.html'
     context_object_name = 'checkins'
-    paginate_by = 25
+    paginate_by = 50
 
     def get_queryset(self):
         from .models import MemberCheckIn
