@@ -65,6 +65,16 @@ Sistema integral y multiplataforma de gestión de gimnasios, socios, clases, ent
 * **Mi Perfil (`/portal/perfil/`)**:
   * Consulta y actualización de datos personales, teléfono y contacto de emergencia.
 
+### 🚪 3. Terminal / Tótem de Entrada Kiosko (`/terminal/`)
+Pantalla de autoservicio para montar en tablets, tótems de entrada o molinetes en la recepción:
+
+* **Acceso por DNI**: El socio ingresa su DNI en el teclado numérico táctil de pantalla completa o lo escanea con un lector de código de barras / QR.
+* **🟢 Pantalla Verde (Al Día)**: Mensaje de bienvenida personalizado (*"¡Bienvenido/a, [Nombre]!"*), foto del socio, plan contratado, fecha de vencimiento y días restantes de vigencia, con sonido de confirmación.
+* **🔴 Pantalla Roja (Vencido)**: Mensaje de alerta visual y sonora (*"⚠️ Tu membresía venció el DD/MM/YYYY. Acércate a recepción"*).
+* **🟡 Pantalla Ámbar (Pendiente / No Encontrado)**: Aviso de cuota pendiente o DNI no registrado.
+* **Reinicio Automático**: Contador visual de 4 segundos que resetea la pantalla para el siguiente socio automáticamente.
+* **Registro de Asistencia**: Guarda cada ingreso con fecha y hora exacta en el historial del socio.
+
 ---
 
 ## 🚀 Cómo ejecutar el proyecto
@@ -99,6 +109,9 @@ python manage.py runserver
 * **Centro de Reportes & Analíticas**: [http://127.0.0.1:8000/reportes/](http://127.0.0.1:8000/reportes/)
 * **Centro de Configuración & Ajustes**: [http://127.0.0.1:8000/configuracion/](http://127.0.0.1:8000/configuracion/)
 * **Panel de Administración Django**: [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)
+
+#### 🚪 Terminal de Entrada / Kiosko:
+* **Tótem de Acceso por DNI**: [http://127.0.0.1:8000/terminal/](http://127.0.0.1:8000/terminal/)
 
 #### 📱 Portal de Autoservicio para Socios:
 * **Portal del Cliente**: [http://127.0.0.1:8000/portal/](http://127.0.0.1:8000/portal/)
@@ -157,4 +170,4 @@ python manage.py loaddata data_backup.json
 ```powershell
 python manage.py test
 ```
-* **64 pruebas unitarias e integrales pasando con éxito (OK 100%)**.
+* **69 pruebas unitarias e integrales pasando con éxito (OK 100%)**.

@@ -1,4 +1,4 @@
-﻿from django.test import TestCase, Client
+from django.test import TestCase, Client
 from django.urls import reverse
 from django.contrib.auth.models import User
 from .models import Plan, Member
@@ -102,3 +102,54 @@ class MemberTests(TestCase):
         # Autenticar con el DNI limpio como password
         clean_dni = self.member.dni.strip().replace('.', '').replace('-', '')
         self.assertTrue(self.client.login(username=clean_dni, password=clean_dni))
+
+    def test_kiosk_terminal_view_renders(self):
+        """Verifica que la pantalla del terminal kiosko renderice correctamente."""
+        response = self.client.get(reverse('members:terminal'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'members/kiosk_terminal.html')
+        self.assertContains(response, 'REGISTRO DE INGRESO')
+        self.assertContains(response, 'Tótem de Acceso Activo')
+
+    def test_kiosk_checkin_success_active_member(self):
+        """Verifica que un socio activo al día reciba confirmación verde y se registre su check-in."""
+        from members.models import MemberCheckIn
+        url = reverse('members:terminal_checkin')
+        response = self.client.post(url, {'dni': '18.432.910-K'})
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertEqual(data['status'], 'success')
+        self.assertIn('Sofía', data['title'])
+        self.assertEqual(data['member_name'], 'Sofía Rodriguez')
+        self.assertTrue(MemberCheckIn.objects.filter(member=self.member, status='PERMITIDO').exists())
+
+    def test_kiosk_checkin_expired_member(self):
+        """Verifica que un socio con membresía vencida reciba alerta roja."""
+        from datetime import date, timedelta
+        from members.models import MemberCheckIn
+        self.member.end_date = date.today() - timedelta(days=5)
+        self.member.status = 'VENCIDO'
+        self.member.save()
+
+        url = reverse('members:terminal_checkin')
+        response = self.client.post(url, {'dni': self.member.dni})
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertEqual(data['status'], 'expired')
+        self.assertEqual(data['title'], 'Membresía Vencida')
+        self.assertTrue(MemberCheckIn.objects.filter(member=self.member, status='VENCIDO').exists())
+
+    def test_kiosk_checkin_not_found(self):
+        """Verifica el comportamiento cuando el DNI no existe en el sistema."""
+        url = reverse('members:terminal_checkin')
+        response = self.client.post(url, {'dni': '9999999999'})
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertEqual(data['status'], 'not_found')
+        self.assertEqual(data['title'], 'DNI No Registrado')
+
+    def test_kiosk_checkin_empty_dni(self):
+        """Verifica que un DNI vacío devuelva error 400."""
+        url = reverse('members:terminal_checkin')
+        response = self.client.post(url, {'dni': ''})
+        self.assertEqual(response.status_code, 400)

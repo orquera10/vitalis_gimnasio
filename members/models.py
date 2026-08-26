@@ -1,4 +1,4 @@
-﻿from django.db import models
+from django.db import models
 from django.utils import timezone
 from datetime import timedelta
 from django.contrib.auth.models import User
@@ -203,3 +203,45 @@ class Member(TimeStampedModel):
         if not self.end_date and self.plan and self.start_date:
             self.end_date = self.start_date + timedelta(days=self.plan.duration_days)
         super().save(*args, **kwargs)
+
+
+class MemberCheckIn(TimeStampedModel):
+    """
+    Registro histórico de accesos y asistencias al gimnasio mediante el terminal de entrada / kiosko.
+    """
+    ACCESS_STATUS_CHOICES = [
+        ('PERMITIDO', 'Acceso Permitido (Al día)'),
+        ('VENCIDO', 'Acceso Denegado (Membresía Vencida)'),
+        ('PENDIENTE', 'Acceso Denegado (Pago Pendiente)'),
+        ('INACTIVO', 'Acceso Denegado (Socio Inactivo)'),
+    ]
+
+    member = models.ForeignKey(
+        Member,
+        on_delete=models.CASCADE,
+        related_name='checkins',
+        verbose_name="Socio"
+    )
+    status = models.CharField(
+        max_length=20,
+        choices=ACCESS_STATUS_CHOICES,
+        default='PERMITIDO',
+        verbose_name="Estado de Acceso"
+    )
+    checkin_time = models.DateTimeField(
+        default=timezone.now,
+        verbose_name="Fecha y Hora de Acceso"
+    )
+    notes = models.CharField(
+        max_length=255,
+        blank=True,
+        verbose_name="Observaciones / Mensaje"
+    )
+
+    class Meta:
+        verbose_name = "Registro de Acceso / Check-in"
+        verbose_name_plural = "Registros de Acceso / Check-ins"
+        ordering = ['-checkin_time']
+
+    def __str__(self):
+        return f"{self.member.full_name} - {self.get_status_display()} ({self.checkin_time.strftime('%d/%m/%Y %H:%M')})"

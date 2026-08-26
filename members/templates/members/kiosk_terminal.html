@@ -1,0 +1,925 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Terminal de Acceso | Vitalis Fitness Club</title>
+    
+    <link rel="shortcut icon" href="{% static 'core/img/vitalis_logo.png' %}" type="image/x-icon">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-base: #06090e;
+            --bg-card: rgba(15, 23, 42, 0.75);
+            --primary-gold: #f5b82e;
+            --primary-gold-hover: #dfa220;
+            --gold-glow: rgba(245, 184, 46, 0.35);
+            --accent-emerald: #10b981;
+            --emerald-glow: rgba(16, 185, 129, 0.4);
+            --accent-rose: #ef4444;
+            --rose-glow: rgba(239, 68, 68, 0.4);
+            --accent-amber: #f59e0b;
+            --amber-glow: rgba(245, 158, 11, 0.4);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-glass: rgba(245, 184, 46, 0.2);
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --radius-xl: 24px;
+            --radius-lg: 16px;
+            --radius-md: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: radial-gradient(circle at 50% 0%, #151d30 0%, #06090e 70%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            user-select: none;
+        }
+
+        /* Top Header */
+        .kiosk-header {
+            padding: 1.25rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-subtle);
+            background: rgba(6, 9, 14, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 10;
+        }
+
+        .kiosk-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .kiosk-logo-img {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: 2px solid var(--primary-gold);
+            box-shadow: 0 0 16px var(--gold-glow);
+        }
+
+        .kiosk-brand-text h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 1px;
+            line-height: 1.1;
+        }
+
+        .kiosk-brand-text span {
+            font-size: 0.72rem;
+            color: var(--primary-gold);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Clock & Date Widget */
+        .kiosk-clock-box {
+            text-align: right;
+        }
+
+        .kiosk-clock-time {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+
+        .kiosk-clock-date {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            text-transform: capitalize;
+        }
+
+        .kiosk-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .kiosk-btn-icon {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .kiosk-btn-icon:hover {
+            background: rgba(245, 184, 46, 0.15);
+            color: var(--primary-gold);
+            border-color: var(--primary-gold);
+        }
+
+        /* Main Workspace Container */
+        .kiosk-main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        /* State 1: Input Card */
+        .kiosk-card {
+            width: 100%;
+            max-width: 480px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-xl);
+            padding: 2.25rem 2rem;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 35px var(--gold-glow);
+            backdrop-filter: blur(20px);
+            text-align: center;
+            position: relative;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .kiosk-badge-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(245, 184, 46, 0.12);
+            border: 1px solid var(--border-glass);
+            color: var(--primary-gold);
+            padding: 0.35rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+
+        .kiosk-badge-tag i {
+            animation: pulse-dot 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.6; }
+        }
+
+        .kiosk-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.85rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 0.25rem;
+        }
+
+        .kiosk-subtitle {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Display Box */
+        .dni-display-wrapper {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .dni-input-field {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 1rem 1.25rem;
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-gold);
+            text-align: center;
+            letter-spacing: 4px;
+            outline: none;
+            transition: all 0.25s ease;
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .dni-input-field:focus {
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 25px var(--gold-glow), inset 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .dni-input-field::placeholder {
+            color: rgba(255, 255, 255, 0.15);
+            font-size: 1.35rem;
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+
+        /* On-Screen Numeric Keypad */
+        .kiosk-numpad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .num-key {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            color: #ffffff;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            height: 62px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            user-select: none;
+        }
+
+        .num-key:active, .num-key.pressed {
+            background: rgba(245, 184, 46, 0.25);
+            border-color: var(--primary-gold);
+            color: var(--primary-gold);
+            transform: scale(0.94);
+        }
+
+        .num-key.key-action {
+            font-size: 1.15rem;
+            background: rgba(255, 255, 255, 0.02);
+            color: var(--text-muted);
+        }
+
+        .num-key.key-action:active {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--accent-rose);
+            border-color: var(--accent-rose);
+        }
+
+        /* Main Submit Button */
+        .btn-checkin-submit {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-gold-hover) 100%);
+            border: none;
+            border-radius: var(--radius-lg);
+            padding: 1.1rem;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #0b0f17;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            box-shadow: 0 10px 25px rgba(245, 184, 46, 0.35);
+            transition: all 0.25s ease;
+        }
+
+        .btn-checkin-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 30px rgba(245, 184, 46, 0.5);
+        }
+
+        .btn-checkin-submit:active {
+            transform: translateY(1px);
+        }
+
+        .btn-checkin-submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* State 2: Result Overlay / Card */
+        .kiosk-result-card {
+            display: none;
+            width: 100%;
+            max-width: 520px;
+            border-radius: var(--radius-xl);
+            padding: 2.75rem 2rem;
+            text-align: center;
+            backdrop-filter: blur(25px);
+            position: relative;
+            animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Theme: SUCCESS (Green) */
+        .result-theme-success {
+            background: rgba(10, 38, 26, 0.88);
+            border: 2px solid var(--accent-emerald);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8), 0 0 60px var(--emerald-glow);
+        }
+
+        /* Theme: EXPIRED / DANGER (Red) */
+        .result-theme-expired {
+            background: rgba(45, 12, 16, 0.88);
+            border: 2px solid var(--accent-rose);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8), 0 0 60px var(--rose-glow);
+        }
+
+        /* Theme: PENDING / WARNING (Amber) */
+        .result-theme-pending {
+            background: rgba(45, 28, 10, 0.88);
+            border: 2px solid var(--accent-amber);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8), 0 0 60px var(--amber-glow);
+        }
+
+        /* Result Components */
+        .result-icon-circle {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.75rem;
+            margin: 0 auto 1.25rem;
+        }
+
+        .result-theme-success .result-icon-circle {
+            background: rgba(16, 185, 129, 0.2);
+            border: 2px solid var(--accent-emerald);
+            color: var(--accent-emerald);
+            box-shadow: 0 0 30px var(--emerald-glow);
+        }
+
+        .result-theme-expired .result-icon-circle {
+            background: rgba(239, 68, 68, 0.2);
+            border: 2px solid var(--accent-rose);
+            color: var(--accent-rose);
+            box-shadow: 0 0 30px var(--rose-glow);
+        }
+
+        .result-theme-pending .result-icon-circle {
+            background: rgba(245, 158, 11, 0.2);
+            border: 2px solid var(--accent-amber);
+            color: var(--accent-amber);
+            box-shadow: 0 0 30px var(--amber-glow);
+        }
+
+        .result-avatar-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #ffffff;
+            margin: 0 auto 1rem;
+            display: block;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .result-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.1rem;
+            font-weight: 900;
+            color: #ffffff;
+            line-height: 1.2;
+            margin-bottom: 0.4rem;
+        }
+
+        .result-member-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #e2e8f0;
+            margin-bottom: 0.75rem;
+        }
+
+        .result-badge {
+            display: inline-block;
+            padding: 0.4rem 1.1rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 1.25rem;
+        }
+
+        .result-theme-success .result-badge {
+            background: rgba(16, 185, 129, 0.25);
+            border: 1px solid var(--accent-emerald);
+            color: #6ee7b7;
+        }
+
+        .result-theme-expired .result-badge {
+            background: rgba(239, 68, 68, 0.25);
+            border: 1px solid var(--accent-rose);
+            color: #fca5a5;
+        }
+
+        .result-theme-pending .result-badge {
+            background: rgba(245, 158, 11, 0.25);
+            border: 1px solid var(--accent-amber);
+            color: #fde68a;
+        }
+
+        .result-message-box {
+            background: rgba(0, 0, 0, 0.35);
+            border-radius: var(--radius-md);
+            padding: 1rem 1.25rem;
+            font-size: 0.95rem;
+            color: #f1f5f9;
+            line-height: 1.5;
+            margin-bottom: 1.75rem;
+        }
+
+        /* Countdown Progress Bar */
+        .countdown-wrapper {
+            margin-bottom: 1rem;
+        }
+
+        .countdown-bar-bg {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 9999px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .countdown-bar-fill {
+            height: 100%;
+            width: 100%;
+            background: #ffffff;
+            transition: width 0.1s linear;
+        }
+
+        .countdown-text {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .btn-result-reset {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            border-radius: var(--radius-md);
+            padding: 0.75rem 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-result-reset:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Footer Info */
+        .kiosk-footer {
+            padding: 1rem 2rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-subtle);
+            background: rgba(6, 9, 14, 0.85);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="kiosk-header">
+        <a href="{% url 'core:home' %}" class="kiosk-brand">
+            <img src="{% static 'core/img/vitalis_logo.png' %}" alt="Vitalis Logo" class="kiosk-logo-img">
+            <div class="kiosk-brand-text">
+                <h1>VITALIS FITNESS</h1>
+                <span>Terminal de Entrada</span>
+            </div>
+        </a>
+
+        <!-- Clock Widget -->
+        <div class="kiosk-clock-box">
+            <div class="kiosk-clock-time" id="liveClock">--:--:--</div>
+            <div class="kiosk-clock-date" id="liveDate">Cargando fecha...</div>
+        </div>
+
+        <!-- Right Action Controls -->
+        <div class="kiosk-actions">
+            <button class="kiosk-btn-icon" id="btnToggleFullscreen" title="Pantalla Completa" aria-label="Pantalla completa">
+                <i class="fa-solid fa-expand"></i>
+            </button>
+            <a href="{% url 'core:home' %}" class="kiosk-btn-icon" title="Volver al Panel" aria-label="Volver al panel">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="kiosk-main">
+        
+        <!-- CARD 1: DNI Input Form -->
+        <div class="kiosk-card" id="kioskInputCard">
+            <div class="kiosk-badge-tag">
+                <i class="fa-solid fa-circle"></i>
+                <span>Tótem de Acceso Activo</span>
+            </div>
+
+            <h2 class="kiosk-title">REGISTRO DE INGRESO</h2>
+            <p class="kiosk-subtitle">Digita o escanea tu DNI para habilitar el acceso</p>
+
+            <!-- DNI Input -->
+            <form id="checkInForm" autocomplete="off" onsubmit="event.preventDefault(); submitCheckIn();">
+                <div class="dni-display-wrapper">
+                    <input 
+                        type="text" 
+                        id="dniInput" 
+                        class="dni-input-field" 
+                        placeholder="INGRESAR DNI"
+                        maxlength="12"
+                        autofocus
+                        inputmode="numeric"
+                    >
+                </div>
+
+                <!-- On-Screen Numpad -->
+                <div class="kiosk-numpad">
+                    <button type="button" class="num-key" onclick="appendDigit('1')">1</button>
+                    <button type="button" class="num-key" onclick="appendDigit('2')">2</button>
+                    <button type="button" class="num-key" onclick="appendDigit('3')">3</button>
+                    
+                    <button type="button" class="num-key" onclick="appendDigit('4')">4</button>
+                    <button type="button" class="num-key" onclick="appendDigit('5')">5</button>
+                    <button type="button" class="num-key" onclick="appendDigit('6')">6</button>
+                    
+                    <button type="button" class="num-key" onclick="appendDigit('7')">7</button>
+                    <button type="button" class="num-key" onclick="appendDigit('8')">8</button>
+                    <button type="button" class="num-key" onclick="appendDigit('9')">9</button>
+                    
+                    <button type="button" class="num-key key-action" onclick="clearDni()"><i class="fa-solid fa-trash-can"></i></button>
+                    <button type="button" class="num-key" onclick="appendDigit('0')">0</button>
+                    <button type="button" class="num-key key-action" onclick="backspaceDni()"><i class="fa-solid fa-delete-left"></i></button>
+                </div>
+
+                <button type="submit" class="btn-checkin-submit" id="btnSubmit">
+                    <span>INGRESAR</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </form>
+        </div>
+
+        <!-- CARD 2: Animated Result Screen (Populated dynamically) -->
+        <div class="kiosk-result-card" id="kioskResultCard">
+            <!-- Icon -->
+            <div class="result-icon-circle" id="resIcon">
+                <i class="fa-solid fa-check"></i>
+            </div>
+
+            <!-- Avatar -->
+            <img src="" alt="Foto Socio" class="result-avatar-img" id="resAvatar" style="display: none;">
+
+            <!-- Titles -->
+            <h2 class="result-title" id="resTitle">¡BIENVENIDO!</h2>
+            <div class="result-member-name" id="resName">Juan Pérez</div>
+            <div class="result-badge" id="resBadge">Black Pass VIP • Vence 25/09/2026</div>
+
+            <!-- Message Box -->
+            <div class="result-message-box" id="resMessage">
+                Acceso registrado exitosamente.
+            </div>
+
+            <!-- Countdown Bar -->
+            <div class="countdown-wrapper">
+                <div class="countdown-bar-bg">
+                    <div class="countdown-bar-fill" id="countdownFill"></div>
+                </div>
+                <span class="countdown-text" id="countdownText">Reiniciando en 4s...</span>
+            </div>
+
+            <button type="button" class="btn-result-reset" onclick="resetToInputState()">
+                <i class="fa-solid fa-rotate-left"></i> Siguiente Socio
+            </button>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="kiosk-footer">
+        <span>Vitalis Fitness Club • Sistema de Control de Accesos y Asistencias</span>
+    </footer>
+
+    <!-- Audio Synthesis & Interaction Script -->
+    <script>
+        // Reloj digital en vivo
+        function updateClock() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('es-AR', { hour12: false });
+            const dateStr = now.toLocaleDateString('es-AR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+            
+            document.getElementById('liveClock').textContent = timeStr;
+            document.getElementById('liveDate').textContent = dateStr;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Web Audio API Synthesizer (Sin dependencias externas)
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        function playSound(type) {
+            try {
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+                const now = audioCtx.currentTime;
+
+                if (type === 'success') {
+                    // Acorde triunfal ascendente (C5 -> E5 -> G5)
+                    [523.25, 659.25, 783.99].forEach((freq, idx) => {
+                        const osc = audioCtx.createOscillator();
+                        const gain = audioCtx.createGain();
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(freq, now + (idx * 0.08));
+                        gain.gain.setValueAtTime(0.2, now + (idx * 0.08));
+                        gain.gain.exponentialRampToValueAtTime(0.001, now + (idx * 0.08) + 0.4);
+                        osc.connect(gain);
+                        gain.connect(audioCtx.destination);
+                        osc.start(now + (idx * 0.08));
+                        osc.stop(now + (idx * 0.08) + 0.45);
+                    });
+                } else if (type === 'error') {
+                    // Tono grave de alerta doble
+                    [220, 180].forEach((freq, idx) => {
+                        const osc = audioCtx.createOscillator();
+                        const gain = audioCtx.createGain();
+                        osc.type = 'sawtooth';
+                        osc.frequency.setValueAtTime(freq, now + (idx * 0.15));
+                        gain.gain.setValueAtTime(0.25, now + (idx * 0.15));
+                        gain.gain.exponentialRampToValueAtTime(0.001, now + (idx * 0.15) + 0.3);
+                        osc.connect(gain);
+                        gain.connect(audioCtx.destination);
+                        osc.start(now + (idx * 0.15));
+                        osc.stop(now + (idx * 0.15) + 0.35);
+                    });
+                } else if (type === 'click') {
+                    // Click táctil hápico suave
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(600, now);
+                    gain.gain.setValueAtTime(0.08, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.05);
+                }
+            } catch (e) {
+                console.warn("Audio playback not supported or interaction needed:", e);
+            }
+        }
+
+        // Numpad Functions
+        const dniInput = document.getElementById('dniInput');
+        
+        function appendDigit(digit) {
+            playSound('click');
+            if (dniInput.value.length < 12) {
+                dniInput.value += digit;
+            }
+            dniInput.focus();
+        }
+
+        function backspaceDni() {
+            playSound('click');
+            dniInput.value = dniInput.value.slice(0, -1);
+            dniInput.focus();
+        }
+
+        function clearDni() {
+            playSound('click');
+            dniInput.value = '';
+            dniInput.focus();
+        }
+
+        // Fullscreen Toggle
+        document.getElementById('btnToggleFullscreen').addEventListener('click', () => {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => console.log(err));
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        });
+
+        // CSRF Token Helper
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        let resetTimer = null;
+        let countdownInterval = null;
+
+        // Check-in AJAX Submit
+        async function submitCheckIn() {
+            const dni = dniInput.value.trim();
+            if (!dni) {
+                dniInput.focus();
+                return;
+            }
+
+            const btnSubmit = document.getElementById('btnSubmit');
+            btnSubmit.disabled = true;
+            btnSubmit.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i><span>VERIFICANDO...</span>`;
+
+            try {
+                const formData = new FormData();
+                formData.append('dni', dni);
+
+                const response = await fetch("{% url 'members:terminal_checkin' %}", {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': getCookie('csrftoken') || '',
+                    },
+                    body: formData
+                });
+
+                const data = await response.json();
+                showResultScreen(data);
+            } catch (err) {
+                console.error("Check-in error:", err);
+                showResultScreen({
+                    status: 'error',
+                    title: 'Error de Conexión',
+                    message: 'No se pudo contactar con el servidor. Intenta de nuevo o consulta en recepción.'
+                });
+            } finally {
+                btnSubmit.disabled = false;
+                btnSubmit.innerHTML = `<span>INGRESAR</span><i class="fa-solid fa-arrow-right"></i>`;
+            }
+        }
+
+        // Show Result Card with appropriate visual/audio state
+        function showResultScreen(data) {
+            const inputCard = document.getElementById('kioskInputCard');
+            const resultCard = document.getElementById('kioskResultCard');
+            
+            const resIcon = document.getElementById('resIcon');
+            const resAvatar = document.getElementById('resAvatar');
+            const resTitle = document.getElementById('resTitle');
+            const resName = document.getElementById('resName');
+            const resBadge = document.getElementById('resBadge');
+            const resMessage = document.getElementById('resMessage');
+
+            // Reset classes
+            resultCard.className = 'kiosk-result-card';
+
+            if (data.status === 'success') {
+                playSound('success');
+                resultCard.classList.add('result-theme-success');
+                resIcon.innerHTML = `<i class="fa-solid fa-check"></i>`;
+                resTitle.textContent = data.title || '¡BIENVENIDO/A!';
+                resName.textContent = data.member_name || '';
+                resBadge.textContent = `${data.plan_name || 'Plan Activo'} • ${data.days_left} días restantes (Vence: ${data.end_date})`;
+                resBadge.style.display = 'inline-block';
+                resMessage.textContent = data.message || 'Acceso registrado correctamente.';
+            } else if (data.status === 'expired') {
+                playSound('error');
+                resultCard.classList.add('result-theme-expired');
+                resIcon.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i>`;
+                resTitle.textContent = data.title || 'MEMBRESÍA VENCIDA';
+                resName.textContent = data.member_name || '';
+                resBadge.textContent = `Venció: ${data.end_date || 'Fecha expirada'} • ${data.plan_name || 'Plan'}`;
+                resBadge.style.display = 'inline-block';
+                resMessage.textContent = data.message || 'Por favor regulariza tu cuota en recepción.';
+            } else {
+                // Pending, Inactive, Not Found
+                playSound('error');
+                resultCard.classList.add('result-theme-pending');
+                resIcon.innerHTML = `<i class="fa-solid fa-circle-info"></i>`;
+                resTitle.textContent = data.title || 'ATENCIÓN';
+                resName.textContent = data.member_name || '';
+                resBadge.style.display = data.member_name ? 'inline-block' : 'none';
+                resBadge.textContent = data.plan_name || 'Consulta en recepción';
+                resMessage.textContent = data.message || 'Por favor acércate a recepción.';
+            }
+
+            // Avatar Handling
+            if (data.avatar_url && data.status !== 'not_found' && data.status !== 'error') {
+                resAvatar.src = data.avatar_url;
+                resAvatar.style.display = 'block';
+            } else {
+                resAvatar.style.display = 'none';
+            }
+
+            // Switch views
+            inputCard.style.display = 'none';
+            resultCard.style.display = 'block';
+
+            // Start countdown timer to auto-reset
+            startAutoResetTimer(data.status === 'success' ? 4 : 5);
+        }
+
+        // Auto Reset Countdown
+        function startAutoResetTimer(seconds) {
+            clearTimeout(resetTimer);
+            clearInterval(countdownInterval);
+
+            let remaining = seconds;
+            const totalMs = seconds * 1000;
+            const startTime = Date.now();
+
+            const countdownFill = document.getElementById('countdownFill');
+            const countdownText = document.getElementById('countdownText');
+
+            countdownInterval = setInterval(() => {
+                const elapsed = Date.now() - startTime;
+                const progressPct = Math.max(0, 100 - (elapsed / totalMs * 100));
+                countdownFill.style.width = `${progressPct}%`;
+                
+                const secsLeft = Math.ceil((totalMs - elapsed) / 1000);
+                if (secsLeft > 0) {
+                    countdownText.textContent = `Reiniciando en ${secsLeft}s...`;
+                }
+            }, 50);
+
+            resetTimer = setTimeout(() => {
+                resetToInputState();
+            }, totalMs);
+        }
+
+        function resetToInputState() {
+            clearTimeout(resetTimer);
+            clearInterval(countdownInterval);
+
+            document.getElementById('kioskResultCard').style.display = 'none';
+            document.getElementById('kioskInputCard').style.display = 'block';
+            
+            dniInput.value = '';
+            dniInput.focus();
+        }
+
+        // Auto-focus on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            dniInput.focus();
+        });
+
+        // Re-focus on any outer click
+        document.body.addEventListener('click', (e) => {
+            if (document.getElementById('kioskInputCard').style.display !== 'none') {
+                if (!e.target.closest('.num-key') && !e.target.closest('.btn-checkin-submit') && !e.target.closest('.kiosk-actions')) {
+                    dniInput.focus();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

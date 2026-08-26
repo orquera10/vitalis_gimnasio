@@ -1,11 +1,12 @@
-﻿from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from core.permissions import MembersManageRequiredMixin, StaffRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View, TemplateView
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 from django.urls import reverse_lazy, reverse
 from django.db.models import Q
+from django.utils import timezone
 from .models import Member, Plan
 from .forms import MemberForm
 
@@ -169,3 +170,114 @@ class MemberPortalResetPasswordView(MembersManageRequiredMixin, View):
         return redirect('members:detail', pk=member.pk)
 
 
+class KioskTerminalView(TemplateView):
+    """
+    Vista de pantalla completa autónoma (Kiosk Mode) para el terminal / tótem de entrada al gimnasio.
+    """
+    template_name = 'members/kiosk_terminal.html'
+
+
+class KioskCheckInAPIView(View):
+    """
+    Endpoint AJAX para procesar el check-in de acceso por DNI:
+    - Retorna status: 'success' si está al día (Verde)
+    - Retorna status: 'expired' si venció su membresía (Rojo)
+    - Retorna status: 'pending' si tiene pago pendiente (Ámbar)
+    - Retorna status: 'not_found' si el DNI no está registrado
+    """
+    def post(self, request, *args, **kwargs):
+        from django.http import JsonResponse
+        from django.db.models import Q
+        from .models import MemberCheckIn
+
+        raw_dni = request.POST.get('dni', '').strip()
+        if not raw_dni:
+            return JsonResponse({'status': 'error', 'message': 'Por favor ingresa un número de DNI válido.'}, status=400)
+
+        # Normalizar DNI para búsqueda flexible (con o sin puntos/guiones)
+        clean_dni = raw_dni.replace('.', '').replace('-', '').replace(' ', '')
+
+        member = Member.objects.filter(
+            Q(dni__iexact=raw_dni) |
+            Q(dni__icontains=clean_dni)
+        ).first()
+
+        if not member:
+            return JsonResponse({
+                'status': 'not_found',
+                'title': 'DNI No Registrado',
+                'message': f'El documento "{raw_dni}" no figura en el sistema. Por favor acércate a recepción.',
+            })
+
+        today = timezone.now().date()
+        is_expired = False
+        if member.end_date and member.end_date < today:
+            is_expired = True
+        elif member.status == 'VENCIDO':
+            is_expired = True
+
+        # 1. Caso: Membresía Vencida (Pantalla Roja)
+        if is_expired:
+            MemberCheckIn.objects.create(
+                member=member,
+                status='VENCIDO',
+                notes='Intento de acceso con membresía vencida'
+            )
+            return JsonResponse({
+                'status': 'expired',
+                'title': 'Membresía Vencida',
+                'member_name': member.full_name,
+                'avatar_url': member.avatar_url,
+                'plan_name': member.plan.name if member.plan else 'Sin Plan',
+                'end_date': member.end_date.strftime('%d/%m/%Y') if member.end_date else 'Vencida',
+                'message': f'Tu plan venció el {member.end_date.strftime("%d/%m/%Y") if member.end_date else "anteriormente"}. Por favor acércate a recepción para regularizar tu cuota.',
+            })
+
+        # 2. Caso: Estado Pendiente o Inactivo
+        if member.status == 'PENDIENTE':
+            MemberCheckIn.objects.create(
+                member=member,
+                status='PENDIENTE',
+                notes='Intento de acceso con cuota pendiente'
+            )
+            return JsonResponse({
+                'status': 'pending',
+                'title': 'Cuota Pendiente de Pago',
+                'member_name': member.full_name,
+                'avatar_url': member.avatar_url,
+                'plan_name': member.plan.name if member.plan else 'Cuota',
+                'message': 'Tienes una cuota registrada pendiente de cobro. Consulta en recepción.',
+            })
+
+        if member.status == 'INACTIVA':
+            MemberCheckIn.objects.create(
+                member=member,
+                status='INACTIVO',
+                notes='Intento de acceso socio inactivo'
+            )
+            return JsonResponse({
+                'status': 'inactive',
+                'title': 'Socio Inactivo',
+                'member_name': member.full_name,
+                'avatar_url': member.avatar_url,
+                'message': 'Tu membresía se encuentra inactiva. Por favor consulta en recepción.',
+            })
+
+        # 3. Caso Exitoso: Membresía Al Día (Pantalla Verde)
+        days_left = (member.end_date - today).days if member.end_date else 30
+        MemberCheckIn.objects.create(
+            member=member,
+            status='PERMITIDO',
+            notes='Ingreso registrado por terminal kiosko'
+        )
+
+        return JsonResponse({
+            'status': 'success',
+            'title': f'¡Bienvenido/a, {member.first_name}!',
+            'member_name': member.full_name,
+            'avatar_url': member.avatar_url,
+            'plan_name': member.plan.name if member.plan else 'Membresía Activa',
+            'end_date': member.end_date.strftime('%d/%m/%Y') if member.end_date else '',
+            'days_left': max(0, days_left),
+            'message': 'Acceso registrado correctamente. ¡Que tengas un excelente entrenamiento!',
+        })
