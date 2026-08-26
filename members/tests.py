@@ -153,3 +153,14 @@ class MemberTests(TestCase):
         url = reverse('members:terminal_checkin')
         response = self.client.post(url, {'dni': ''})
         self.assertEqual(response.status_code, 400)
+
+    def test_checkin_list_view_authenticated(self):
+        """Verifica que el staff pueda ver el feed en vivo de accesos."""
+        from members.models import MemberCheckIn
+        MemberCheckIn.objects.create(member=self.member, status='PERMITIDO')
+        self.client.login(username='admin_test', password='TestPassword123!')
+        response = self.client.get(reverse('members:checkin_list'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'members/checkin_list.html')
+        self.assertContains(response, 'Control de Accesos en Vivo')
+        self.assertContains(response, self.member.full_name)

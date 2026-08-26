@@ -7,7 +7,8 @@ from .views import (
     MemberDeleteView,
     MemberPortalResetPasswordView,
     KioskTerminalView,
-    KioskCheckInAPIView
+    KioskCheckInAPIView,
+    MemberCheckInListView
 )
 
 app_name = 'members'
@@ -15,6 +16,7 @@ app_name = 'members'
 urlpatterns = [
     path('', MemberListView.as_view(), name='list'),
     path('nuevo/', MemberCreateView.as_view(), name='create'),
+    path('accesos/', MemberCheckInListView.as_view(), name='checkin_list'),
     path('terminal/', KioskTerminalView.as_view(), name='terminal'),
     path('terminal/checkin/', KioskCheckInAPIView.as_view(), name='terminal_checkin'),
     path('<int:pk>/', MemberDetailView.as_view(), name='detail'),

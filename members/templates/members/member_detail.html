@@ -1,4 +1,4 @@
-﻿{% extends 'base.html' %}
+{% extends 'base.html' %}
 
 {% block title %}Ficha de {{ member.full_name }} | Vitalis Fitness{% endblock %}
 
@@ -349,7 +349,7 @@
                                     <th>Fecha</th>
                                     <th>Monto</th>
                                     <th>Estado</th>
-                                    <th style="text-align: right;">Recibo</th>
+                                    <th style="text-align: right;">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -399,9 +399,62 @@
                 {% endif %}
             </div>
 
+            <!-- Tarjeta de Registro de Accesos / Check-ins en Terminal -->
+            <div class="table-card" style="margin-top: 1.25rem;">
+                <div class="card-header-flex" style="margin-bottom: 0.75rem;">
+                    <div>
+                        <h3 class="card-title" style="color: var(--gold-primary);">
+                            🚪 Registro de Entradas (Tótem de Acceso)
+                        </h3>
+                        <p class="card-subtitle">Historial de ingresos por DNI registrados en la puerta de entrada</p>
+                    </div>
+                </div>
+
+                {% if member.checkins.all %}
+                    <div class="table-responsive">
+                        <table class="custom-table">
+                            <thead>
+                                <tr>
+                                    <th>Fecha y Hora</th>
+                                    <th>Resultado</th>
+                                    <th>Detalles / Observaciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for ci in member.checkins.all %}
+                                <tr>
+                                    <td style="font-family: monospace; font-size: 0.85rem; color: #ffffff;">
+                                        📅 {{ ci.checkin_time|date:"d/m/Y H:i:s" }}
+                                    </td>
+                                    <td>
+                                        {% if ci.status == 'PERMITIDO' %}
+                                            <span class="badge badge-success">✓ Acceso Permitido</span>
+                                        {% elif ci.status == 'VENCIDO' %}
+                                            <span class="badge badge-danger">⚠️ Membresía Vencida</span>
+                                        {% elif ci.status == 'PENDIENTE' %}
+                                            <span class="badge badge-warning">⏳ Pago Pendiente</span>
+                                        {% else %}
+                                            <span class="badge badge-secondary">{{ ci.get_status_display }}</span>
+                                        {% endif %}
+                                    </td>
+                                    <td style="font-size: 0.85rem; color: var(--text-secondary);">
+                                        {{ ci.notes|default:"Ingreso regular por terminal" }}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p style="color: var(--text-muted); font-size: 0.85rem; padding: 0.5rem 0;">
+                        No hay registros de ingresos en terminal para este socio aún.
+                    </p>
+                {% endif %}
+            </div>
+
         </div>
 
     </div>
 
 </div>
-{% endblock %}
+{% endblock %}

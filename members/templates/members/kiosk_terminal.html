@@ -527,13 +527,13 @@
 
     <!-- Header -->
     <header class="kiosk-header">
-        <a href="{% url 'core:home' %}" class="kiosk-brand">
+        <div class="kiosk-brand">
             <img src="{% static 'core/img/vitalis_logo.png' %}" alt="Vitalis Logo" class="kiosk-logo-img">
             <div class="kiosk-brand-text">
                 <h1>VITALIS FITNESS</h1>
                 <span>Terminal de Entrada</span>
             </div>
-        </a>
+        </div>
 
         <!-- Clock Widget -->
         <div class="kiosk-clock-box">
@@ -541,14 +541,11 @@
             <div class="kiosk-clock-date" id="liveDate">Cargando fecha...</div>
         </div>
 
-        <!-- Right Action Controls -->
+        <!-- Right Action Controls (Solo Pantalla Completa para Kiosko Seguro) -->
         <div class="kiosk-actions">
             <button class="kiosk-btn-icon" id="btnToggleFullscreen" title="Pantalla Completa" aria-label="Pantalla completa">
                 <i class="fa-solid fa-expand"></i>
             </button>
-            <a href="{% url 'core:home' %}" class="kiosk-btn-icon" title="Volver al Panel" aria-label="Volver al panel">
-                <i class="fa-solid fa-arrow-right-from-bracket"></i>
-            </a>
         </div>
     </header>
 

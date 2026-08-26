@@ -1,0 +1,228 @@
+{% extends 'base.html' %}
+
+{% block title %}Control de Accesos en Vivo | Vitalis Fitness{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    
+    <!-- Header y Acciones Principales -->
+    <div class="page-header-flex">
+        <div>
+            <h1 class="page-title">Control de Accesos en Vivo</h1>
+            <p class="page-subtitle">Monitoreo en tiempo real de ingresos por DNI en el terminal de recepción</p>
+        </div>
+        <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
+            <a href="{% url 'members:terminal' %}" target="_blank" class="btn-gold" style="text-decoration: none; padding: 0.65rem 1.25rem; display: flex; align-items: center; gap: 0.5rem;">
+                <span>🚪</span> Abrir Terminal Kiosko ↗
+            </a>
+            <a href="{% url 'members:list' %}" class="btn-outline" style="text-decoration: none; padding: 0.65rem 1.1rem;">
+                👥 Padrón de Socios
+            </a>
+        </div>
+    </div>
+
+    <!-- Tarjetas de Métricas Rápidas (KPIs de Hoy) -->
+    <div class="kpi-grid" style="margin-bottom: 1.75rem;">
+        <div class="kpi-card">
+            <div class="kpi-header">
+                <span class="kpi-title">Ingresos Hoy</span>
+                <div class="kpi-icon-box gold">🚪</div>
+            </div>
+            <div class="kpi-value">{{ today_total }}</div>
+            <div class="kpi-footer">
+                <span class="trend neutral">Registrados en la fecha actual</span>
+            </div>
+        </div>
+
+        <div class="kpi-card">
+            <div class="kpi-header">
+                <span class="kpi-title">Accesos Permitidos</span>
+                <div class="kpi-icon-box green">✓</div>
+            </div>
+            <div class="kpi-value" style="color: var(--accent-green);">{{ today_allowed }}</div>
+            <div class="kpi-footer">
+                <span class="trend positive">Socios con cuota al día</span>
+            </div>
+        </div>
+
+        <div class="kpi-card">
+            <div class="kpi-header">
+                <span class="kpi-title">Rechazados / Vencidos</span>
+                <div class="kpi-icon-box red">⚠️</div>
+            </div>
+            <div class="kpi-value" style="color: var(--accent-red);">{{ today_denied }}</div>
+            <div class="kpi-footer">
+                <span class="trend negative">Requieren regularizar en mostrador</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Barra de Filtros y Búsqueda -->
+    <div class="filter-card" style="margin-bottom: 1.5rem;">
+        <form method="get" class="filter-form">
+            <div class="search-input-wrapper">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon">
+                    <circle cx="11" cy="11" r="8"/>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+                <input 
+                    type="text" 
+                    name="q" 
+                    placeholder="Buscar por nombre, apellido o DNI..." 
+                    value="{{ search_query }}" 
+                    class="filter-input"
+                >
+            </div>
+
+            <div class="filter-group">
+                <select name="status" class="filter-select" onchange="this.form.submit()">
+                    <option value="">Todos los Estados</option>
+                    <option value="PERMITIDO" {% if current_status == 'PERMITIDO' %}selected{% endif %}>✓ Permitidos (Al día)</option>
+                    <option value="VENCIDO" {% if current_status == 'VENCIDO' %}selected{% endif %}>⚠️ Membresía Vencida</option>
+                    <option value="PENDIENTE" {% if current_status == 'PENDIENTE' %}selected{% endif %}>⏳ Cuota Pendiente</option>
+                    <option value="INACTIVO" {% if current_status == 'INACTIVO' %}selected{% endif %}>⛔ Socio Inactivo</option>
+                </select>
+
+                <select name="date" class="filter-select" onchange="this.form.submit()">
+                    <option value="">Todas las Fechas</option>
+                    <option value="today" {% if current_date_filter == 'today' %}selected{% endif %}>📅 Solo Hoy</option>
+                    <option value="week" {% if current_date_filter == 'week' %}selected{% endif %}>📅 Últimos 7 Días</option>
+                </select>
+
+                <button type="submit" class="btn-gold" style="padding: 0.65rem 1.25rem;">
+                    Filtrar
+                </button>
+
+                {% if search_query or current_status or current_date_filter %}
+                    <a href="{% url 'members:checkin_list' %}" class="btn-outline" style="text-decoration: none; padding: 0.65rem 1rem;">
+                        Limpiar
+                    </a>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+
+    <!-- Tabla Principal de Registros de Acceso -->
+    <div class="table-card">
+        <div class="card-header-flex">
+            <div>
+                <h3 class="card-title">Historial de Ingresos Registrados</h3>
+                <p class="card-subtitle">Listado cronológico de accesos detectados por el terminal de recepción</p>
+            </div>
+            <span class="badge badge-info" style="font-size: 0.85rem; padding: 0.4rem 0.9rem;">
+                {{ page_obj.paginator.count }} registros totales
+            </span>
+        </div>
+
+        {% if checkins %}
+            <div class="table-responsive">
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>Fecha y Hora</th>
+                            <th>Socio</th>
+                            <th>DNI / Cédula</th>
+                            <th>Plan de Membresía</th>
+                            <th>Resultado</th>
+                            <th>Detalles / Observaciones</th>
+                            <th style="text-align: right;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for ci in checkins %}
+                        <tr>
+                            <td style="font-family: monospace; font-size: 0.85rem; color: #ffffff; white-space: nowrap;">
+                                📅 {{ ci.checkin_time|date:"d/m/Y" }} • <strong style="color: var(--gold-primary);">{{ ci.checkin_time|date:"H:i:s" }}</strong>
+                            </td>
+                            <td>
+                                <div class="table-user-cell">
+                                    <img src="{{ ci.member.avatar_url }}" alt="{{ ci.member.full_name }}" class="table-avatar">
+                                    <div>
+                                        <a href="{% url 'members:detail' ci.member.pk %}" style="font-weight: 700; color: #ffffff; text-decoration: none;">
+                                            {{ ci.member.full_name }}
+                                        </a>
+                                        <div style="font-size: 0.75rem; color: var(--text-muted);">
+                                            {{ ci.member.email }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="font-family: monospace; font-size: 0.85rem; color: var(--text-secondary);">
+                                {{ ci.member.dni }}
+                            </td>
+                            <td>
+                                {% if ci.member.plan %}
+                                    <span class="badge" style="background: rgba(245, 184, 46, 0.1); border: 1px solid var(--border-gold); color: var(--gold-primary);">
+                                        {{ ci.member.plan.name }}
+                                    </span>
+                                {% else %}
+                                    <span style="font-size: 0.85rem; color: var(--text-muted);">Sin Plan</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if ci.status == 'PERMITIDO' %}
+                                    <span class="badge badge-success">✓ Permitido</span>
+                                {% elif ci.status == 'VENCIDO' %}
+                                    <span class="badge badge-danger">⚠️ Vencido</span>
+                                {% elif ci.status == 'PENDIENTE' %}
+                                    <span class="badge badge-warning">⏳ Pendiente</span>
+                                {% else %}
+                                    <span class="badge badge-secondary">{{ ci.get_status_display }}</span>
+                                {% endif %}
+                            </td>
+                            <td style="font-size: 0.85rem; color: var(--text-secondary);">
+                                {{ ci.notes|default:"-" }}
+                            </td>
+                            <td style="text-align: right; white-space: nowrap;">
+                                <a href="{% url 'members:detail' ci.member.pk %}" class="btn-outline" style="padding: 0.35rem 0.75rem; font-size: 0.8rem; text-decoration: none;" title="Ver Ficha Técnica">
+                                    👤 Ficha
+                                </a>
+                                {% if ci.status != 'PERMITIDO' %}
+                                    <a href="{% url 'payments:create' %}?member={{ ci.member.pk }}" class="btn-gold" style="padding: 0.35rem 0.75rem; font-size: 0.8rem; text-decoration: none; margin-left: 0.35rem;" title="Cobrar Cuota">
+                                        💳 Cobrar
+                                    </a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Paginación -->
+            {% if is_paginated %}
+                <div class="pagination-container" style="margin-top: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 0.85rem; color: var(--text-muted);">
+                        Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+                    </span>
+                    <div style="display: flex; gap: 0.5rem;">
+                        {% if page_obj.has_previous %}
+                            <a href="?page={{ page_obj.previous_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}{% if current_status %}&status={{ current_status }}{% endif %}{% if current_date_filter %}&date={{ current_date_filter }}{% endif %}" class="btn-outline" style="padding: 0.4rem 0.85rem; font-size: 0.85rem; text-decoration: none;">
+                                &larr; Anterior
+                            </a>
+                        {% endif %}
+                        {% if page_obj.has_next %}
+                            <a href="?page={{ page_obj.next_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}{% if current_status %}&status={{ current_status }}{% endif %}{% if current_date_filter %}&date={{ current_date_filter }}{% endif %}" class="btn-outline" style="padding: 0.4rem 0.85rem; font-size: 0.85rem; text-decoration: none;">
+                                Siguiente &rarr;
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+
+        {% else %}
+            <div style="text-align: center; padding: 3rem 1.5rem;">
+                <span style="font-size: 3rem; display: block; margin-bottom: 1rem;">🚪</span>
+                <h4 style="color: #ffffff; font-size: 1.15rem; margin-bottom: 0.5rem;">No se encontraron registros de acceso</h4>
+                <p style="color: var(--text-muted); font-size: 0.9rem; max-width: 450px; margin: 0 auto 1.5rem;">
+                    Los ingresos que realicen los socios desde el terminal de recepción aparecerán aquí en tiempo real.
+                </p>
+                <a href="{% url 'members:terminal' %}" target="_blank" class="btn-gold" style="text-decoration: none; padding: 0.65rem 1.25rem; display: inline-flex; align-items: center; gap: 0.5rem;">
+                    <span>🚪</span> Abrir Terminal de Entrada
+                </a>
+            </div>
+        {% endif %}
+    </div>
+
+</div>
+{% endblock %}

@@ -7,7 +7,7 @@ from django.contrib import messages
 from django.urls import reverse_lazy, reverse
 from django.db.models import Q
 from django.utils import timezone
-from .models import Member, Plan
+from .models import Member, Plan, MemberCheckIn
 from .forms import MemberForm
 
 
@@ -281,3 +281,55 @@ class KioskCheckInAPIView(View):
             'days_left': max(0, days_left),
             'message': 'Acceso registrado correctamente. ¡Que tengas un excelente entrenamiento!',
         })
+
+
+class MemberCheckInListView(StaffRequiredMixin, ListView):
+    """
+    Vista de control y registro de accesos en tiempo real por el terminal kiosko.
+    """
+    model = MemberCheckIn
+    template_name = 'members/checkin_list.html'
+    context_object_name = 'checkins'
+    paginate_by = 25
+
+    def get_queryset(self):
+        from .models import MemberCheckIn
+        from datetime import timedelta
+
+        qs = MemberCheckIn.objects.select_related('member', 'member__plan').all()
+        q = self.request.GET.get('q', '').strip()
+        status = self.request.GET.get('status', '').strip()
+        date_filter = self.request.GET.get('date', '').strip()
+
+        if q:
+            qs = qs.filter(
+                Q(member__first_name__icontains=q) |
+                Q(member__last_name__icontains=q) |
+                Q(member__dni__icontains=q)
+            )
+
+        if status:
+            qs = qs.filter(status=status)
+
+        today = timezone.now().date()
+        if date_filter == 'today':
+            qs = qs.filter(checkin_time__date=today)
+        elif date_filter == 'week':
+            week_ago = today - timedelta(days=7)
+            qs = qs.filter(checkin_time__date__gte=week_ago)
+
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        from .models import MemberCheckIn
+        today = timezone.now().date()
+        today_qs = MemberCheckIn.objects.filter(checkin_time__date=today)
+
+        context['today_total'] = today_qs.count()
+        context['today_allowed'] = today_qs.filter(status='PERMITIDO').count()
+        context['today_denied'] = today_qs.filter(status__in=['VENCIDO', 'PENDIENTE', 'INACTIVO']).count()
+        context['current_status'] = self.request.GET.get('status', '')
+        context['current_date_filter'] = self.request.GET.get('date', '')
+        context['search_query'] = self.request.GET.get('q', '')
+        return context
