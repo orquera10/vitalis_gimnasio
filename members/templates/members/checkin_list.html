@@ -2,57 +2,305 @@
 
 {% block title %}Control de Accesos en Vivo | Vitalis Fitness{% endblock %}
 
+{% block extra_css %}
+<style>
+    /* Live Status Badge Pulsing */
+    .live-status-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        background: rgba(16, 185, 129, 0.12);
+        border: 1px solid rgba(16, 185, 129, 0.35);
+        color: #10b981;
+        padding: 0.45rem 1rem;
+        border-radius: 9999px;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
+    }
+
+    .pulse-dot-live {
+        width: 8px;
+        height: 8px;
+        background: #10b981;
+        border-radius: 50%;
+        box-shadow: 0 0 10px #10b981;
+        animation: radarPulse 1.8s infinite cubic-bezier(0.4, 0, 0.6, 1);
+    }
+
+    @keyframes radarPulse {
+        0%, 100% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.6); opacity: 0.4; }
+    }
+
+    /* Luxury KPI Cards */
+    .access-kpi-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 1.25rem;
+        margin-bottom: 1.75rem;
+    }
+
+    .access-kpi-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-lg);
+        padding: 1.5rem;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .access-kpi-card:hover {
+        transform: translateY(-3px);
+        border-color: var(--border-gold);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45), 0 0 25px rgba(245, 184, 46, 0.1);
+    }
+
+    .access-kpi-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+    }
+
+    .access-kpi-card.gold::before { background: linear-gradient(90deg, #f5b82e, #dfa220); }
+    .access-kpi-card.emerald::before { background: linear-gradient(90deg, #10b981, #059669); }
+    .access-kpi-card.rose::before { background: linear-gradient(90deg, #ef4444, #dc2626); }
+
+    .access-kpi-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.75rem;
+    }
+
+    .access-kpi-title {
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: var(--text-muted);
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+
+    .access-kpi-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: var(--radius-md);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+    }
+
+    .access-kpi-icon.gold {
+        background: rgba(245, 184, 46, 0.12);
+        color: var(--primary-gold);
+        border: 1px solid rgba(245, 184, 46, 0.25);
+    }
+
+    .access-kpi-icon.emerald {
+        background: rgba(16, 185, 129, 0.12);
+        color: #10b981;
+        border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+
+    .access-kpi-icon.rose {
+        background: rgba(239, 68, 68, 0.12);
+        color: #ef4444;
+        border: 1px solid rgba(239, 68, 68, 0.25);
+    }
+
+    .access-kpi-number {
+        font-family: 'Outfit', sans-serif;
+        font-size: 2.35rem;
+        font-weight: 800;
+        color: #ffffff;
+        line-height: 1;
+        margin-bottom: 0.5rem;
+    }
+
+    .access-kpi-desc {
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+    }
+
+    /* Filter Chips Bar */
+    .filter-chips-row {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-top: 0.75rem;
+        padding-top: 0.75rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .chip-btn {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--border-subtle);
+        color: var(--text-muted);
+        padding: 0.35rem 0.85rem;
+        border-radius: 9999px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+    }
+
+    .chip-btn:hover {
+        background: rgba(245, 184, 46, 0.1);
+        color: var(--primary-gold);
+        border-color: rgba(245, 184, 46, 0.3);
+    }
+
+    .chip-btn.active {
+        background: rgba(245, 184, 46, 0.2);
+        color: var(--primary-gold);
+        border-color: var(--primary-gold);
+        box-shadow: 0 0 12px rgba(245, 184, 46, 0.2);
+    }
+
+    /* OLED Time Pill */
+    .time-pill-oled {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: var(--radius-sm);
+        padding: 0.35rem 0.65rem;
+        font-family: monospace;
+        font-size: 0.85rem;
+        color: #ffffff;
+    }
+
+    .time-pill-oled strong {
+        color: var(--primary-gold);
+    }
+
+    /* Status Glow Badges */
+    .badge-glow-emerald {
+        background: rgba(16, 185, 129, 0.15);
+        border: 1px solid rgba(16, 185, 129, 0.4);
+        color: #34d399;
+        font-weight: 700;
+        padding: 0.35rem 0.85rem;
+        border-radius: 9999px;
+        box-shadow: 0 0 12px rgba(16, 185, 129, 0.2);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+    }
+
+    .badge-glow-rose {
+        background: rgba(239, 68, 68, 0.15);
+        border: 1px solid rgba(239, 68, 68, 0.4);
+        color: #f87171;
+        font-weight: 700;
+        padding: 0.35rem 0.85rem;
+        border-radius: 9999px;
+        box-shadow: 0 0 12px rgba(239, 68, 68, 0.2);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+    }
+
+    .badge-glow-amber {
+        background: rgba(245, 158, 11, 0.15);
+        border: 1px solid rgba(245, 158, 11, 0.4);
+        color: #fbbf24;
+        font-weight: 700;
+        padding: 0.35rem 0.85rem;
+        border-radius: 9999px;
+        box-shadow: 0 0 12px rgba(245, 158, 11, 0.2);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
 <div class="page-container">
     
-    <!-- Header y Acciones Principales -->
+    <!-- Header y Acciones Principales con Radar en Vivo -->
     <div class="page-header-flex">
         <div>
-            <h1 class="page-title">Control de Accesos en Vivo</h1>
-            <p class="page-subtitle">Monitoreo en tiempo real de ingresos por DNI en el terminal de recepción</p>
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.4rem; flex-wrap: wrap;">
+                <div class="live-status-pill">
+                    <span class="pulse-dot-live"></span>
+                    <span>Feed de Acceso en Vivo</span>
+                </div>
+                <span style="font-size: 0.8rem; color: var(--text-muted);">Actualizado al instante</span>
+            </div>
+            <h1 class="page-title">Control de Accesos & Molinetes</h1>
+            <p class="page-subtitle">Monitoreo en tiempo real de ingresos por DNI registrados en el terminal de recepción</p>
         </div>
+        
         <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
-            <a href="{% url 'members:terminal' %}" target="_blank" class="btn-gold" style="text-decoration: none; padding: 0.65rem 1.25rem; display: flex; align-items: center; gap: 0.5rem;">
-                <span>🚪</span> Abrir Terminal Kiosko ↗
-            </a>
-            <a href="{% url 'members:list' %}" class="btn-outline" style="text-decoration: none; padding: 0.65rem 1.1rem;">
-                👥 Padrón de Socios
+            <button type="button" class="btn-outline" onclick="location.reload();" title="Recargar Registros" style="display: flex; align-items: center; gap: 0.4rem;">
+                <i class="fa-solid fa-arrows-rotate"></i>
+                <span>Actualizar</span>
+            </button>
+            <a href="{% url 'members:terminal' %}" target="_blank" class="btn-gold" style="text-decoration: none; padding: 0.65rem 1.35rem; display: flex; align-items: center; gap: 0.5rem; box-shadow: 0 8px 20px rgba(245, 184, 46, 0.3);">
+                <span>🚪</span>
+                <span>Abrir Terminal Kiosko ↗</span>
             </a>
         </div>
     </div>
 
     <!-- Tarjetas de Métricas Rápidas (KPIs de Hoy) -->
-    <div class="kpi-grid" style="margin-bottom: 1.75rem;">
-        <div class="kpi-card">
-            <div class="kpi-header">
-                <span class="kpi-title">Ingresos Hoy</span>
-                <div class="kpi-icon-box gold">🚪</div>
+    <div class="access-kpi-grid">
+        <div class="access-kpi-card gold">
+            <div class="access-kpi-top">
+                <span class="access-kpi-title">Ingresos Registrados Hoy</span>
+                <div class="access-kpi-icon gold">
+                    <i class="fa-solid fa-id-card-clip"></i>
+                </div>
             </div>
-            <div class="kpi-value">{{ today_total }}</div>
-            <div class="kpi-footer">
-                <span class="trend neutral">Registrados en la fecha actual</span>
-            </div>
-        </div>
-
-        <div class="kpi-card">
-            <div class="kpi-header">
-                <span class="kpi-title">Accesos Permitidos</span>
-                <div class="kpi-icon-box green">✓</div>
-            </div>
-            <div class="kpi-value" style="color: var(--accent-green);">{{ today_allowed }}</div>
-            <div class="kpi-footer">
-                <span class="trend positive">Socios con cuota al día</span>
+            <div class="access-kpi-number">{{ today_total }}</div>
+            <div class="access-kpi-desc">
+                <i class="fa-regular fa-calendar-check" style="color: var(--primary-gold);"></i>
+                <span>Total de escaneos y DNIs ingresados hoy</span>
             </div>
         </div>
 
-        <div class="kpi-card">
-            <div class="kpi-header">
-                <span class="kpi-title">Rechazados / Vencidos</span>
-                <div class="kpi-icon-box red">⚠️</div>
+        <div class="access-kpi-card emerald">
+            <div class="access-kpi-top">
+                <span class="access-kpi-title">Accesos Permitidos</span>
+                <div class="access-kpi-icon emerald">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
             </div>
-            <div class="kpi-value" style="color: var(--accent-red);">{{ today_denied }}</div>
-            <div class="kpi-footer">
-                <span class="trend negative">Requieren regularizar en mostrador</span>
+            <div class="access-kpi-number" style="color: #10b981;">{{ today_allowed }}</div>
+            <div class="access-kpi-desc">
+                <i class="fa-solid fa-shield-halved" style="color: #10b981;"></i>
+                <span>Socios activos con membresía al día</span>
+            </div>
+        </div>
+
+        <div class="access-kpi-card rose">
+            <div class="access-kpi-top">
+                <span class="access-kpi-title">Rechazados / Vencidos</span>
+                <div class="access-kpi-icon rose">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+            </div>
+            <div class="access-kpi-number" style="color: #ef4444;">{{ today_denied }}</div>
+            <div class="access-kpi-desc">
+                <i class="fa-solid fa-hand-holding-dollar" style="color: #ef4444;"></i>
+                <span>Requieren regularizar cuota en recepción</span>
             </div>
         </div>
     </div>
@@ -68,7 +316,7 @@
                 <input 
                     type="text" 
                     name="q" 
-                    placeholder="Buscar por nombre, apellido o DNI..." 
+                    placeholder="Buscar por nombre, apellido o DNI del socio..." 
                     value="{{ search_query }}" 
                     class="filter-input"
                 >
@@ -77,10 +325,10 @@
             <div class="filter-group">
                 <select name="status" class="filter-select" onchange="this.form.submit()">
                     <option value="">Todos los Estados</option>
-                    <option value="PERMITIDO" {% if current_status == 'PERMITIDO' %}selected{% endif %}>✓ Permitidos (Al día)</option>
-                    <option value="VENCIDO" {% if current_status == 'VENCIDO' %}selected{% endif %}>⚠️ Membresía Vencida</option>
-                    <option value="PENDIENTE" {% if current_status == 'PENDIENTE' %}selected{% endif %}>⏳ Cuota Pendiente</option>
-                    <option value="INACTIVO" {% if current_status == 'INACTIVO' %}selected{% endif %}>⛔ Socio Inactivo</option>
+                    <option value="PERMITIDO" {% if current_status == 'PERMITIDO' %}selected{% endif %}>✓ Solo Permitidos (Al día)</option>
+                    <option value="VENCIDO" {% if current_status == 'VENCIDO' %}selected{% endif %}>⚠️ Solo Vencidos</option>
+                    <option value="PENDIENTE" {% if current_status == 'PENDIENTE' %}selected{% endif %}>⏳ Cuotas Pendientes</option>
+                    <option value="INACTIVO" {% if current_status == 'INACTIVO' %}selected{% endif %}>⛔ Inactivos</option>
                 </select>
 
                 <select name="date" class="filter-select" onchange="this.form.submit()">
@@ -100,17 +348,39 @@
                 {% endif %}
             </div>
         </form>
+
+        <!-- Filtros Rápidos en Chips -->
+        <div class="filter-chips-row">
+            <span style="font-size: 0.75rem; color: var(--text-muted); display: flex; align-items: center; margin-right: 0.25rem;">Filtros rápidos:</span>
+            <a href="{% url 'members:checkin_list' %}" class="chip-btn {% if not current_status and not current_date_filter %}active{% endif %}">
+                Todos
+            </a>
+            <a href="{% url 'members:checkin_list' %}?date=today" class="chip-btn {% if current_date_filter == 'today' and not current_status %}active{% endif %}">
+                📅 Hoy
+            </a>
+            <a href="{% url 'members:checkin_list' %}?status=PERMITIDO" class="chip-btn {% if current_status == 'PERMITIDO' %}active{% endif %}">
+                🟢 Permitidos
+            </a>
+            <a href="{% url 'members:checkin_list' %}?status=VENCIDO" class="chip-btn {% if current_status == 'VENCIDO' %}active{% endif %}">
+                🔴 Vencidos
+            </a>
+            <a href="{% url 'members:checkin_list' %}?status=PENDIENTE" class="chip-btn {% if current_status == 'PENDIENTE' %}active{% endif %}">
+                ⏳ Pendientes
+            </a>
+        </div>
     </div>
 
     <!-- Tabla Principal de Registros de Acceso -->
     <div class="table-card">
         <div class="card-header-flex">
             <div>
-                <h3 class="card-title">Historial de Ingresos Registrados</h3>
-                <p class="card-subtitle">Listado cronológico de accesos detectados por el terminal de recepción</p>
+                <h3 class="card-title" style="display: flex; align-items: center; gap: 0.5rem;">
+                    <span>Historial de Accesos Registrados</span>
+                </h3>
+                <p class="card-subtitle">Registro cronológico de entradas con validación de membresía en puerta</p>
             </div>
             <span class="badge badge-info" style="font-size: 0.85rem; padding: 0.4rem 0.9rem;">
-                {{ page_obj.paginator.count }} registros totales
+                {{ page_obj.paginator.count }} ingresos en total
             </span>
         </div>
 
@@ -131,14 +401,18 @@
                     <tbody>
                         {% for ci in checkins %}
                         <tr>
-                            <td style="font-family: monospace; font-size: 0.85rem; color: #ffffff; white-space: nowrap;">
-                                📅 {{ ci.checkin_time|date:"d/m/Y" }} • <strong style="color: var(--gold-primary);">{{ ci.checkin_time|date:"H:i:s" }}</strong>
+                            <td style="white-space: nowrap;">
+                                <div class="time-pill-oled">
+                                    <i class="fa-regular fa-clock" style="color: var(--primary-gold);"></i>
+                                    <span>{{ ci.checkin_time|date:"d/m/Y" }}</span>
+                                    <strong>{{ ci.checkin_time|date:"H:i:s" }}</strong>
+                                </div>
                             </td>
                             <td>
                                 <div class="table-user-cell">
-                                    <img src="{{ ci.member.avatar_url }}" alt="{{ ci.member.full_name }}" class="table-avatar">
+                                    <img src="{{ ci.member.avatar_url }}" alt="{{ ci.member.full_name }}" class="table-avatar" style="border: 2px solid {% if ci.status == 'PERMITIDO' %}#10b981{% elif ci.status == 'VENCIDO' %}#ef4444{% else %}#f59e0b{% endif %};">
                                     <div>
-                                        <a href="{% url 'members:detail' ci.member.pk %}" style="font-weight: 700; color: #ffffff; text-decoration: none;">
+                                        <a href="{% url 'members:detail' ci.member.pk %}" style="font-weight: 700; color: #ffffff; text-decoration: none; font-size: 0.95rem;">
                                             {{ ci.member.full_name }}
                                         </a>
                                         <div style="font-size: 0.75rem; color: var(--text-muted);">
@@ -147,7 +421,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td style="font-family: monospace; font-size: 0.85rem; color: var(--text-secondary);">
+                            <td style="font-family: monospace; font-size: 0.85rem; color: var(--text-secondary); font-weight: 600;">
                                 {{ ci.member.dni }}
                             </td>
                             <td>
@@ -161,24 +435,30 @@
                             </td>
                             <td>
                                 {% if ci.status == 'PERMITIDO' %}
-                                    <span class="badge badge-success">✓ Permitido</span>
+                                    <span class="badge-glow-emerald">
+                                        <i class="fa-solid fa-check"></i> Permitido
+                                    </span>
                                 {% elif ci.status == 'VENCIDO' %}
-                                    <span class="badge badge-danger">⚠️ Vencido</span>
+                                    <span class="badge-glow-rose">
+                                        <i class="fa-solid fa-triangle-exclamation"></i> Vencido
+                                    </span>
                                 {% elif ci.status == 'PENDIENTE' %}
-                                    <span class="badge badge-warning">⏳ Pendiente</span>
+                                    <span class="badge-glow-amber">
+                                        <i class="fa-solid fa-clock"></i> Pendiente
+                                    </span>
                                 {% else %}
                                     <span class="badge badge-secondary">{{ ci.get_status_display }}</span>
                                 {% endif %}
                             </td>
                             <td style="font-size: 0.85rem; color: var(--text-secondary);">
-                                {{ ci.notes|default:"-" }}
+                                {{ ci.notes|default:"Ingreso correcto" }}
                             </td>
                             <td style="text-align: right; white-space: nowrap;">
                                 <a href="{% url 'members:detail' ci.member.pk %}" class="btn-outline" style="padding: 0.35rem 0.75rem; font-size: 0.8rem; text-decoration: none;" title="Ver Ficha Técnica">
                                     👤 Ficha
                                 </a>
                                 {% if ci.status != 'PERMITIDO' %}
-                                    <a href="{% url 'payments:create' %}?member={{ ci.member.pk }}" class="btn-gold" style="padding: 0.35rem 0.75rem; font-size: 0.8rem; text-decoration: none; margin-left: 0.35rem;" title="Cobrar Cuota">
+                                    <a href="{% url 'payments:create' %}?member={{ ci.member.pk }}" class="btn-gold" style="padding: 0.35rem 0.85rem; font-size: 0.8rem; text-decoration: none; margin-left: 0.35rem; box-shadow: 0 4px 12px rgba(245, 184, 46, 0.35);" title="Cobrar y Habilitar Socio">
                                         💳 Cobrar
                                     </a>
                                 {% endif %}
@@ -211,14 +491,17 @@
             {% endif %}
 
         {% else %}
-            <div style="text-align: center; padding: 3rem 1.5rem;">
-                <span style="font-size: 3rem; display: block; margin-bottom: 1rem;">🚪</span>
-                <h4 style="color: #ffffff; font-size: 1.15rem; margin-bottom: 0.5rem;">No se encontraron registros de acceso</h4>
-                <p style="color: var(--text-muted); font-size: 0.9rem; max-width: 450px; margin: 0 auto 1.5rem;">
-                    Los ingresos que realicen los socios desde el terminal de recepción aparecerán aquí en tiempo real.
+            <div style="text-align: center; padding: 3.5rem 1.5rem;">
+                <div style="width: 72px; height: 72px; border-radius: 50%; background: rgba(245, 184, 46, 0.1); border: 2px solid rgba(245, 184, 46, 0.3); display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 1.25rem; color: var(--primary-gold);">
+                    <i class="fa-solid fa-door-open"></i>
+                </div>
+                <h4 style="color: #ffffff; font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">No se encontraron ingresos</h4>
+                <p style="color: var(--text-muted); font-size: 0.9rem; max-width: 450px; margin: 0 auto 1.75rem; line-height: 1.5;">
+                    Los socios que ingresen su DNI en el terminal de recepción aparecerán registrados en esta pantalla automáticamente.
                 </p>
-                <a href="{% url 'members:terminal' %}" target="_blank" class="btn-gold" style="text-decoration: none; padding: 0.65rem 1.25rem; display: inline-flex; align-items: center; gap: 0.5rem;">
-                    <span>🚪</span> Abrir Terminal de Entrada
+                <a href="{% url 'members:terminal' %}" target="_blank" class="btn-gold" style="text-decoration: none; padding: 0.75rem 1.5rem; display: inline-flex; align-items: center; gap: 0.5rem; box-shadow: 0 10px 25px rgba(245, 184, 46, 0.3);">
+                    <span>🚪</span>
+                    <span>Abrir Terminal de Entrada en Kiosko</span>
                 </a>
             </div>
         {% endif %}

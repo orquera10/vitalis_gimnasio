@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Terminal de Acceso | Vitalis Fitness Club</title>
+    <title>Terminal de Acceso Autónomo | Vitalis Fitness Club</title>
     
     <link rel="shortcut icon" href="{% static 'core/img/vitalis_logo.png' %}" type="image/x-icon">
     
@@ -19,22 +19,22 @@
     <style>
         :root {
             --bg-base: #06090e;
-            --bg-card: rgba(15, 23, 42, 0.75);
+            --bg-card: rgba(15, 23, 42, 0.82);
             --primary-gold: #f5b82e;
             --primary-gold-hover: #dfa220;
             --gold-glow: rgba(245, 184, 46, 0.35);
             --accent-emerald: #10b981;
-            --emerald-glow: rgba(16, 185, 129, 0.4);
+            --emerald-glow: rgba(16, 185, 129, 0.45);
             --accent-rose: #ef4444;
-            --rose-glow: rgba(239, 68, 68, 0.4);
+            --rose-glow: rgba(239, 68, 68, 0.45);
             --accent-amber: #f59e0b;
-            --amber-glow: rgba(245, 158, 11, 0.4);
+            --amber-glow: rgba(245, 158, 11, 0.45);
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --border-glass: rgba(245, 184, 46, 0.2);
+            --border-glass: rgba(245, 184, 46, 0.22);
             --border-subtle: rgba(255, 255, 255, 0.08);
-            --radius-xl: 24px;
-            --radius-lg: 16px;
+            --radius-xl: 28px;
+            --radius-lg: 18px;
             --radius-md: 12px;
         }
 
@@ -47,48 +47,76 @@
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background: radial-gradient(circle at 50% 0%, #151d30 0%, #06090e 70%);
+            background: #06090e;
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             overflow-x: hidden;
             user-select: none;
+            position: relative;
+        }
+
+        /* Ambient Glowing Background Orbs */
+        .ambient-glow-1 {
+            position: fixed;
+            top: -10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 650px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(245, 184, 46, 0.12) 0%, rgba(15, 23, 42, 0) 70%);
+            border-radius: 50%;
+            filter: blur(60px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .ambient-glow-2 {
+            position: fixed;
+            bottom: -15%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.06) 0%, rgba(15, 23, 42, 0) 70%);
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+            z-index: 0;
         }
 
         /* Top Header */
         .kiosk-header {
-            padding: 1.25rem 2rem;
+            padding: 1.25rem 2.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid var(--border-subtle);
             background: rgba(6, 9, 14, 0.85);
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(16px);
             z-index: 10;
         }
 
         .kiosk-brand {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            text-decoration: none;
+            gap: 1.1rem;
         }
 
         .kiosk-logo-img {
-            width: 46px;
-            height: 46px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             border: 2px solid var(--primary-gold);
-            box-shadow: 0 0 16px var(--gold-glow);
+            box-shadow: 0 0 20px var(--gold-glow);
         }
 
         .kiosk-brand-text h1 {
             font-family: 'Outfit', sans-serif;
-            font-size: 1.35rem;
+            font-size: 1.4rem;
             font-weight: 800;
             color: #ffffff;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             line-height: 1.1;
         }
 
@@ -96,13 +124,18 @@
             font-size: 0.72rem;
             color: var(--primary-gold);
             font-weight: 700;
-            letter-spacing: 2px;
+            letter-spacing: 2.5px;
             text-transform: uppercase;
         }
 
         /* Clock & Date Widget */
         .kiosk-clock-box {
             text-align: right;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-subtle);
+            padding: 0.4rem 1.25rem;
+            border-radius: var(--radius-md);
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
         }
 
         .kiosk-clock-time {
@@ -110,13 +143,14 @@
             font-size: 1.75rem;
             font-weight: 800;
             color: #ffffff;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
+            line-height: 1.1;
         }
 
         .kiosk-clock-date {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            font-weight: 500;
+            font-size: 0.78rem;
+            color: var(--primary-gold);
+            font-weight: 600;
             text-transform: capitalize;
         }
 
@@ -127,24 +161,25 @@
         }
 
         .kiosk-btn-icon {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.04);
             border: 1px solid var(--border-subtle);
             color: var(--text-muted);
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             border-radius: var(--radius-md);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: all 0.2s ease;
-            text-decoration: none;
+            font-size: 1.1rem;
         }
 
         .kiosk-btn-icon:hover {
             background: rgba(245, 184, 46, 0.15);
             color: var(--primary-gold);
             border-color: var(--primary-gold);
+            box-shadow: 0 0 15px var(--gold-glow);
         }
 
         /* Main Workspace Container */
@@ -153,20 +188,21 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 1.5rem;
+            padding: 2rem 1.5rem;
             position: relative;
+            z-index: 1;
         }
 
         /* State 1: Input Card */
         .kiosk-card {
             width: 100%;
-            max-width: 480px;
+            max-width: 490px;
             background: var(--bg-card);
             border: 1px solid var(--border-glass);
             border-radius: var(--radius-xl);
-            padding: 2.25rem 2rem;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 35px var(--gold-glow);
-            backdrop-filter: blur(20px);
+            padding: 2.5rem 2.25rem;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.75), 0 0 45px rgba(245, 184, 46, 0.15);
+            backdrop-filter: blur(24px);
             text-align: center;
             position: relative;
             transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
@@ -179,13 +215,14 @@
             background: rgba(245, 184, 46, 0.12);
             border: 1px solid var(--border-glass);
             color: var(--primary-gold);
-            padding: 0.35rem 1rem;
+            padding: 0.4rem 1.1rem;
             border-radius: 9999px;
-            font-size: 0.75rem;
+            font-size: 0.78rem;
             font-weight: 700;
             letter-spacing: 1.5px;
             text-transform: uppercase;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.85rem;
+            box-shadow: 0 0 15px rgba(245, 184, 46, 0.15);
         }
 
         .kiosk-badge-tag i {
@@ -194,21 +231,22 @@
 
         @keyframes pulse-dot {
             0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.3); opacity: 0.6; }
+            50% { transform: scale(1.4); opacity: 0.5; }
         }
 
         .kiosk-title {
             font-family: 'Outfit', sans-serif;
-            font-size: 1.85rem;
-            font-weight: 800;
+            font-size: 2rem;
+            font-weight: 900;
             color: #ffffff;
+            letter-spacing: 0.5px;
             margin-bottom: 0.25rem;
         }
 
         .kiosk-subtitle {
             color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
+            font-size: 0.92rem;
+            margin-bottom: 1.75rem;
         }
 
         /* Display Box */
@@ -219,38 +257,38 @@
 
         .dni-input-field {
             width: 100%;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.55);
             border: 2px solid var(--border-glass);
             border-radius: var(--radius-lg);
-            padding: 1rem 1.25rem;
+            padding: 1.1rem 1.25rem;
             font-family: 'Outfit', sans-serif;
-            font-size: 2rem;
-            font-weight: 800;
+            font-size: 2.2rem;
+            font-weight: 900;
             color: var(--primary-gold);
             text-align: center;
-            letter-spacing: 4px;
+            letter-spacing: 5px;
             outline: none;
             transition: all 0.25s ease;
-            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
+            box-shadow: inset 0 3px 12px rgba(0, 0, 0, 0.7);
         }
 
         .dni-input-field:focus {
             border-color: var(--primary-gold);
-            box-shadow: 0 0 25px var(--gold-glow), inset 0 2px 10px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 30px var(--gold-glow), inset 0 3px 12px rgba(0, 0, 0, 0.7);
         }
 
         .dni-input-field::placeholder {
             color: rgba(255, 255, 255, 0.15);
-            font-size: 1.35rem;
-            letter-spacing: 2px;
-            font-weight: 500;
+            font-size: 1.4rem;
+            letter-spacing: 3px;
+            font-weight: 600;
         }
 
         /* On-Screen Numeric Keypad */
         .kiosk-numpad {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 0.75rem;
+            gap: 0.85rem;
             margin-bottom: 1.5rem;
         }
 
@@ -260,32 +298,40 @@
             border-radius: var(--radius-md);
             color: #ffffff;
             font-family: 'Outfit', sans-serif;
-            font-size: 1.6rem;
-            font-weight: 700;
-            height: 62px;
+            font-size: 1.75rem;
+            font-weight: 800;
+            height: 66px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.15s ease;
+            transition: all 0.12s ease;
             user-select: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .num-key:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(245, 184, 46, 0.4);
+            color: var(--primary-gold);
         }
 
         .num-key:active, .num-key.pressed {
-            background: rgba(245, 184, 46, 0.25);
+            background: rgba(245, 184, 46, 0.3);
             border-color: var(--primary-gold);
             color: var(--primary-gold);
-            transform: scale(0.94);
+            transform: scale(0.93);
+            box-shadow: 0 0 20px var(--gold-glow);
         }
 
         .num-key.key-action {
-            font-size: 1.15rem;
+            font-size: 1.25rem;
             background: rgba(255, 255, 255, 0.02);
             color: var(--text-muted);
         }
 
         .num-key.key-action:active {
-            background: rgba(239, 68, 68, 0.2);
+            background: rgba(239, 68, 68, 0.25);
             color: var(--accent-rose);
             border-color: var(--accent-rose);
         }
@@ -293,28 +339,28 @@
         /* Main Submit Button */
         .btn-checkin-submit {
             width: 100%;
-            background: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-gold-hover) 100%);
+            background: linear-gradient(135deg, #f5b82e 0%, #dfa220 100%);
             border: none;
             border-radius: var(--radius-lg);
-            padding: 1.1rem;
+            padding: 1.15rem;
             font-family: 'Outfit', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 800;
+            font-size: 1.25rem;
+            font-weight: 900;
             color: #0b0f17;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 0.75rem;
-            box-shadow: 0 10px 25px rgba(245, 184, 46, 0.35);
-            transition: all 0.25s ease;
+            box-shadow: 0 12px 30px rgba(245, 184, 46, 0.4);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .btn-checkin-submit:hover {
             transform: translateY(-2px);
-            box-shadow: 0 14px 30px rgba(245, 184, 46, 0.5);
+            box-shadow: 0 16px 35px rgba(245, 184, 46, 0.55);
         }
 
         .btn-checkin-submit:active {
@@ -322,7 +368,7 @@
         }
 
         .btn-checkin-submit:disabled {
-            opacity: 0.5;
+            opacity: 0.6;
             cursor: not-allowed;
             transform: none;
         }
@@ -331,11 +377,11 @@
         .kiosk-result-card {
             display: none;
             width: 100%;
-            max-width: 520px;
+            max-width: 530px;
             border-radius: var(--radius-xl);
-            padding: 2.75rem 2rem;
+            padding: 3rem 2.25rem;
             text-align: center;
-            backdrop-filter: blur(25px);
+            backdrop-filter: blur(28px);
             position: relative;
             animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
@@ -343,7 +389,7 @@
         @keyframes slideUp {
             from {
                 opacity: 0;
-                transform: translateY(30px) scale(0.96);
+                transform: translateY(35px) scale(0.95);
             }
             to {
                 opacity: 1;
@@ -353,93 +399,93 @@
 
         /* Theme: SUCCESS (Green) */
         .result-theme-success {
-            background: rgba(10, 38, 26, 0.88);
+            background: rgba(8, 38, 26, 0.92);
             border: 2px solid var(--accent-emerald);
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8), 0 0 60px var(--emerald-glow);
+            box-shadow: 0 35px 80px rgba(0, 0, 0, 0.85), 0 0 70px var(--emerald-glow);
         }
 
         /* Theme: EXPIRED / DANGER (Red) */
         .result-theme-expired {
-            background: rgba(45, 12, 16, 0.88);
+            background: rgba(48, 12, 18, 0.92);
             border: 2px solid var(--accent-rose);
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8), 0 0 60px var(--rose-glow);
+            box-shadow: 0 35px 80px rgba(0, 0, 0, 0.85), 0 0 70px var(--rose-glow);
         }
 
         /* Theme: PENDING / WARNING (Amber) */
         .result-theme-pending {
-            background: rgba(45, 28, 10, 0.88);
+            background: rgba(48, 28, 10, 0.92);
             border: 2px solid var(--accent-amber);
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8), 0 0 60px var(--amber-glow);
+            box-shadow: 0 35px 80px rgba(0, 0, 0, 0.85), 0 0 70px var(--amber-glow);
         }
 
         /* Result Components */
         .result-icon-circle {
-            width: 90px;
-            height: 90px;
+            width: 96px;
+            height: 96px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.75rem;
-            margin: 0 auto 1.25rem;
+            font-size: 3rem;
+            margin: 0 auto 1.5rem;
         }
 
         .result-theme-success .result-icon-circle {
             background: rgba(16, 185, 129, 0.2);
             border: 2px solid var(--accent-emerald);
             color: var(--accent-emerald);
-            box-shadow: 0 0 30px var(--emerald-glow);
+            box-shadow: 0 0 35px var(--emerald-glow);
         }
 
         .result-theme-expired .result-icon-circle {
             background: rgba(239, 68, 68, 0.2);
             border: 2px solid var(--accent-rose);
             color: var(--accent-rose);
-            box-shadow: 0 0 30px var(--rose-glow);
+            box-shadow: 0 0 35px var(--rose-glow);
         }
 
         .result-theme-pending .result-icon-circle {
             background: rgba(245, 158, 11, 0.2);
             border: 2px solid var(--accent-amber);
             color: var(--accent-amber);
-            box-shadow: 0 0 30px var(--amber-glow);
+            box-shadow: 0 0 35px var(--amber-glow);
         }
 
         .result-avatar-img {
-            width: 80px;
-            height: 80px;
+            width: 88px;
+            height: 88px;
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid #ffffff;
-            margin: 0 auto 1rem;
+            margin: 0 auto 1.25rem;
             display: block;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
         }
 
         .result-title {
             font-family: 'Outfit', sans-serif;
-            font-size: 2.1rem;
+            font-size: 2.3rem;
             font-weight: 900;
             color: #ffffff;
-            line-height: 1.2;
+            line-height: 1.15;
             margin-bottom: 0.4rem;
         }
 
         .result-member-name {
-            font-size: 1.25rem;
-            font-weight: 700;
+            font-size: 1.35rem;
+            font-weight: 800;
             color: #e2e8f0;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.85rem;
         }
 
         .result-badge {
             display: inline-block;
-            padding: 0.4rem 1.1rem;
+            padding: 0.45rem 1.25rem;
             border-radius: 9999px;
-            font-size: 0.85rem;
+            font-size: 0.88rem;
             font-weight: 700;
             letter-spacing: 0.5px;
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.5rem;
         }
 
         .result-theme-success .result-badge {
@@ -461,24 +507,25 @@
         }
 
         .result-message-box {
-            background: rgba(0, 0, 0, 0.35);
+            background: rgba(0, 0, 0, 0.45);
             border-radius: var(--radius-md);
-            padding: 1rem 1.25rem;
-            font-size: 0.95rem;
+            padding: 1.15rem 1.35rem;
+            font-size: 1rem;
             color: #f1f5f9;
             line-height: 1.5;
-            margin-bottom: 1.75rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         /* Countdown Progress Bar */
         .countdown-wrapper {
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
         }
 
         .countdown-bar-bg {
             width: 100%;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.1);
+            height: 7px;
+            background: rgba(255, 255, 255, 0.12);
             border-radius: 9999px;
             overflow: hidden;
             margin-bottom: 0.5rem;
@@ -488,42 +535,49 @@
             height: 100%;
             width: 100%;
             background: #ffffff;
-            transition: width 0.1s linear;
+            transition: width 0.05s linear;
         }
 
         .countdown-text {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
+            font-weight: 600;
         }
 
         .btn-result-reset {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.25);
             color: #ffffff;
             border-radius: var(--radius-md);
-            padding: 0.75rem 1.5rem;
-            font-size: 0.9rem;
+            padding: 0.85rem 1.75rem;
+            font-size: 0.95rem;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.2s ease;
         }
 
         .btn-result-reset:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.22);
+            transform: scale(1.02);
         }
 
         /* Footer Info */
         .kiosk-footer {
-            padding: 1rem 2rem;
+            padding: 1rem 2.5rem;
             text-align: center;
-            font-size: 0.8rem;
+            font-size: 0.82rem;
             color: var(--text-muted);
             border-top: 1px solid var(--border-subtle);
             background: rgba(6, 9, 14, 0.85);
+            z-index: 10;
         }
     </style>
 </head>
 <body>
+
+    <!-- Ambient Orbs -->
+    <div class="ambient-glow-1"></div>
+    <div class="ambient-glow-2"></div>
 
     <!-- Header -->
     <header class="kiosk-header">
@@ -639,7 +693,7 @@
 
     <!-- Footer -->
     <footer class="kiosk-footer">
-        <span>Vitalis Fitness Club • Sistema de Control de Accesos y Asistencias</span>
+        <span>Vitalis Fitness Club • Sistema Inteligente de Control de Accesos y Asistencias</span>
     </footer>
 
     <!-- Audio Synthesis & Interaction Script -->
@@ -656,7 +710,7 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // Web Audio API Synthesizer (Sin dependencias externas)
+        // Web Audio API Synthesizer
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
         function playSound(type) {
@@ -695,7 +749,7 @@
                         osc.stop(now + (idx * 0.15) + 0.35);
                     });
                 } else if (type === 'click') {
-                    // Click táctil hápico suave
+                    // Click táctil háptico suave
                     const osc = audioCtx.createOscillator();
                     const gain = audioCtx.createGain();
                     osc.type = 'triangle';
