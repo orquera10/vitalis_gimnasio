@@ -1,0 +1,4754 @@
+[
+{
+  "model": "auth.group",
+  "fields": {
+    "name": "Administradores",
+    "permissions": []
+  }
+},
+{
+  "model": "auth.group",
+  "fields": {
+    "name": "Recepcionistas",
+    "permissions": [
+      [
+        "add_classbooking",
+        "classes",
+        "classbooking"
+      ],
+      [
+        "change_classbooking",
+        "classes",
+        "classbooking"
+      ],
+      [
+        "view_classbooking",
+        "classes",
+        "classbooking"
+      ],
+      [
+        "view_classsession",
+        "classes",
+        "classsession"
+      ],
+      [
+        "view_trainer",
+        "classes",
+        "trainer"
+      ],
+      [
+        "add_member",
+        "members",
+        "member"
+      ],
+      [
+        "change_member",
+        "members",
+        "member"
+      ],
+      [
+        "view_member",
+        "members",
+        "member"
+      ],
+      [
+        "add_payment",
+        "payments",
+        "payment"
+      ],
+      [
+        "change_payment",
+        "payments",
+        "payment"
+      ],
+      [
+        "view_payment",
+        "payments",
+        "payment"
+      ]
+    ]
+  }
+},
+{
+  "model": "auth.group",
+  "fields": {
+    "name": "Entrenadores",
+    "permissions": [
+      [
+        "view_classsession",
+        "classes",
+        "classsession"
+      ],
+      [
+        "view_trainer",
+        "classes",
+        "trainer"
+      ],
+      [
+        "view_member",
+        "members",
+        "member"
+      ]
+    ]
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$TcWgiGlnTX2LT93AvdUHma$lmGu7gdipecAtlMNU01R9dNxl5K4IxAAqLxFFxZDe/I=",
+    "last_login": "2026-08-25T22:41:00.588Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "admin@ejemplo.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-08-24T16:11:41.729Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$SnSDpHfQj85QWH4RtlFHNh$eVdEza0SJBSDil0+BHyMEjw0PXAaEd2lgDj4P7Cjnds=",
+    "last_login": "2026-08-25T23:34:54.533Z",
+    "is_superuser": false,
+    "username": "dario",
+    "first_name": "Dario",
+    "last_name": "Rossi",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-08-25T16:12:12.303Z",
+    "groups": [
+      [
+        "Recepcionistas"
+      ]
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$ygKxPEWuOTACy7UqcsgNGD$sqNBuaOFPBBVurBqglVE9hRSeDfRaDGwu0ummxaygSs=",
+    "last_login": "2026-08-25T16:24:49.543Z",
+    "is_superuser": false,
+    "username": "camila",
+    "first_name": "Camila",
+    "last_name": "Rossi",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-08-25T16:12:40.201Z",
+    "groups": [
+      [
+        "Entrenadores"
+      ]
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$DgIUGglg0yF6Q4XIWjeITn$fRIQLqe8idxA2uF2Crc53A/gAZvSbHXBxrMPrXHIqUc=",
+    "last_login": "2026-08-25T23:41:13.946Z",
+    "is_superuser": true,
+    "username": "victoria",
+    "first_name": "Victoria",
+    "last_name": "Rossi",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-08-25T16:13:08.028Z",
+    "groups": [
+      [
+        "Administradores"
+      ]
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$tTcif1f7MU1dIdzk8giloB$7Tp96Q7NnWi4Jv1dgQia+8f/0brMALeWyv7SngtUbaw=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "martinfuentes",
+    "first_name": "Martín",
+    "last_name": "Fuentes",
+    "email": "martin.fuentes@vitalis.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-08-25T22:56:39.489Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$6AaYJ8ADogDqnRAJMxbfmD$pTq+0T/bsdl7eDE1+DA7dfz4LCXcbqBL/3Bf9P4jWHY=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "38492019",
+    "first_name": "Martín",
+    "last_name": "Fuentes",
+    "email": "martin.fuentes@vitalis.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-08-25T23:21:16.207Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$KcsFzVgTHYul4yG49Zmya6$EYkPwSyoaIb6+ha8amwISUwnUIPkMhQ8QyHEKFRAmEo=",
+    "last_login": "2026-08-25T23:36:17.868Z",
+    "is_superuser": false,
+    "username": "33482732",
+    "first_name": "Dario",
+    "last_name": "Orquera",
+    "email": "informaticasnaf@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-08-25T23:21:16.900Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$KK3hVZN3aNywERniVU1kY6$qzTJW1bA/lCNg2xY2Clm9fnhfS+xrLz3GtPpVRv+w/g=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "201234561",
+    "first_name": "Florencia",
+    "last_name": "Navarro",
+    "email": "florencia.navarro@email.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-08-25T23:21:17.691Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$pgcjc3WNhN2q67u9LbwaBR$ZRrxVzwM0vvWItGTReCqbzeYy/dJRZyh74JZ2My7zNo=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "159876542",
+    "first_name": "Ignacio",
+    "last_name": "Valenzuela",
+    "email": "ignacio.valenzuela@email.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-08-25T23:21:18.602Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$EvKR6jr3VvLTK3DVa9JgUU$+vw7+N/b6TqXp1YgOT9cQG4iTMFJTSrbRK0MVlKiiyk=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "167890123",
+    "first_name": "Mateo",
+    "last_name": "Silva",
+    "email": "mateo.silva@email.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-08-25T23:21:19.851Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$iJOb2NMoogPgeZebiJWF2E$ql6PnR7T7CSPqau+oDNsQEN6MJafeheomtOQ8tu6EC4=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "195543217",
+    "first_name": "Valentina",
+    "last_name": "Ortiz",
+    "email": "valentina.ortiz@email.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-08-25T23:21:21.272Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$q2ugAOLFuTCJp16tPj5DpX$h/WpYqryOmio80SSfDCRpLkKXzYASzbniNUyENa5iks=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "178901234",
+    "first_name": "Carlos",
+    "last_name": "Mendoza",
+    "email": "carlos.mendoza@email.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-08-25T23:21:22.196Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$G5kg2Gb0peIVMzo2rpFXAx$03qcmhvw4145w/EDf6ucUNhLOzFjK6jPhN0XY8THmNg=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "18432910K",
+    "first_name": "Sofía",
+    "last_name": "Rodriguez",
+    "email": "sofia.rodriguez@email.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-08-25T23:21:23.095Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "20gu7jjwyg1ezs1sztpyol0l2fvn0b5f",
+  "fields": {
+    "session_data": ".eJxVjDEKwzAMAP-iuRg7xk6asXvfYCRLqtMWB-JkCv17CWRo17vjdki4rSVtTZY0MYzQweWXEeaX1EPwE-tjNnmu6zKRORJz2mbuM8v7drZ_g4KtwAguOJVAgwafUYSiWsc2YMwuU4z-ymqpZ987lcELqahHYcs5uC6iwucLEPw5dA:1wysk8:RJiEl1gW7ik4miNbb7RHOd40lq-wnhAFfec-xQCzdGw",
+    "expire_date": "2026-09-08T15:07:16.848Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "8196e94ep7jf5d331fyepeiogsa4vz1m",
+  "fields": {
+    "session_data": ".eJxVjDEKwzAMAP-iuRg7xk6asXvfYCRLqtMWB-JkCv17CWRo17vjdki4rSVtTZY0MYzQweWXEeaX1EPwE-tjNnmu6zKRORJz2mbuM8v7drZ_g4KtwAguOJVAgwafUYSiWsc2YMwuU4z-ymqpZ987lcELqahHYcs5uC6iwucLEPw5dA:1wyt0z:OHXyLbqvkekjG-cLjvQR8JQl6I21MBb590o60hhbKyE",
+    "expire_date": "2026-09-08T15:24:41.927Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "8p3rhbhyi79eg42hgmme53f50ex159py",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAUBf-FtSFSuC24dN9vIHAftmogKe3K-O_apAvdnpk5LxXTtk5xa7zEmdRFgTr9bjnhg8sO6J7KrWqsZV3mrHdFH7TpsRI_r4f7dzClNn1rtEgkYI0z6KkzIgOHc9-RM55QgnTcW4QMA_mBe0kQfHBInJx4C6DeHwHDOIg:1wz0lV:1YFIrNEocO7ThKo2sYE4veBHmdbddAWYErhIpR2ySyU",
+    "expire_date": "2026-09-08T23:41:13.959Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "97nnbwgutl3q65kiwo6uegkvfzxxxdjz",
+  "fields": {
+    "session_data": ".eJxVjDEKwzAMAP-iuRg7xk6asXvfYCRLqtMWB-JkCv17CWRo17vjdki4rSVtTZY0MYzQweWXEeaX1EPwE-tjNnmu6zKRORJz2mbuM8v7drZ_g4KtwAguOJVAgwafUYSiWsc2YMwuU4z-ymqpZ987lcELqahHYcs5uC6iwucLEPw5dA:1wytQk:d5Z_hzCAcWq2pGEOfduw7JgcRofPdmnppjpOpxPx93g",
+    "expire_date": "2026-09-08T15:51:18.590Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "bedzdz3mq1tec9lsdrlfrucjdby3ki76",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQAP9lz4YUdhHo0Xu_oVlgkaqhSR8n47-bJj3odWYybxh53-q4r7KMU4YeEC6_LHJ6SjtEfnC7zyrNbVumqI5EnXZVw5zldTvbv0HltUIPhRnpmoPNhiSiE228lo48czEhFmKHwjZ5DMhJW8ZCzgZyPlEsvoPPF_NAOAk:1wytwy:q_HctjgVZpz-ikOLjGAdx5wh8aCuX5omORU4n4tZkr0",
+    "expire_date": "2026-09-08T16:24:36.404Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "pmku27gwz032j54akbzp8sleivslmhvm",
+  "fields": {
+    "session_data": ".eJxVjDkOwjAQAP-yNbKSDb5S0ucN1u7axgFkSzkqxN9RpBTQzozmDYH2rYR9TUuYI4yAcPllTPJM9RDxQfXelLS6LTOrI1GnXdXUYnrdzvZvUGgtMIKRYWDKHp02TN5mw1GTE0osDtH3lqInTNpqZImpN-St7zJm66Trr_D5AgLlOG8:1wysji:T7H2LnAKXVtLzrxJ00tZJ-6JY4vESdJAG5zw620mXdI",
+    "expire_date": "2026-09-08T15:06:50.906Z"
+  }
+},
+{
+  "model": "core.gymsetting",
+  "pk": 1,
+  "fields": {
+    "created_at": "2026-08-25T15:24:42.062Z",
+    "updated_at": "2026-08-25T15:24:42.062Z",
+    "gym_name": "Vitalis Fitness Club",
+    "branch_name": "Sede Central • Palermo Soho",
+    "tax_id": "30-71829304-5",
+    "address": "Av. del Libertador 4500, Palermo, CABA",
+    "phone": "+54 11 4899-2030",
+    "whatsapp": "+54 9 11 5500-8822",
+    "email": "contacto@vitalisfitness.com",
+    "bank_cbu": "0000003100045678912345",
+    "bank_alias": "VITALIS.FITNESS.PAGO",
+    "receipt_footer": "Gracias por elegir Vitalis Fitness Club. Las cuotas abonadas son personales y no reembolsables.",
+    "days_advance_notice": 7,
+    "grace_period_days": 3,
+    "default_class_capacity": 15
+  }
+},
+{
+  "model": "members.plan",
+  "pk": 1,
+  "fields": {
+    "created_at": "2026-08-24T16:24:28.633Z",
+    "updated_at": "2026-08-24T16:24:28.633Z",
+    "name": "Black Pass VIP",
+    "price": "65000.00",
+    "duration_days": 30,
+    "color": "#f5b82e",
+    "description": "Acceso ilimitado a todas las sedes, clases premium, sauna y evaluación física mensual.",
+    "is_active": true
+  }
+},
+{
+  "model": "members.plan",
+  "pk": 2,
+  "fields": {
+    "created_at": "2026-08-24T16:24:28.825Z",
+    "updated_at": "2026-08-24T16:24:28.825Z",
+    "name": "Membresía Studio",
+    "price": "42000.00",
+    "duration_days": 30,
+    "color": "#e2e8f0",
+    "description": "Acceso a sala de musculación, cardio y 8 clases grupales por mes.",
+    "is_active": true
+  }
+},
+{
+  "model": "members.plan",
+  "pk": 3,
+  "fields": {
+    "created_at": "2026-08-24T16:24:28.907Z",
+    "updated_at": "2026-08-24T16:24:28.907Z",
+    "name": "Pase Estándar",
+    "price": "29900.00",
+    "duration_days": 30,
+    "color": "#64748b",
+    "description": "Acceso en horario valle (09:00 a 16:00) a sala de musculación.",
+    "is_active": true
+  }
+},
+{
+  "model": "members.member",
+  "pk": 1,
+  "fields": {
+    "created_at": "2026-08-24T16:24:28.991Z",
+    "updated_at": "2026-08-24T16:24:28.991Z",
+    "user": [
+      "18432910K"
+    ],
+    "first_name": "Sofía",
+    "last_name": "Rodriguez",
+    "dni": "18.432.910-K",
+    "email": "sofia.rodriguez@email.com",
+    "phone": "+56 9 8765 4321",
+    "date_of_birth": "1996-05-14",
+    "gender": "F",
+    "address": "",
+    "avatar_file": "",
+    "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80",
+    "plan": 1,
+    "status": "ACTIVA",
+    "start_date": "2026-01-15",
+    "end_date": "2026-09-15",
+    "emergency_contact_name": "Mariana Rodriguez (Madre)",
+    "emergency_contact_phone": "+56 9 1122 3344",
+    "medical_notes": "Apta para alta intensidad. Sin alergias."
+  }
+},
+{
+  "model": "members.member",
+  "pk": 2,
+  "fields": {
+    "created_at": "2026-08-24T16:24:29.083Z",
+    "updated_at": "2026-08-24T16:24:29.083Z",
+    "user": [
+      "178901234"
+    ],
+    "first_name": "Carlos",
+    "last_name": "Mendoza",
+    "dni": "17.890.123-4",
+    "email": "carlos.mendoza@email.com",
+    "phone": "+56 9 7654 3210",
+    "date_of_birth": "1992-08-22",
+    "gender": "M",
+    "address": "",
+    "avatar_file": "",
+    "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80",
+    "plan": 2,
+    "status": "PENDIENTE",
+    "start_date": "2026-02-02",
+    "end_date": "2026-08-02",
+    "emergency_contact_name": "Lucía Mendoza (Hermana)",
+    "emergency_contact_phone": "+56 9 9988 7766",
+    "medical_notes": "Comprobante de transferencia bancaria en revisión."
+  }
+},
+{
+  "model": "members.member",
+  "pk": 3,
+  "fields": {
+    "created_at": "2026-08-24T16:24:29.166Z",
+    "updated_at": "2026-08-24T16:24:29.166Z",
+    "user": [
+      "195543217"
+    ],
+    "first_name": "Valentina",
+    "last_name": "Ortiz",
+    "dni": "19.554.321-7",
+    "email": "valentina.ortiz@email.com",
+    "phone": "+56 9 6543 2109",
+    "date_of_birth": "1998-11-30",
+    "gender": "F",
+    "address": "",
+    "avatar_file": "",
+    "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&auto=format&fit=crop&q=80",
+    "plan": 3,
+    "status": "VENCIDO",
+    "start_date": "2025-11-12",
+    "end_date": "2025-12-12",
+    "emergency_contact_name": "Esteban Ortiz (Padre)",
+    "emergency_contact_phone": "+56 9 3344 5566",
+    "medical_notes": "Membresía vencida. Notificada por correo."
+  }
+},
+{
+  "model": "members.member",
+  "pk": 4,
+  "fields": {
+    "created_at": "2026-08-24T16:24:29.250Z",
+    "updated_at": "2026-08-24T16:24:29.250Z",
+    "user": [
+      "167890123"
+    ],
+    "first_name": "Mateo",
+    "last_name": "Silva",
+    "dni": "16.789.012-3",
+    "email": "mateo.silva@email.com",
+    "phone": "+56 9 5432 1098",
+    "date_of_birth": "1990-03-18",
+    "gender": "M",
+    "address": "",
+    "avatar_file": "",
+    "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&auto=format&fit=crop&q=80",
+    "plan": 1,
+    "status": "ACTIVA",
+    "start_date": "2026-01-28",
+    "end_date": "2026-11-27",
+    "emergency_contact_name": "Camila Silva (Esposa)",
+    "emergency_contact_phone": "+56 9 7788 9900",
+    "medical_notes": "Molestia leve en manguito rotador derecho."
+  }
+},
+{
+  "model": "members.member",
+  "pk": 5,
+  "fields": {
+    "created_at": "2026-08-24T16:24:29.341Z",
+    "updated_at": "2026-08-24T16:24:29.341Z",
+    "user": [
+      "159876542"
+    ],
+    "first_name": "Ignacio",
+    "last_name": "Valenzuela",
+    "dni": "15.987.654-2",
+    "email": "ignacio.valenzuela@email.com",
+    "phone": "+56 9 4321 0987",
+    "date_of_birth": "1988-07-09",
+    "gender": "M",
+    "address": "",
+    "avatar_file": "",
+    "avatar": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=120&auto=format&fit=crop&q=80",
+    "plan": 1,
+    "status": "ACTIVA",
+    "start_date": "2026-02-10",
+    "end_date": "2026-12-10",
+    "emergency_contact_name": "Daniela Valenzuela",
+    "emergency_contact_phone": "+56 9 2233 4455",
+    "medical_notes": "Apto sin restricciones."
+  }
+},
+{
+  "model": "members.member",
+  "pk": 6,
+  "fields": {
+    "created_at": "2026-08-24T16:24:29.424Z",
+    "updated_at": "2026-08-24T16:24:29.424Z",
+    "user": [
+      "201234561"
+    ],
+    "first_name": "Florencia",
+    "last_name": "Navarro",
+    "dni": "20.123.456-1",
+    "email": "florencia.navarro@email.com",
+    "phone": "+56 9 3210 9876",
+    "date_of_birth": "2001-12-05",
+    "gender": "F",
+    "address": "",
+    "avatar_file": "",
+    "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&auto=format&fit=crop&q=80",
+    "plan": 2,
+    "status": "ACTIVA",
+    "start_date": "2026-03-01",
+    "end_date": "2026-10-01",
+    "emergency_contact_name": "Rodrigo Navarro",
+    "emergency_contact_phone": "+56 9 6655 4433",
+    "medical_notes": "Entrenamiento orientado a hipertrofia."
+  }
+},
+{
+  "model": "members.member",
+  "pk": 7,
+  "fields": {
+    "created_at": "2026-08-24T16:27:04.189Z",
+    "updated_at": "2026-08-24T16:27:04.190Z",
+    "user": [
+      "33482732"
+    ],
+    "first_name": "Dario",
+    "last_name": "Orquera",
+    "dni": "33482732",
+    "email": "informaticasnaf@gmail.com",
+    "phone": "3885104530",
+    "date_of_birth": "1987-12-28",
+    "gender": "M",
+    "address": "Av. Fuerza Aérea 331",
+    "avatar_file": "",
+    "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80",
+    "plan": 1,
+    "status": "ACTIVA",
+    "start_date": "2026-08-01",
+    "end_date": "2026-09-30",
+    "emergency_contact_name": "Palmira Cari",
+    "emergency_contact_phone": "3885104531",
+    "medical_notes": ""
+  }
+},
+{
+  "model": "members.member",
+  "pk": 8,
+  "fields": {
+    "created_at": "2026-08-25T22:56:39.481Z",
+    "updated_at": "2026-08-25T22:56:39.481Z",
+    "user": [
+      "38492019"
+    ],
+    "first_name": "Martín",
+    "last_name": "Fuentes",
+    "dni": "38492019",
+    "email": "martin.fuentes@vitalis.com",
+    "phone": "+54 9 11 4829-1928",
+    "date_of_birth": null,
+    "gender": "M",
+    "address": "",
+    "avatar_file": "",
+    "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&auto=format&fit=crop&q=80",
+    "plan": 1,
+    "status": "ACTIVA",
+    "start_date": "2026-08-10",
+    "end_date": "2026-09-09",
+    "emergency_contact_name": "Laura Fuentes",
+    "emergency_contact_phone": "+54 9 11 4433-2211",
+    "medical_notes": "Apto médico al día presentado en Julio 2026."
+  }
+},
+{
+  "model": "classes.trainer",
+  "pk": 1,
+  "fields": {
+    "created_at": "2026-08-24T16:33:00.219Z",
+    "updated_at": "2026-08-25T13:44:54.833Z",
+    "first_name": "Lucas",
+    "last_name": "Torres",
+    "specialty": "Funcional & Crossfit Coach",
+    "email": "lucas.torres@vitalisfitness.com",
+    "phone": "+56 9 9123 4567",
+    "avatar_file": "",
+    "avatar": "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=120&auto=format&fit=crop&q=80",
+    "bio": "Especialista en acondicionamiento físico, entrenamiento funcional de alta intensidad y cross training con 8 años de experiencia.",
+    "is_active": true
+  }
+},
+{
+  "model": "classes.trainer",
+  "pk": 2,
+  "fields": {
+    "created_at": "2026-08-24T16:33:00.292Z",
+    "updated_at": "2026-08-25T13:44:54.920Z",
+    "first_name": "Ana",
+    "last_name": "Sofía",
+    "specialty": "Power Yoga & Flexibilidad",
+    "email": "ana.sofia@vitalisfitness.com",
+    "phone": "+56 9 8234 5678",
+    "avatar_file": "",
+    "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&auto=format&fit=crop&q=80",
+    "bio": "Instructora certificada de Vinyasa y Ashtanga Yoga. Especialista en movilidad articular y reducción del estrés.",
+    "is_active": true
+  }
+},
+{
+  "model": "classes.trainer",
+  "pk": 3,
+  "fields": {
+    "created_at": "2026-08-24T16:33:00.368Z",
+    "updated_at": "2026-08-25T13:44:55.003Z",
+    "first_name": "Mario",
+    "last_name": "Ruiz",
+    "specialty": "Indoor Cycling & HIIT",
+    "email": "mario.ruiz@vitalisfitness.com",
+    "phone": "+56 9 7345 6789",
+    "avatar_file": "",
+    "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&auto=format&fit=crop&q=80",
+    "bio": "Entrenador de alta exigencia cardiovascular, spinning y resistencia metabólica.",
+    "is_active": true
+  }
+},
+{
+  "model": "classes.classcategory",
+  "pk": 1,
+  "fields": {
+    "created_at": "2026-08-24T16:33:00.442Z",
+    "updated_at": "2026-08-25T13:44:55.087Z",
+    "name": "Entrenamiento Funcional",
+    "color": "#f5b82e",
+    "description": "Ejercicios multiarticulares para fuerza, agilidad y resistencia metabólica.",
+    "icon": "dumbbell"
+  }
+},
+{
+  "model": "classes.classcategory",
+  "pk": 2,
+  "fields": {
+    "created_at": "2026-08-24T16:33:00.518Z",
+    "updated_at": "2026-08-25T13:44:55.161Z",
+    "name": "Crossfit WOD",
+    "color": "#06b6d4",
+    "description": "Workout of the Day con levantamiento olímpico y gimnasia.",
+    "icon": "dumbbell"
+  }
+},
+{
+  "model": "classes.classcategory",
+  "pk": 3,
+  "fields": {
+    "created_at": "2026-08-24T16:33:00.592Z",
+    "updated_at": "2026-08-25T13:44:55.237Z",
+    "name": "Power Yoga Flow",
+    "color": "#84cc16",
+    "description": "Secuencias dinámicas de posturas con respiración consciente.",
+    "icon": "dumbbell"
+  }
+},
+{
+  "model": "classes.classcategory",
+  "pk": 4,
+  "fields": {
+    "created_at": "2026-08-24T16:33:00.667Z",
+    "updated_at": "2026-08-25T13:44:55.320Z",
+    "name": "Spinning Pro",
+    "color": "#f59e0b",
+    "description": "Ciclismo indoor de alta intensidad por intervalos.",
+    "icon": "dumbbell"
+  }
+},
+{
+  "model": "classes.classcategory",
+  "pk": 5,
+  "fields": {
+    "created_at": "2026-08-24T16:33:00.742Z",
+    "updated_at": "2026-08-25T13:44:55.412Z",
+    "name": "HIIT Training",
+    "color": "#ec4899",
+    "description": "Intervalos cortos de esfuerzo máximo para quema calórica.",
+    "icon": "dumbbell"
+  }
+},
+{
+  "model": "classes.classcategory",
+  "pk": 6,
+  "fields": {
+    "created_at": "2026-08-25T22:56:41.076Z",
+    "updated_at": "2026-08-25T22:56:41.076Z",
+    "name": "Crossfit",
+    "color": "#f5b82e",
+    "description": "WOD de alta intensidad",
+    "icon": "dumbbell"
+  }
+},
+{
+  "model": "classes.classcategory",
+  "pk": 7,
+  "fields": {
+    "created_at": "2026-08-25T22:56:41.083Z",
+    "updated_at": "2026-08-25T22:56:41.083Z",
+    "name": "Spinning",
+    "color": "#00f2fe",
+    "description": "Ciclismo indoor",
+    "icon": "dumbbell"
+  }
+},
+{
+  "model": "classes.classcategory",
+  "pk": 8,
+  "fields": {
+    "created_at": "2026-08-25T22:56:41.092Z",
+    "updated_at": "2026-08-25T22:56:41.092Z",
+    "name": "Yoga",
+    "color": "#4facfe",
+    "description": "Power Flow & Flexibilidad",
+    "icon": "dumbbell"
+  }
+},
+{
+  "model": "classes.classschedule",
+  "pk": 1,
+  "fields": {
+    "created_at": "2026-08-24T16:33:00.818Z",
+    "updated_at": "2026-08-25T13:44:55.495Z",
+    "title": "Entrenamiento Funcional Nocturno",
+    "category": 1,
+    "trainer": 1,
+    "day_of_week": 3,
+    "start_time": "20:00:00",
+    "end_time": "22:00:00",
+    "room": "Box Funcional Principal",
+    "capacity": 20,
+    "is_active": true
+  }
+},
+{
+  "model": "classes.classschedule",
+  "pk": 2,
+  "fields": {
+    "created_at": "2026-08-24T16:33:01.301Z",
+    "updated_at": "2026-08-25T13:44:55.582Z",
+    "title": "Entrenamiento Funcional Nocturno",
+    "category": 1,
+    "trainer": 1,
+    "day_of_week": 5,
+    "start_time": "20:00:00",
+    "end_time": "22:00:00",
+    "room": "Box Funcional Principal",
+    "capacity": 20,
+    "is_active": true
+  }
+},
+{
+  "model": "classes.classschedule",
+  "pk": 3,
+  "fields": {
+    "created_at": "2026-08-24T16:33:01.809Z",
+    "updated_at": "2026-08-25T13:44:55.673Z",
+    "title": "Crossfit WOD Matutino",
+    "category": 2,
+    "trainer": 1,
+    "day_of_week": 1,
+    "start_time": "08:00:00",
+    "end_time": "09:30:00",
+    "room": "Box Central",
+    "capacity": 15,
+    "is_active": true
+  }
+},
+{
+  "model": "classes.classschedule",
+  "pk": 4,
+  "fields": {
+    "created_at": "2026-08-24T16:33:02.310Z",
+    "updated_at": "2026-08-25T13:44:55.773Z",
+    "title": "Crossfit WOD Matutino",
+    "category": 2,
+    "trainer": 1,
+    "day_of_week": 2,
+    "start_time": "08:00:00",
+    "end_time": "09:30:00",
+    "room": "Box Central",
+    "capacity": 15,
+    "is_active": true
+  }
+},
+{
+  "model": "classes.classschedule",
+  "pk": 5,
+  "fields": {
+    "created_at": "2026-08-24T16:33:02.776Z",
+    "updated_at": "2026-08-25T13:44:55.864Z",
+    "title": "Crossfit WOD Matutino",
+    "category": 2,
+    "trainer": 1,
+    "day_of_week": 3,
+    "start_time": "08:00:00",
+    "end_time": "09:30:00",
+    "room": "Box Central",
+    "capacity": 15,
+    "is_active": true
+  }
+},
+{
+  "model": "classes.classschedule",
+  "pk": 6,
+  "fields": {
+    "created_at": "2026-08-24T16:33:03.234Z",
+    "updated_at": "2026-08-25T13:44:55.956Z",
+    "title": "Crossfit WOD Matutino",
+    "category": 2,
+    "trainer": 1,
+    "day_of_week": 4,
+    "start_time": "08:00:00",
+    "end_time": "09:30:00",
+    "room": "Box Central",
+    "capacity": 15,
+    "is_active": true
+  }
+},
+{
+  "model": "classes.classschedule",
+  "pk": 7,
+  "fields": {
+    "created_at": "2026-08-24T16:33:03.684Z",
+    "updated_at": "2026-08-25T13:44:56.030Z",
+    "title": "Crossfit WOD Matutino",
+    "category": 2,
+    "trainer": 1,
+    "day_of_week": 5,
+    "start_time": "08:00:00",
+    "end_time": "09:30:00",
+    "room": "Box Central",
+    "capacity": 15,
+    "is_active": true
+  }
+},
+{
+  "model": "classes.classschedule",
+  "pk": 8,
+  "fields": {
+    "created_at": "2026-08-24T16:33:04.160Z",
+    "updated_at": "2026-08-25T13:44:56.131Z",
+    "title": "Power Yoga Flow",
+    "category": 3,
+    "trainer": 2,
+    "day_of_week": 2,
+    "start_time": "09:30:00",
+    "end_time": "11:00:00",
+    "room": "Studio Zen",
+    "capacity": 18,
+    "is_active": true
+  }
+},
+{
+  "model": "classes.classschedule",
+  "pk": 9,
+  "fields": {
+    "created_at": "2026-08-24T16:33:04.676Z",
+    "updated_at": "2026-08-25T13:44:56.214Z",
+    "title": "Power Yoga Flow",
+    "category": 3,
+    "trainer": 2,
+    "day_of_week": 4,
+    "start_time": "09:30:00",
+    "end_time": "11:00:00",
+    "room": "Studio Zen",
+    "capacity": 18,
+    "is_active": true
+  }
+},
+{
+  "model": "classes.classschedule",
+  "pk": 10,
+  "fields": {
+    "created_at": "2026-08-24T16:33:05.235Z",
+    "updated_at": "2026-08-25T13:44:56.306Z",
+    "title": "Spinning Pro Interval",
+    "category": 4,
+    "trainer": 3,
+    "day_of_week": 1,
+    "start_time": "11:00:00",
+    "end_time": "12:30:00",
+    "room": "Sala Spinning",
+    "capacity": 25,
+    "is_active": true
+  }
+},
+{
+  "model": "classes.classschedule",
+  "pk": 11,
+  "fields": {
+    "created_at": "2026-08-24T16:33:05.724Z",
+    "updated_at": "2026-08-25T13:44:56.381Z",
+    "title": "Spinning Pro Interval",
+    "category": 4,
+    "trainer": 3,
+    "day_of_week": 3,
+    "start_time": "11:00:00",
+    "end_time": "12:30:00",
+    "room": "Sala Spinning",
+    "capacity": 25,
+    "is_active": true
+  }
+},
+{
+  "model": "classes.classschedule",
+  "pk": 12,
+  "fields": {
+    "created_at": "2026-08-24T16:33:06.334Z",
+    "updated_at": "2026-08-25T13:44:56.464Z",
+    "title": "Spinning Pro Interval",
+    "category": 4,
+    "trainer": 3,
+    "day_of_week": 5,
+    "start_time": "11:00:00",
+    "end_time": "12:30:00",
+    "room": "Sala Spinning",
+    "capacity": 25,
+    "is_active": true
+  }
+},
+{
+  "model": "classes.classschedule",
+  "pk": 13,
+  "fields": {
+    "created_at": "2026-08-24T16:33:06.801Z",
+    "updated_at": "2026-08-25T13:44:56.548Z",
+    "title": "HIIT Training Quema-Grasa",
+    "category": 5,
+    "trainer": 1,
+    "day_of_week": 1,
+    "start_time": "18:30:00",
+    "end_time": "19:45:00",
+    "room": "Sala Funcional 2",
+    "capacity": 16,
+    "is_active": true
+  }
+},
+{
+  "model": "classes.classschedule",
+  "pk": 14,
+  "fields": {
+    "created_at": "2026-08-24T16:33:07.301Z",
+    "updated_at": "2026-08-25T13:44:56.640Z",
+    "title": "HIIT Training Quema-Grasa",
+    "category": 5,
+    "trainer": 1,
+    "day_of_week": 2,
+    "start_time": "18:30:00",
+    "end_time": "19:45:00",
+    "room": "Sala Funcional 2",
+    "capacity": 16,
+    "is_active": true
+  }
+},
+{
+  "model": "classes.classschedule",
+  "pk": 15,
+  "fields": {
+    "created_at": "2026-08-24T16:33:07.776Z",
+    "updated_at": "2026-08-25T13:44:56.722Z",
+    "title": "HIIT Training Quema-Grasa",
+    "category": 5,
+    "trainer": 1,
+    "day_of_week": 3,
+    "start_time": "18:30:00",
+    "end_time": "19:45:00",
+    "room": "Sala Funcional 2",
+    "capacity": 16,
+    "is_active": true
+  }
+},
+{
+  "model": "classes.classschedule",
+  "pk": 16,
+  "fields": {
+    "created_at": "2026-08-24T16:33:08.309Z",
+    "updated_at": "2026-08-25T13:44:56.814Z",
+    "title": "HIIT Training Quema-Grasa",
+    "category": 5,
+    "trainer": 1,
+    "day_of_week": 4,
+    "start_time": "18:30:00",
+    "end_time": "19:45:00",
+    "room": "Sala Funcional 2",
+    "capacity": 16,
+    "is_active": true
+  }
+},
+{
+  "model": "classes.classschedule",
+  "pk": 17,
+  "fields": {
+    "created_at": "2026-08-25T13:36:09.787Z",
+    "updated_at": "2026-08-25T13:36:09.787Z",
+    "title": "Funcional",
+    "category": 1,
+    "trainer": 2,
+    "day_of_week": 1,
+    "start_time": "20:00:00",
+    "end_time": "22:00:00",
+    "room": "Sala Principal",
+    "capacity": 30,
+    "is_active": false
+  }
+},
+{
+  "model": "classes.classschedule",
+  "pk": 18,
+  "fields": {
+    "created_at": "2026-08-25T13:36:10.260Z",
+    "updated_at": "2026-08-25T13:36:10.260Z",
+    "title": "Funcional",
+    "category": 1,
+    "trainer": 2,
+    "day_of_week": 3,
+    "start_time": "20:00:00",
+    "end_time": "22:00:00",
+    "room": "Sala Principal",
+    "capacity": 30,
+    "is_active": false
+  }
+},
+{
+  "model": "classes.classschedule",
+  "pk": 19,
+  "fields": {
+    "created_at": "2026-08-25T13:37:36.560Z",
+    "updated_at": "2026-08-25T13:37:36.560Z",
+    "title": "funcioanl Nocturno",
+    "category": 1,
+    "trainer": 1,
+    "day_of_week": 3,
+    "start_time": "20:00:00",
+    "end_time": "22:00:00",
+    "room": "Sala Principal",
+    "capacity": 35,
+    "is_active": false
+  }
+},
+{
+  "model": "classes.classschedule",
+  "pk": 20,
+  "fields": {
+    "created_at": "2026-08-25T13:37:37.015Z",
+    "updated_at": "2026-08-25T13:37:37.015Z",
+    "title": "funcioanl Nocturno",
+    "category": 1,
+    "trainer": 1,
+    "day_of_week": 5,
+    "start_time": "20:00:00",
+    "end_time": "22:00:00",
+    "room": "Sala Principal",
+    "capacity": 35,
+    "is_active": false
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 1,
+  "fields": {
+    "created_at": "2026-08-24T16:33:00.901Z",
+    "updated_at": "2026-08-24T16:33:00.901Z",
+    "schedule": 1,
+    "title": "Entrenamiento Funcional Nocturno",
+    "category": 1,
+    "trainer": 1,
+    "date": "2026-08-19",
+    "start_time": "20:00:00",
+    "end_time": "22:00:00",
+    "room": "Box Funcional Principal",
+    "capacity": 20,
+    "booked_count": 8,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 2,
+  "fields": {
+    "created_at": "2026-08-24T16:33:00.976Z",
+    "updated_at": "2026-08-24T16:33:00.976Z",
+    "schedule": 1,
+    "title": "Entrenamiento Funcional Nocturno",
+    "category": 1,
+    "trainer": 1,
+    "date": "2026-08-26",
+    "start_time": "20:00:00",
+    "end_time": "22:00:00",
+    "room": "Box Funcional Principal",
+    "capacity": 20,
+    "booked_count": 8,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 3,
+  "fields": {
+    "created_at": "2026-08-24T16:33:01.050Z",
+    "updated_at": "2026-08-24T16:33:01.050Z",
+    "schedule": 1,
+    "title": "Entrenamiento Funcional Nocturno",
+    "category": 1,
+    "trainer": 1,
+    "date": "2026-09-02",
+    "start_time": "20:00:00",
+    "end_time": "22:00:00",
+    "room": "Box Funcional Principal",
+    "capacity": 20,
+    "booked_count": 8,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 4,
+  "fields": {
+    "created_at": "2026-08-24T16:33:01.135Z",
+    "updated_at": "2026-08-24T16:33:01.135Z",
+    "schedule": 1,
+    "title": "Entrenamiento Funcional Nocturno",
+    "category": 1,
+    "trainer": 1,
+    "date": "2026-09-09",
+    "start_time": "20:00:00",
+    "end_time": "22:00:00",
+    "room": "Box Funcional Principal",
+    "capacity": 20,
+    "booked_count": 8,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 5,
+  "fields": {
+    "created_at": "2026-08-24T16:33:01.217Z",
+    "updated_at": "2026-08-24T16:33:01.217Z",
+    "schedule": 1,
+    "title": "Entrenamiento Funcional Nocturno",
+    "category": 1,
+    "trainer": 1,
+    "date": "2026-09-16",
+    "start_time": "20:00:00",
+    "end_time": "22:00:00",
+    "room": "Box Funcional Principal",
+    "capacity": 20,
+    "booked_count": 8,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 6,
+  "fields": {
+    "created_at": "2026-08-24T16:33:01.384Z",
+    "updated_at": "2026-08-24T16:33:01.384Z",
+    "schedule": 2,
+    "title": "Entrenamiento Funcional Nocturno",
+    "category": 1,
+    "trainer": 1,
+    "date": "2026-08-21",
+    "start_time": "20:00:00",
+    "end_time": "22:00:00",
+    "room": "Box Funcional Principal",
+    "capacity": 20,
+    "booked_count": 8,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 7,
+  "fields": {
+    "created_at": "2026-08-24T16:33:01.468Z",
+    "updated_at": "2026-08-24T16:33:01.468Z",
+    "schedule": 2,
+    "title": "Entrenamiento Funcional Nocturno",
+    "category": 1,
+    "trainer": 1,
+    "date": "2026-08-28",
+    "start_time": "20:00:00",
+    "end_time": "22:00:00",
+    "room": "Box Funcional Principal",
+    "capacity": 20,
+    "booked_count": 8,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 8,
+  "fields": {
+    "created_at": "2026-08-24T16:33:01.551Z",
+    "updated_at": "2026-08-24T16:33:01.551Z",
+    "schedule": 2,
+    "title": "Entrenamiento Funcional Nocturno",
+    "category": 1,
+    "trainer": 1,
+    "date": "2026-09-04",
+    "start_time": "20:00:00",
+    "end_time": "22:00:00",
+    "room": "Box Funcional Principal",
+    "capacity": 20,
+    "booked_count": 8,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 9,
+  "fields": {
+    "created_at": "2026-08-24T16:33:01.643Z",
+    "updated_at": "2026-08-24T16:33:01.643Z",
+    "schedule": 2,
+    "title": "Entrenamiento Funcional Nocturno",
+    "category": 1,
+    "trainer": 1,
+    "date": "2026-09-11",
+    "start_time": "20:00:00",
+    "end_time": "22:00:00",
+    "room": "Box Funcional Principal",
+    "capacity": 20,
+    "booked_count": 8,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 10,
+  "fields": {
+    "created_at": "2026-08-24T16:33:01.726Z",
+    "updated_at": "2026-08-24T16:33:01.726Z",
+    "schedule": 2,
+    "title": "Entrenamiento Funcional Nocturno",
+    "category": 1,
+    "trainer": 1,
+    "date": "2026-09-18",
+    "start_time": "20:00:00",
+    "end_time": "22:00:00",
+    "room": "Box Funcional Principal",
+    "capacity": 20,
+    "booked_count": 8,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 11,
+  "fields": {
+    "created_at": "2026-08-24T16:33:01.892Z",
+    "updated_at": "2026-08-24T16:33:01.892Z",
+    "schedule": 3,
+    "title": "Crossfit WOD Matutino",
+    "category": 2,
+    "trainer": 1,
+    "date": "2026-08-17",
+    "start_time": "08:00:00",
+    "end_time": "09:30:00",
+    "room": "Box Central",
+    "capacity": 15,
+    "booked_count": 16,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 12,
+  "fields": {
+    "created_at": "2026-08-24T16:33:01.976Z",
+    "updated_at": "2026-08-24T16:33:01.976Z",
+    "schedule": 3,
+    "title": "Crossfit WOD Matutino",
+    "category": 2,
+    "trainer": 1,
+    "date": "2026-08-24",
+    "start_time": "08:00:00",
+    "end_time": "09:30:00",
+    "room": "Box Central",
+    "capacity": 15,
+    "booked_count": 16,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 13,
+  "fields": {
+    "created_at": "2026-08-24T16:33:02.059Z",
+    "updated_at": "2026-08-24T16:33:02.059Z",
+    "schedule": 3,
+    "title": "Crossfit WOD Matutino",
+    "category": 2,
+    "trainer": 1,
+    "date": "2026-08-31",
+    "start_time": "08:00:00",
+    "end_time": "09:30:00",
+    "room": "Box Central",
+    "capacity": 15,
+    "booked_count": 16,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 14,
+  "fields": {
+    "created_at": "2026-08-24T16:33:02.143Z",
+    "updated_at": "2026-08-24T16:33:02.143Z",
+    "schedule": 3,
+    "title": "Crossfit WOD Matutino",
+    "category": 2,
+    "trainer": 1,
+    "date": "2026-09-07",
+    "start_time": "08:00:00",
+    "end_time": "09:30:00",
+    "room": "Box Central",
+    "capacity": 15,
+    "booked_count": 16,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 15,
+  "fields": {
+    "created_at": "2026-08-24T16:33:02.225Z",
+    "updated_at": "2026-08-24T16:33:02.225Z",
+    "schedule": 3,
+    "title": "Crossfit WOD Matutino",
+    "category": 2,
+    "trainer": 1,
+    "date": "2026-09-14",
+    "start_time": "08:00:00",
+    "end_time": "09:30:00",
+    "room": "Box Central",
+    "capacity": 15,
+    "booked_count": 16,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 16,
+  "fields": {
+    "created_at": "2026-08-24T16:33:02.400Z",
+    "updated_at": "2026-08-24T16:33:02.400Z",
+    "schedule": 4,
+    "title": "Crossfit WOD Matutino",
+    "category": 2,
+    "trainer": 1,
+    "date": "2026-08-18",
+    "start_time": "08:00:00",
+    "end_time": "09:30:00",
+    "room": "Box Central",
+    "capacity": 15,
+    "booked_count": 16,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 17,
+  "fields": {
+    "created_at": "2026-08-24T16:33:02.476Z",
+    "updated_at": "2026-08-24T16:33:02.476Z",
+    "schedule": 4,
+    "title": "Crossfit WOD Matutino",
+    "category": 2,
+    "trainer": 1,
+    "date": "2026-08-25",
+    "start_time": "08:00:00",
+    "end_time": "09:30:00",
+    "room": "Box Central",
+    "capacity": 15,
+    "booked_count": 3,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 18,
+  "fields": {
+    "created_at": "2026-08-24T16:33:02.550Z",
+    "updated_at": "2026-08-24T16:33:02.550Z",
+    "schedule": 4,
+    "title": "Crossfit WOD Matutino",
+    "category": 2,
+    "trainer": 1,
+    "date": "2026-09-01",
+    "start_time": "08:00:00",
+    "end_time": "09:30:00",
+    "room": "Box Central",
+    "capacity": 15,
+    "booked_count": 16,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 19,
+  "fields": {
+    "created_at": "2026-08-24T16:33:02.626Z",
+    "updated_at": "2026-08-24T16:33:02.626Z",
+    "schedule": 4,
+    "title": "Crossfit WOD Matutino",
+    "category": 2,
+    "trainer": 1,
+    "date": "2026-09-08",
+    "start_time": "08:00:00",
+    "end_time": "09:30:00",
+    "room": "Box Central",
+    "capacity": 15,
+    "booked_count": 16,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 20,
+  "fields": {
+    "created_at": "2026-08-24T16:33:02.700Z",
+    "updated_at": "2026-08-24T16:33:02.700Z",
+    "schedule": 4,
+    "title": "Crossfit WOD Matutino",
+    "category": 2,
+    "trainer": 1,
+    "date": "2026-09-15",
+    "start_time": "08:00:00",
+    "end_time": "09:30:00",
+    "room": "Box Central",
+    "capacity": 15,
+    "booked_count": 16,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 21,
+  "fields": {
+    "created_at": "2026-08-24T16:33:02.850Z",
+    "updated_at": "2026-08-24T16:33:02.850Z",
+    "schedule": 5,
+    "title": "Crossfit WOD Matutino",
+    "category": 2,
+    "trainer": 1,
+    "date": "2026-08-19",
+    "start_time": "08:00:00",
+    "end_time": "09:30:00",
+    "room": "Box Central",
+    "capacity": 15,
+    "booked_count": 16,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 22,
+  "fields": {
+    "created_at": "2026-08-24T16:33:02.926Z",
+    "updated_at": "2026-08-24T16:33:02.926Z",
+    "schedule": 5,
+    "title": "Crossfit WOD Matutino",
+    "category": 2,
+    "trainer": 1,
+    "date": "2026-08-26",
+    "start_time": "08:00:00",
+    "end_time": "09:30:00",
+    "room": "Box Central",
+    "capacity": 15,
+    "booked_count": 16,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 23,
+  "fields": {
+    "created_at": "2026-08-24T16:33:03.009Z",
+    "updated_at": "2026-08-24T16:33:03.009Z",
+    "schedule": 5,
+    "title": "Crossfit WOD Matutino",
+    "category": 2,
+    "trainer": 1,
+    "date": "2026-09-02",
+    "start_time": "08:00:00",
+    "end_time": "09:30:00",
+    "room": "Box Central",
+    "capacity": 15,
+    "booked_count": 16,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 24,
+  "fields": {
+    "created_at": "2026-08-24T16:33:03.084Z",
+    "updated_at": "2026-08-24T16:33:03.084Z",
+    "schedule": 5,
+    "title": "Crossfit WOD Matutino",
+    "category": 2,
+    "trainer": 1,
+    "date": "2026-09-09",
+    "start_time": "08:00:00",
+    "end_time": "09:30:00",
+    "room": "Box Central",
+    "capacity": 15,
+    "booked_count": 16,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 25,
+  "fields": {
+    "created_at": "2026-08-24T16:33:03.159Z",
+    "updated_at": "2026-08-24T16:33:03.159Z",
+    "schedule": 5,
+    "title": "Crossfit WOD Matutino",
+    "category": 2,
+    "trainer": 1,
+    "date": "2026-09-16",
+    "start_time": "08:00:00",
+    "end_time": "09:30:00",
+    "room": "Box Central",
+    "capacity": 15,
+    "booked_count": 16,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 26,
+  "fields": {
+    "created_at": "2026-08-24T16:33:03.309Z",
+    "updated_at": "2026-08-24T16:33:03.309Z",
+    "schedule": 6,
+    "title": "Crossfit WOD Matutino",
+    "category": 2,
+    "trainer": 1,
+    "date": "2026-08-20",
+    "start_time": "08:00:00",
+    "end_time": "09:30:00",
+    "room": "Box Central",
+    "capacity": 15,
+    "booked_count": 16,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 27,
+  "fields": {
+    "created_at": "2026-08-24T16:33:03.384Z",
+    "updated_at": "2026-08-24T16:33:03.384Z",
+    "schedule": 6,
+    "title": "Crossfit WOD Matutino",
+    "category": 2,
+    "trainer": 1,
+    "date": "2026-08-27",
+    "start_time": "08:00:00",
+    "end_time": "09:30:00",
+    "room": "Box Central",
+    "capacity": 15,
+    "booked_count": 16,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 28,
+  "fields": {
+    "created_at": "2026-08-24T16:33:03.460Z",
+    "updated_at": "2026-08-24T16:33:03.460Z",
+    "schedule": 6,
+    "title": "Crossfit WOD Matutino",
+    "category": 2,
+    "trainer": 1,
+    "date": "2026-09-03",
+    "start_time": "08:00:00",
+    "end_time": "09:30:00",
+    "room": "Box Central",
+    "capacity": 15,
+    "booked_count": 16,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 29,
+  "fields": {
+    "created_at": "2026-08-24T16:33:03.534Z",
+    "updated_at": "2026-08-24T16:33:03.534Z",
+    "schedule": 6,
+    "title": "Crossfit WOD Matutino",
+    "category": 2,
+    "trainer": 1,
+    "date": "2026-09-10",
+    "start_time": "08:00:00",
+    "end_time": "09:30:00",
+    "room": "Box Central",
+    "capacity": 15,
+    "booked_count": 16,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 30,
+  "fields": {
+    "created_at": "2026-08-24T16:33:03.610Z",
+    "updated_at": "2026-08-24T16:33:03.610Z",
+    "schedule": 6,
+    "title": "Crossfit WOD Matutino",
+    "category": 2,
+    "trainer": 1,
+    "date": "2026-09-17",
+    "start_time": "08:00:00",
+    "end_time": "09:30:00",
+    "room": "Box Central",
+    "capacity": 15,
+    "booked_count": 16,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 31,
+  "fields": {
+    "created_at": "2026-08-24T16:33:03.759Z",
+    "updated_at": "2026-08-24T16:33:03.759Z",
+    "schedule": 7,
+    "title": "Crossfit WOD Matutino",
+    "category": 2,
+    "trainer": 1,
+    "date": "2026-08-21",
+    "start_time": "08:00:00",
+    "end_time": "09:30:00",
+    "room": "Box Central",
+    "capacity": 15,
+    "booked_count": 16,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 32,
+  "fields": {
+    "created_at": "2026-08-24T16:33:03.834Z",
+    "updated_at": "2026-08-24T16:33:03.834Z",
+    "schedule": 7,
+    "title": "Crossfit WOD Matutino",
+    "category": 2,
+    "trainer": 1,
+    "date": "2026-08-28",
+    "start_time": "08:00:00",
+    "end_time": "09:30:00",
+    "room": "Box Central",
+    "capacity": 15,
+    "booked_count": 16,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 33,
+  "fields": {
+    "created_at": "2026-08-24T16:33:03.910Z",
+    "updated_at": "2026-08-24T16:33:03.910Z",
+    "schedule": 7,
+    "title": "Crossfit WOD Matutino",
+    "category": 2,
+    "trainer": 1,
+    "date": "2026-09-04",
+    "start_time": "08:00:00",
+    "end_time": "09:30:00",
+    "room": "Box Central",
+    "capacity": 15,
+    "booked_count": 16,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 34,
+  "fields": {
+    "created_at": "2026-08-24T16:33:03.992Z",
+    "updated_at": "2026-08-24T16:33:03.992Z",
+    "schedule": 7,
+    "title": "Crossfit WOD Matutino",
+    "category": 2,
+    "trainer": 1,
+    "date": "2026-09-11",
+    "start_time": "08:00:00",
+    "end_time": "09:30:00",
+    "room": "Box Central",
+    "capacity": 15,
+    "booked_count": 16,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 35,
+  "fields": {
+    "created_at": "2026-08-24T16:33:04.076Z",
+    "updated_at": "2026-08-24T16:33:04.076Z",
+    "schedule": 7,
+    "title": "Crossfit WOD Matutino",
+    "category": 2,
+    "trainer": 1,
+    "date": "2026-09-18",
+    "start_time": "08:00:00",
+    "end_time": "09:30:00",
+    "room": "Box Central",
+    "capacity": 15,
+    "booked_count": 16,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 36,
+  "fields": {
+    "created_at": "2026-08-24T16:33:04.242Z",
+    "updated_at": "2026-08-24T16:33:04.242Z",
+    "schedule": 8,
+    "title": "Power Yoga Flow",
+    "category": 3,
+    "trainer": 2,
+    "date": "2026-08-18",
+    "start_time": "09:30:00",
+    "end_time": "11:00:00",
+    "room": "Studio Zen",
+    "capacity": 18,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 37,
+  "fields": {
+    "created_at": "2026-08-24T16:33:04.326Z",
+    "updated_at": "2026-08-24T16:33:04.326Z",
+    "schedule": 8,
+    "title": "Power Yoga Flow",
+    "category": 3,
+    "trainer": 2,
+    "date": "2026-08-25",
+    "start_time": "09:30:00",
+    "end_time": "11:00:00",
+    "room": "Studio Zen",
+    "capacity": 18,
+    "booked_count": 3,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 38,
+  "fields": {
+    "created_at": "2026-08-24T16:33:04.416Z",
+    "updated_at": "2026-08-24T16:33:04.416Z",
+    "schedule": 8,
+    "title": "Power Yoga Flow",
+    "category": 3,
+    "trainer": 2,
+    "date": "2026-09-01",
+    "start_time": "09:30:00",
+    "end_time": "11:00:00",
+    "room": "Studio Zen",
+    "capacity": 18,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 39,
+  "fields": {
+    "created_at": "2026-08-24T16:33:04.509Z",
+    "updated_at": "2026-08-24T16:33:04.509Z",
+    "schedule": 8,
+    "title": "Power Yoga Flow",
+    "category": 3,
+    "trainer": 2,
+    "date": "2026-09-08",
+    "start_time": "09:30:00",
+    "end_time": "11:00:00",
+    "room": "Studio Zen",
+    "capacity": 18,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 40,
+  "fields": {
+    "created_at": "2026-08-24T16:33:04.593Z",
+    "updated_at": "2026-08-24T16:33:04.593Z",
+    "schedule": 8,
+    "title": "Power Yoga Flow",
+    "category": 3,
+    "trainer": 2,
+    "date": "2026-09-15",
+    "start_time": "09:30:00",
+    "end_time": "11:00:00",
+    "room": "Studio Zen",
+    "capacity": 18,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 41,
+  "fields": {
+    "created_at": "2026-08-24T16:33:04.759Z",
+    "updated_at": "2026-08-24T16:33:04.759Z",
+    "schedule": 9,
+    "title": "Power Yoga Flow",
+    "category": 3,
+    "trainer": 2,
+    "date": "2026-08-20",
+    "start_time": "09:30:00",
+    "end_time": "11:00:00",
+    "room": "Studio Zen",
+    "capacity": 18,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 42,
+  "fields": {
+    "created_at": "2026-08-24T16:33:04.834Z",
+    "updated_at": "2026-08-24T16:33:04.834Z",
+    "schedule": 9,
+    "title": "Power Yoga Flow",
+    "category": 3,
+    "trainer": 2,
+    "date": "2026-08-27",
+    "start_time": "09:30:00",
+    "end_time": "11:00:00",
+    "room": "Studio Zen",
+    "capacity": 18,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 43,
+  "fields": {
+    "created_at": "2026-08-24T16:33:04.954Z",
+    "updated_at": "2026-08-24T16:33:04.954Z",
+    "schedule": 9,
+    "title": "Power Yoga Flow",
+    "category": 3,
+    "trainer": 2,
+    "date": "2026-09-03",
+    "start_time": "09:30:00",
+    "end_time": "11:00:00",
+    "room": "Studio Zen",
+    "capacity": 18,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 44,
+  "fields": {
+    "created_at": "2026-08-24T16:33:05.043Z",
+    "updated_at": "2026-08-24T16:33:05.043Z",
+    "schedule": 9,
+    "title": "Power Yoga Flow",
+    "category": 3,
+    "trainer": 2,
+    "date": "2026-09-10",
+    "start_time": "09:30:00",
+    "end_time": "11:00:00",
+    "room": "Studio Zen",
+    "capacity": 18,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 45,
+  "fields": {
+    "created_at": "2026-08-24T16:33:05.127Z",
+    "updated_at": "2026-08-24T16:33:05.127Z",
+    "schedule": 9,
+    "title": "Power Yoga Flow",
+    "category": 3,
+    "trainer": 2,
+    "date": "2026-09-17",
+    "start_time": "09:30:00",
+    "end_time": "11:00:00",
+    "room": "Studio Zen",
+    "capacity": 18,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 46,
+  "fields": {
+    "created_at": "2026-08-24T16:33:05.326Z",
+    "updated_at": "2026-08-24T16:33:05.326Z",
+    "schedule": 10,
+    "title": "Spinning Pro Interval",
+    "category": 4,
+    "trainer": 3,
+    "date": "2026-08-17",
+    "start_time": "11:00:00",
+    "end_time": "12:30:00",
+    "room": "Sala Spinning",
+    "capacity": 25,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 47,
+  "fields": {
+    "created_at": "2026-08-24T16:33:05.402Z",
+    "updated_at": "2026-08-24T16:33:05.402Z",
+    "schedule": 10,
+    "title": "Spinning Pro Interval",
+    "category": 4,
+    "trainer": 3,
+    "date": "2026-08-24",
+    "start_time": "11:00:00",
+    "end_time": "12:30:00",
+    "room": "Sala Spinning",
+    "capacity": 25,
+    "booked_count": 25,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 48,
+  "fields": {
+    "created_at": "2026-08-24T16:33:05.476Z",
+    "updated_at": "2026-08-24T16:33:05.476Z",
+    "schedule": 10,
+    "title": "Spinning Pro Interval",
+    "category": 4,
+    "trainer": 3,
+    "date": "2026-08-31",
+    "start_time": "11:00:00",
+    "end_time": "12:30:00",
+    "room": "Sala Spinning",
+    "capacity": 25,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 49,
+  "fields": {
+    "created_at": "2026-08-24T16:33:05.551Z",
+    "updated_at": "2026-08-24T16:33:05.551Z",
+    "schedule": 10,
+    "title": "Spinning Pro Interval",
+    "category": 4,
+    "trainer": 3,
+    "date": "2026-09-07",
+    "start_time": "11:00:00",
+    "end_time": "12:30:00",
+    "room": "Sala Spinning",
+    "capacity": 25,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 50,
+  "fields": {
+    "created_at": "2026-08-24T16:33:05.634Z",
+    "updated_at": "2026-08-24T16:33:05.634Z",
+    "schedule": 10,
+    "title": "Spinning Pro Interval",
+    "category": 4,
+    "trainer": 3,
+    "date": "2026-09-14",
+    "start_time": "11:00:00",
+    "end_time": "12:30:00",
+    "room": "Sala Spinning",
+    "capacity": 25,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 51,
+  "fields": {
+    "created_at": "2026-08-24T16:33:05.809Z",
+    "updated_at": "2026-08-24T16:33:05.809Z",
+    "schedule": 11,
+    "title": "Spinning Pro Interval",
+    "category": 4,
+    "trainer": 3,
+    "date": "2026-08-19",
+    "start_time": "11:00:00",
+    "end_time": "12:30:00",
+    "room": "Sala Spinning",
+    "capacity": 25,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 52,
+  "fields": {
+    "created_at": "2026-08-24T16:33:05.918Z",
+    "updated_at": "2026-08-24T16:33:05.918Z",
+    "schedule": 11,
+    "title": "Spinning Pro Interval",
+    "category": 4,
+    "trainer": 3,
+    "date": "2026-08-26",
+    "start_time": "11:00:00",
+    "end_time": "12:30:00",
+    "room": "Sala Spinning",
+    "capacity": 25,
+    "booked_count": 1,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 53,
+  "fields": {
+    "created_at": "2026-08-24T16:33:06.001Z",
+    "updated_at": "2026-08-24T16:33:06.001Z",
+    "schedule": 11,
+    "title": "Spinning Pro Interval",
+    "category": 4,
+    "trainer": 3,
+    "date": "2026-09-02",
+    "start_time": "11:00:00",
+    "end_time": "12:30:00",
+    "room": "Sala Spinning",
+    "capacity": 25,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 54,
+  "fields": {
+    "created_at": "2026-08-24T16:33:06.143Z",
+    "updated_at": "2026-08-24T16:33:06.143Z",
+    "schedule": 11,
+    "title": "Spinning Pro Interval",
+    "category": 4,
+    "trainer": 3,
+    "date": "2026-09-09",
+    "start_time": "11:00:00",
+    "end_time": "12:30:00",
+    "room": "Sala Spinning",
+    "capacity": 25,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 55,
+  "fields": {
+    "created_at": "2026-08-24T16:33:06.226Z",
+    "updated_at": "2026-08-24T16:33:06.226Z",
+    "schedule": 11,
+    "title": "Spinning Pro Interval",
+    "category": 4,
+    "trainer": 3,
+    "date": "2026-09-16",
+    "start_time": "11:00:00",
+    "end_time": "12:30:00",
+    "room": "Sala Spinning",
+    "capacity": 25,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 56,
+  "fields": {
+    "created_at": "2026-08-24T16:33:06.409Z",
+    "updated_at": "2026-08-24T16:33:06.409Z",
+    "schedule": 12,
+    "title": "Spinning Pro Interval",
+    "category": 4,
+    "trainer": 3,
+    "date": "2026-08-21",
+    "start_time": "11:00:00",
+    "end_time": "12:30:00",
+    "room": "Sala Spinning",
+    "capacity": 25,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 57,
+  "fields": {
+    "created_at": "2026-08-24T16:33:06.501Z",
+    "updated_at": "2026-08-24T16:33:06.501Z",
+    "schedule": 12,
+    "title": "Spinning Pro Interval",
+    "category": 4,
+    "trainer": 3,
+    "date": "2026-08-28",
+    "start_time": "11:00:00",
+    "end_time": "12:30:00",
+    "room": "Sala Spinning",
+    "capacity": 25,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 58,
+  "fields": {
+    "created_at": "2026-08-24T16:33:06.576Z",
+    "updated_at": "2026-08-24T16:33:06.576Z",
+    "schedule": 12,
+    "title": "Spinning Pro Interval",
+    "category": 4,
+    "trainer": 3,
+    "date": "2026-09-04",
+    "start_time": "11:00:00",
+    "end_time": "12:30:00",
+    "room": "Sala Spinning",
+    "capacity": 25,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 59,
+  "fields": {
+    "created_at": "2026-08-24T16:33:06.652Z",
+    "updated_at": "2026-08-24T16:33:06.652Z",
+    "schedule": 12,
+    "title": "Spinning Pro Interval",
+    "category": 4,
+    "trainer": 3,
+    "date": "2026-09-11",
+    "start_time": "11:00:00",
+    "end_time": "12:30:00",
+    "room": "Sala Spinning",
+    "capacity": 25,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 60,
+  "fields": {
+    "created_at": "2026-08-24T16:33:06.726Z",
+    "updated_at": "2026-08-24T16:33:06.726Z",
+    "schedule": 12,
+    "title": "Spinning Pro Interval",
+    "category": 4,
+    "trainer": 3,
+    "date": "2026-09-18",
+    "start_time": "11:00:00",
+    "end_time": "12:30:00",
+    "room": "Sala Spinning",
+    "capacity": 25,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 61,
+  "fields": {
+    "created_at": "2026-08-24T16:33:06.876Z",
+    "updated_at": "2026-08-24T16:33:06.876Z",
+    "schedule": 13,
+    "title": "HIIT Training Quema-Grasa",
+    "category": 5,
+    "trainer": 1,
+    "date": "2026-08-17",
+    "start_time": "18:30:00",
+    "end_time": "19:45:00",
+    "room": "Sala Funcional 2",
+    "capacity": 16,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 62,
+  "fields": {
+    "created_at": "2026-08-24T16:33:06.984Z",
+    "updated_at": "2026-08-24T16:33:06.984Z",
+    "schedule": 13,
+    "title": "HIIT Training Quema-Grasa",
+    "category": 5,
+    "trainer": 1,
+    "date": "2026-08-24",
+    "start_time": "18:30:00",
+    "end_time": "19:45:00",
+    "room": "Sala Funcional 2",
+    "capacity": 16,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 63,
+  "fields": {
+    "created_at": "2026-08-24T16:33:07.060Z",
+    "updated_at": "2026-08-24T16:33:07.060Z",
+    "schedule": 13,
+    "title": "HIIT Training Quema-Grasa",
+    "category": 5,
+    "trainer": 1,
+    "date": "2026-08-31",
+    "start_time": "18:30:00",
+    "end_time": "19:45:00",
+    "room": "Sala Funcional 2",
+    "capacity": 16,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 64,
+  "fields": {
+    "created_at": "2026-08-24T16:33:07.134Z",
+    "updated_at": "2026-08-24T16:33:07.134Z",
+    "schedule": 13,
+    "title": "HIIT Training Quema-Grasa",
+    "category": 5,
+    "trainer": 1,
+    "date": "2026-09-07",
+    "start_time": "18:30:00",
+    "end_time": "19:45:00",
+    "room": "Sala Funcional 2",
+    "capacity": 16,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 65,
+  "fields": {
+    "created_at": "2026-08-24T16:33:07.225Z",
+    "updated_at": "2026-08-24T16:33:07.225Z",
+    "schedule": 13,
+    "title": "HIIT Training Quema-Grasa",
+    "category": 5,
+    "trainer": 1,
+    "date": "2026-09-14",
+    "start_time": "18:30:00",
+    "end_time": "19:45:00",
+    "room": "Sala Funcional 2",
+    "capacity": 16,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 66,
+  "fields": {
+    "created_at": "2026-08-24T16:33:07.392Z",
+    "updated_at": "2026-08-24T16:33:07.392Z",
+    "schedule": 14,
+    "title": "HIIT Training Quema-Grasa",
+    "category": 5,
+    "trainer": 1,
+    "date": "2026-08-18",
+    "start_time": "18:30:00",
+    "end_time": "19:45:00",
+    "room": "Sala Funcional 2",
+    "capacity": 16,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 67,
+  "fields": {
+    "created_at": "2026-08-24T16:33:07.468Z",
+    "updated_at": "2026-08-24T16:33:07.468Z",
+    "schedule": 14,
+    "title": "HIIT Training Quema-Grasa",
+    "category": 5,
+    "trainer": 1,
+    "date": "2026-08-25",
+    "start_time": "18:30:00",
+    "end_time": "19:45:00",
+    "room": "Sala Funcional 2",
+    "capacity": 16,
+    "booked_count": 3,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 68,
+  "fields": {
+    "created_at": "2026-08-24T16:33:07.542Z",
+    "updated_at": "2026-08-24T16:33:07.542Z",
+    "schedule": 14,
+    "title": "HIIT Training Quema-Grasa",
+    "category": 5,
+    "trainer": 1,
+    "date": "2026-09-01",
+    "start_time": "18:30:00",
+    "end_time": "19:45:00",
+    "room": "Sala Funcional 2",
+    "capacity": 16,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 69,
+  "fields": {
+    "created_at": "2026-08-24T16:33:07.626Z",
+    "updated_at": "2026-08-24T16:33:07.626Z",
+    "schedule": 14,
+    "title": "HIIT Training Quema-Grasa",
+    "category": 5,
+    "trainer": 1,
+    "date": "2026-09-08",
+    "start_time": "18:30:00",
+    "end_time": "19:45:00",
+    "room": "Sala Funcional 2",
+    "capacity": 16,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 70,
+  "fields": {
+    "created_at": "2026-08-24T16:33:07.701Z",
+    "updated_at": "2026-08-24T16:33:07.701Z",
+    "schedule": 14,
+    "title": "HIIT Training Quema-Grasa",
+    "category": 5,
+    "trainer": 1,
+    "date": "2026-09-15",
+    "start_time": "18:30:00",
+    "end_time": "19:45:00",
+    "room": "Sala Funcional 2",
+    "capacity": 16,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 71,
+  "fields": {
+    "created_at": "2026-08-24T16:33:07.868Z",
+    "updated_at": "2026-08-24T16:33:07.868Z",
+    "schedule": 15,
+    "title": "HIIT Training Quema-Grasa",
+    "category": 5,
+    "trainer": 1,
+    "date": "2026-08-19",
+    "start_time": "18:30:00",
+    "end_time": "19:45:00",
+    "room": "Sala Funcional 2",
+    "capacity": 16,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 72,
+  "fields": {
+    "created_at": "2026-08-24T16:33:07.951Z",
+    "updated_at": "2026-08-24T16:33:07.951Z",
+    "schedule": 15,
+    "title": "HIIT Training Quema-Grasa",
+    "category": 5,
+    "trainer": 1,
+    "date": "2026-08-26",
+    "start_time": "18:30:00",
+    "end_time": "19:45:00",
+    "room": "Sala Funcional 2",
+    "capacity": 16,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 73,
+  "fields": {
+    "created_at": "2026-08-24T16:33:08.034Z",
+    "updated_at": "2026-08-24T16:33:08.034Z",
+    "schedule": 15,
+    "title": "HIIT Training Quema-Grasa",
+    "category": 5,
+    "trainer": 1,
+    "date": "2026-09-02",
+    "start_time": "18:30:00",
+    "end_time": "19:45:00",
+    "room": "Sala Funcional 2",
+    "capacity": 16,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 74,
+  "fields": {
+    "created_at": "2026-08-24T16:33:08.118Z",
+    "updated_at": "2026-08-24T16:33:08.118Z",
+    "schedule": 15,
+    "title": "HIIT Training Quema-Grasa",
+    "category": 5,
+    "trainer": 1,
+    "date": "2026-09-09",
+    "start_time": "18:30:00",
+    "end_time": "19:45:00",
+    "room": "Sala Funcional 2",
+    "capacity": 16,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 75,
+  "fields": {
+    "created_at": "2026-08-24T16:33:08.201Z",
+    "updated_at": "2026-08-24T16:33:08.201Z",
+    "schedule": 15,
+    "title": "HIIT Training Quema-Grasa",
+    "category": 5,
+    "trainer": 1,
+    "date": "2026-09-16",
+    "start_time": "18:30:00",
+    "end_time": "19:45:00",
+    "room": "Sala Funcional 2",
+    "capacity": 16,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 76,
+  "fields": {
+    "created_at": "2026-08-24T16:33:08.417Z",
+    "updated_at": "2026-08-24T16:33:08.417Z",
+    "schedule": 16,
+    "title": "HIIT Training Quema-Grasa",
+    "category": 5,
+    "trainer": 1,
+    "date": "2026-08-20",
+    "start_time": "18:30:00",
+    "end_time": "19:45:00",
+    "room": "Sala Funcional 2",
+    "capacity": 16,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 77,
+  "fields": {
+    "created_at": "2026-08-24T16:33:08.525Z",
+    "updated_at": "2026-08-24T16:33:08.525Z",
+    "schedule": 16,
+    "title": "HIIT Training Quema-Grasa",
+    "category": 5,
+    "trainer": 1,
+    "date": "2026-08-27",
+    "start_time": "18:30:00",
+    "end_time": "19:45:00",
+    "room": "Sala Funcional 2",
+    "capacity": 16,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 78,
+  "fields": {
+    "created_at": "2026-08-24T16:33:08.634Z",
+    "updated_at": "2026-08-24T16:33:08.634Z",
+    "schedule": 16,
+    "title": "HIIT Training Quema-Grasa",
+    "category": 5,
+    "trainer": 1,
+    "date": "2026-09-03",
+    "start_time": "18:30:00",
+    "end_time": "19:45:00",
+    "room": "Sala Funcional 2",
+    "capacity": 16,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 79,
+  "fields": {
+    "created_at": "2026-08-24T16:33:08.742Z",
+    "updated_at": "2026-08-24T16:33:08.742Z",
+    "schedule": 16,
+    "title": "HIIT Training Quema-Grasa",
+    "category": 5,
+    "trainer": 1,
+    "date": "2026-09-10",
+    "start_time": "18:30:00",
+    "end_time": "19:45:00",
+    "room": "Sala Funcional 2",
+    "capacity": 16,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 80,
+  "fields": {
+    "created_at": "2026-08-24T16:33:08.826Z",
+    "updated_at": "2026-08-24T16:33:08.826Z",
+    "schedule": 16,
+    "title": "HIIT Training Quema-Grasa",
+    "category": 5,
+    "trainer": 1,
+    "date": "2026-09-17",
+    "start_time": "18:30:00",
+    "end_time": "19:45:00",
+    "room": "Sala Funcional 2",
+    "capacity": 16,
+    "booked_count": 10,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 81,
+  "fields": {
+    "created_at": "2026-08-25T13:36:09.894Z",
+    "updated_at": "2026-08-25T13:36:09.895Z",
+    "schedule": 17,
+    "title": "Funcional",
+    "category": 1,
+    "trainer": 2,
+    "date": "2026-08-31",
+    "start_time": "20:00:00",
+    "end_time": "22:00:00",
+    "room": "Sala Principal",
+    "capacity": 30,
+    "booked_count": 0,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 82,
+  "fields": {
+    "created_at": "2026-08-25T13:36:09.987Z",
+    "updated_at": "2026-08-25T13:36:09.987Z",
+    "schedule": 17,
+    "title": "Funcional",
+    "category": 1,
+    "trainer": 2,
+    "date": "2026-09-07",
+    "start_time": "20:00:00",
+    "end_time": "22:00:00",
+    "room": "Sala Principal",
+    "capacity": 30,
+    "booked_count": 0,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 83,
+  "fields": {
+    "created_at": "2026-08-25T13:36:10.077Z",
+    "updated_at": "2026-08-25T13:36:10.077Z",
+    "schedule": 17,
+    "title": "Funcional",
+    "category": 1,
+    "trainer": 2,
+    "date": "2026-09-14",
+    "start_time": "20:00:00",
+    "end_time": "22:00:00",
+    "room": "Sala Principal",
+    "capacity": 30,
+    "booked_count": 0,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 84,
+  "fields": {
+    "created_at": "2026-08-25T13:36:10.161Z",
+    "updated_at": "2026-08-25T13:36:10.161Z",
+    "schedule": 17,
+    "title": "Funcional",
+    "category": 1,
+    "trainer": 2,
+    "date": "2026-09-21",
+    "start_time": "20:00:00",
+    "end_time": "22:00:00",
+    "room": "Sala Principal",
+    "capacity": 30,
+    "booked_count": 0,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 86,
+  "fields": {
+    "created_at": "2026-08-25T13:36:10.444Z",
+    "updated_at": "2026-08-25T13:36:10.444Z",
+    "schedule": 18,
+    "title": "Funcional",
+    "category": 1,
+    "trainer": 2,
+    "date": "2026-09-02",
+    "start_time": "20:00:00",
+    "end_time": "22:00:00",
+    "room": "Sala Principal",
+    "capacity": 30,
+    "booked_count": 0,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 87,
+  "fields": {
+    "created_at": "2026-08-25T13:36:10.544Z",
+    "updated_at": "2026-08-25T13:36:10.544Z",
+    "schedule": 18,
+    "title": "Funcional",
+    "category": 1,
+    "trainer": 2,
+    "date": "2026-09-09",
+    "start_time": "20:00:00",
+    "end_time": "22:00:00",
+    "room": "Sala Principal",
+    "capacity": 30,
+    "booked_count": 0,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 88,
+  "fields": {
+    "created_at": "2026-08-25T13:36:10.636Z",
+    "updated_at": "2026-08-25T13:36:10.636Z",
+    "schedule": 18,
+    "title": "Funcional",
+    "category": 1,
+    "trainer": 2,
+    "date": "2026-09-16",
+    "start_time": "20:00:00",
+    "end_time": "22:00:00",
+    "room": "Sala Principal",
+    "capacity": 30,
+    "booked_count": 0,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 89,
+  "fields": {
+    "created_at": "2026-08-25T13:37:36.666Z",
+    "updated_at": "2026-08-25T13:37:36.666Z",
+    "schedule": 19,
+    "title": "funcioanl Nocturno",
+    "category": 1,
+    "trainer": 1,
+    "date": "2026-08-26",
+    "start_time": "20:00:00",
+    "end_time": "22:00:00",
+    "room": "Sala Principal",
+    "capacity": 35,
+    "booked_count": 0,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 90,
+  "fields": {
+    "created_at": "2026-08-25T13:37:36.757Z",
+    "updated_at": "2026-08-25T13:37:36.757Z",
+    "schedule": 19,
+    "title": "funcioanl Nocturno",
+    "category": 1,
+    "trainer": 1,
+    "date": "2026-09-02",
+    "start_time": "20:00:00",
+    "end_time": "22:00:00",
+    "room": "Sala Principal",
+    "capacity": 35,
+    "booked_count": 0,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 91,
+  "fields": {
+    "created_at": "2026-08-25T13:37:36.840Z",
+    "updated_at": "2026-08-25T13:37:36.840Z",
+    "schedule": 19,
+    "title": "funcioanl Nocturno",
+    "category": 1,
+    "trainer": 1,
+    "date": "2026-09-09",
+    "start_time": "20:00:00",
+    "end_time": "22:00:00",
+    "room": "Sala Principal",
+    "capacity": 35,
+    "booked_count": 0,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 92,
+  "fields": {
+    "created_at": "2026-08-25T13:37:36.923Z",
+    "updated_at": "2026-08-25T13:37:36.923Z",
+    "schedule": 19,
+    "title": "funcioanl Nocturno",
+    "category": 1,
+    "trainer": 1,
+    "date": "2026-09-16",
+    "start_time": "20:00:00",
+    "end_time": "22:00:00",
+    "room": "Sala Principal",
+    "capacity": 35,
+    "booked_count": 0,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 93,
+  "fields": {
+    "created_at": "2026-08-25T13:37:37.107Z",
+    "updated_at": "2026-08-25T13:37:37.107Z",
+    "schedule": 20,
+    "title": "funcioanl Nocturno",
+    "category": 1,
+    "trainer": 1,
+    "date": "2026-08-28",
+    "start_time": "20:00:00",
+    "end_time": "22:00:00",
+    "room": "Sala Principal",
+    "capacity": 35,
+    "booked_count": 0,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 94,
+  "fields": {
+    "created_at": "2026-08-25T13:37:37.191Z",
+    "updated_at": "2026-08-25T13:37:37.191Z",
+    "schedule": 20,
+    "title": "funcioanl Nocturno",
+    "category": 1,
+    "trainer": 1,
+    "date": "2026-09-04",
+    "start_time": "20:00:00",
+    "end_time": "22:00:00",
+    "room": "Sala Principal",
+    "capacity": 35,
+    "booked_count": 0,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 95,
+  "fields": {
+    "created_at": "2026-08-25T13:37:37.274Z",
+    "updated_at": "2026-08-25T13:37:37.274Z",
+    "schedule": 20,
+    "title": "funcioanl Nocturno",
+    "category": 1,
+    "trainer": 1,
+    "date": "2026-09-11",
+    "start_time": "20:00:00",
+    "end_time": "22:00:00",
+    "room": "Sala Principal",
+    "capacity": 35,
+    "booked_count": 0,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 96,
+  "fields": {
+    "created_at": "2026-08-25T13:37:37.366Z",
+    "updated_at": "2026-08-25T13:37:37.366Z",
+    "schedule": 20,
+    "title": "funcioanl Nocturno",
+    "category": 1,
+    "trainer": 1,
+    "date": "2026-09-18",
+    "start_time": "20:00:00",
+    "end_time": "22:00:00",
+    "room": "Sala Principal",
+    "capacity": 35,
+    "booked_count": 0,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 97,
+  "fields": {
+    "created_at": "2026-08-25T22:56:41.101Z",
+    "updated_at": "2026-08-25T22:56:41.101Z",
+    "schedule": null,
+    "title": "Spinning Pro",
+    "category": 7,
+    "trainer": 3,
+    "date": "2026-08-25",
+    "start_time": "08:00:00",
+    "end_time": "09:00:00",
+    "room": "Sala Principal",
+    "capacity": 20,
+    "booked_count": 1,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 98,
+  "fields": {
+    "created_at": "2026-08-25T22:56:41.120Z",
+    "updated_at": "2026-08-25T22:56:41.120Z",
+    "schedule": null,
+    "title": "Crossfit WOD",
+    "category": 6,
+    "trainer": 1,
+    "date": "2026-08-25",
+    "start_time": "18:00:00",
+    "end_time": "19:15:00",
+    "room": "Sala Principal",
+    "capacity": 15,
+    "booked_count": 1,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classsession",
+  "pk": 99,
+  "fields": {
+    "created_at": "2026-08-25T22:56:41.136Z",
+    "updated_at": "2026-08-25T22:56:41.136Z",
+    "schedule": null,
+    "title": "Power Yoga Flow",
+    "category": 8,
+    "trainer": 2,
+    "date": "2026-08-25",
+    "start_time": "19:30:00",
+    "end_time": "20:30:00",
+    "room": "Sala Principal",
+    "capacity": 25,
+    "booked_count": 0,
+    "status": "PROGRAMADA"
+  }
+},
+{
+  "model": "classes.classbooking",
+  "pk": 1,
+  "fields": {
+    "created_at": "2026-08-25T13:44:56.907Z",
+    "updated_at": "2026-08-25T13:44:56.907Z",
+    "session": 17,
+    "member": 7,
+    "status": "PRESENTE",
+    "booking_date": "2026-08-25T13:44:56.907Z",
+    "notes": "Asistencia confirmada"
+  }
+},
+{
+  "model": "classes.classbooking",
+  "pk": 2,
+  "fields": {
+    "created_at": "2026-08-25T13:44:57.004Z",
+    "updated_at": "2026-08-25T13:44:57.004Z",
+    "session": 17,
+    "member": 6,
+    "status": "RESERVADO",
+    "booking_date": "2026-08-25T13:44:57.004Z",
+    "notes": "Inscripción regular"
+  }
+},
+{
+  "model": "classes.classbooking",
+  "pk": 3,
+  "fields": {
+    "created_at": "2026-08-25T13:44:57.110Z",
+    "updated_at": "2026-08-25T13:44:57.110Z",
+    "session": 17,
+    "member": 5,
+    "status": "RESERVADO",
+    "booking_date": "2026-08-25T13:44:57.110Z",
+    "notes": "Inscripción regular"
+  }
+},
+{
+  "model": "classes.classbooking",
+  "pk": 4,
+  "fields": {
+    "created_at": "2026-08-25T13:44:57.212Z",
+    "updated_at": "2026-08-25T13:44:57.212Z",
+    "session": 37,
+    "member": 7,
+    "status": "PRESENTE",
+    "booking_date": "2026-08-25T13:44:57.212Z",
+    "notes": "Asistencia confirmada"
+  }
+},
+{
+  "model": "classes.classbooking",
+  "pk": 5,
+  "fields": {
+    "created_at": "2026-08-25T13:44:57.318Z",
+    "updated_at": "2026-08-25T13:44:57.318Z",
+    "session": 37,
+    "member": 6,
+    "status": "RESERVADO",
+    "booking_date": "2026-08-25T13:44:57.318Z",
+    "notes": "Inscripción regular"
+  }
+},
+{
+  "model": "classes.classbooking",
+  "pk": 6,
+  "fields": {
+    "created_at": "2026-08-25T13:44:57.429Z",
+    "updated_at": "2026-08-25T13:44:57.429Z",
+    "session": 37,
+    "member": 5,
+    "status": "RESERVADO",
+    "booking_date": "2026-08-25T13:44:57.429Z",
+    "notes": "Inscripción regular"
+  }
+},
+{
+  "model": "classes.classbooking",
+  "pk": 7,
+  "fields": {
+    "created_at": "2026-08-25T13:44:57.527Z",
+    "updated_at": "2026-08-25T13:44:57.527Z",
+    "session": 67,
+    "member": 7,
+    "status": "PRESENTE",
+    "booking_date": "2026-08-25T13:44:57.527Z",
+    "notes": "Asistencia confirmada"
+  }
+},
+{
+  "model": "classes.classbooking",
+  "pk": 8,
+  "fields": {
+    "created_at": "2026-08-25T13:44:57.637Z",
+    "updated_at": "2026-08-25T13:44:57.637Z",
+    "session": 67,
+    "member": 6,
+    "status": "RESERVADO",
+    "booking_date": "2026-08-25T13:44:57.637Z",
+    "notes": "Inscripción regular"
+  }
+},
+{
+  "model": "classes.classbooking",
+  "pk": 9,
+  "fields": {
+    "created_at": "2026-08-25T13:44:57.751Z",
+    "updated_at": "2026-08-25T13:44:57.751Z",
+    "session": 67,
+    "member": 5,
+    "status": "RESERVADO",
+    "booking_date": "2026-08-25T13:44:57.751Z",
+    "notes": "Inscripción regular"
+  }
+},
+{
+  "model": "classes.classbooking",
+  "pk": 10,
+  "fields": {
+    "created_at": "2026-08-25T13:47:50.159Z",
+    "updated_at": "2026-08-25T13:48:04.377Z",
+    "session": 52,
+    "member": 7,
+    "status": "PRESENTE",
+    "booking_date": "2026-08-25T13:47:50.159Z",
+    "notes": ""
+  }
+},
+{
+  "model": "classes.classbooking",
+  "pk": 11,
+  "fields": {
+    "created_at": "2026-08-25T22:56:41.110Z",
+    "updated_at": "2026-08-25T22:56:41.110Z",
+    "session": 97,
+    "member": 8,
+    "status": "ASISTIO",
+    "booking_date": "2026-08-25T22:56:41.110Z",
+    "notes": ""
+  }
+},
+{
+  "model": "classes.classbooking",
+  "pk": 12,
+  "fields": {
+    "created_at": "2026-08-25T22:56:41.128Z",
+    "updated_at": "2026-08-25T22:56:41.128Z",
+    "session": 98,
+    "member": 8,
+    "status": "RESERVADO",
+    "booking_date": "2026-08-25T22:56:41.128Z",
+    "notes": ""
+  }
+},
+{
+  "model": "payments.payment",
+  "pk": 1,
+  "fields": {
+    "created_at": "2026-08-25T14:07:05.074Z",
+    "updated_at": "2026-08-25T14:07:05.074Z",
+    "member": 7,
+    "plan": 1,
+    "amount": "65000.00",
+    "payment_method": "MERCADOPAGO",
+    "status": "COMPLETADO",
+    "payment_date": "2026-08-23",
+    "invoice_number": "REC-2026-0001",
+    "notes": "Pago aprobado vía Mercado Pago QR. Ref #MP-883912.",
+    "auto_renew_membership": true
+  }
+},
+{
+  "model": "payments.payment",
+  "pk": 2,
+  "fields": {
+    "created_at": "2026-08-25T14:07:05.265Z",
+    "updated_at": "2026-08-25T14:07:05.265Z",
+    "member": 6,
+    "plan": 2,
+    "amount": "42000.00",
+    "payment_method": "TRANSFERENCIA",
+    "status": "COMPLETADO",
+    "payment_date": "2026-08-20",
+    "invoice_number": "REC-2026-0002",
+    "notes": "Transferencia bancaria Banco Santander comprobante #9482.",
+    "auto_renew_membership": true
+  }
+},
+{
+  "model": "payments.payment",
+  "pk": 3,
+  "fields": {
+    "created_at": "2026-08-25T14:07:05.448Z",
+    "updated_at": "2026-08-25T14:07:05.448Z",
+    "member": 5,
+    "plan": 1,
+    "amount": "65000.00",
+    "payment_method": "TARJETA_CREDITO",
+    "status": "COMPLETADO",
+    "payment_date": "2026-08-15",
+    "invoice_number": "REC-2026-0003",
+    "notes": "Cobro POS terminal en recepción. Visa Débito.",
+    "auto_renew_membership": true
+  }
+},
+{
+  "model": "payments.payment",
+  "pk": 4,
+  "fields": {
+    "created_at": "2026-08-25T14:07:05.689Z",
+    "updated_at": "2026-08-25T14:07:05.689Z",
+    "member": 7,
+    "plan": 1,
+    "amount": "65000.00",
+    "payment_method": "EFECTIVO",
+    "status": "PENDIENTE",
+    "payment_date": "2026-08-24",
+    "invoice_number": "REC-2026-0004",
+    "notes": "Seña de reserva pendiente de completar en recepción.",
+    "auto_renew_membership": false
+  }
+},
+{
+  "model": "payments.payment",
+  "pk": 5,
+  "fields": {
+    "created_at": "2026-08-25T14:07:05.780Z",
+    "updated_at": "2026-08-25T14:07:05.781Z",
+    "member": 4,
+    "plan": 1,
+    "amount": "65000.00",
+    "payment_method": "EFECTIVO",
+    "status": "COMPLETADO",
+    "payment_date": "2026-08-07",
+    "invoice_number": "REC-2026-0005",
+    "notes": "Pago en efectivo abonado en recepción.",
+    "auto_renew_membership": true
+  }
+},
+{
+  "model": "portal.workoutroutine",
+  "pk": 2,
+  "fields": {
+    "created_at": "2026-08-25T22:56:51.977Z",
+    "updated_at": "2026-08-25T22:56:51.977Z",
+    "member": 8,
+    "name": "Hipertrofia Clásica",
+    "goal": "Hipertrofia de Empuje: Pecho y Tríceps",
+    "total_weeks": 8,
+    "current_week": 3,
+    "progress_percent": 38,
+    "trainer": 1,
+    "trainer_notes": "Para este entrenamiento de empuje, enfócate en la fase excéntrica (bajada) en el Press de Banca. Mantén una bajada controlada de 3 segundos para maximizar el reclutamiento de fibras musculares. Si completas todas las series con buena técnica, incrementa 2.5 kg en la última de press inclinado.",
+    "is_active": true
+  }
+},
+{
+  "model": "portal.workoutroutine",
+  "pk": 3,
+  "fields": {
+    "created_at": "2026-08-25T23:21:17.591Z",
+    "updated_at": "2026-08-25T23:21:17.591Z",
+    "member": 7,
+    "name": "Adaptación y Acondicionamiento",
+    "goal": "Acondicionamiento General & Fuerza",
+    "total_weeks": 6,
+    "current_week": 1,
+    "progress_percent": 15,
+    "trainer": null,
+    "trainer_notes": "¡Bienvenido a Vitalis! Esta rutina inicial de adaptación te permitirá preparar articulaciones y músculos. Enfócate en la técnica antes de subir cargas.",
+    "is_active": true
+  }
+},
+{
+  "model": "portal.workoutroutine",
+  "pk": 4,
+  "fields": {
+    "created_at": "2026-08-25T23:21:18.508Z",
+    "updated_at": "2026-08-25T23:21:18.508Z",
+    "member": 6,
+    "name": "Adaptación y Acondicionamiento",
+    "goal": "Acondicionamiento General & Fuerza",
+    "total_weeks": 6,
+    "current_week": 1,
+    "progress_percent": 15,
+    "trainer": null,
+    "trainer_notes": "¡Bienvenido a Vitalis! Esta rutina inicial de adaptación te permitirá preparar articulaciones y músculos. Enfócate en la técnica antes de subir cargas.",
+    "is_active": true
+  }
+},
+{
+  "model": "portal.workoutroutine",
+  "pk": 5,
+  "fields": {
+    "created_at": "2026-08-25T23:21:19.734Z",
+    "updated_at": "2026-08-25T23:21:19.734Z",
+    "member": 5,
+    "name": "Adaptación y Acondicionamiento",
+    "goal": "Acondicionamiento General & Fuerza",
+    "total_weeks": 6,
+    "current_week": 1,
+    "progress_percent": 15,
+    "trainer": null,
+    "trainer_notes": "¡Bienvenido a Vitalis! Esta rutina inicial de adaptación te permitirá preparar articulaciones y músculos. Enfócate en la técnica antes de subir cargas.",
+    "is_active": true
+  }
+},
+{
+  "model": "portal.workoutroutine",
+  "pk": 6,
+  "fields": {
+    "created_at": "2026-08-25T23:21:21.167Z",
+    "updated_at": "2026-08-25T23:21:21.167Z",
+    "member": 4,
+    "name": "Adaptación y Acondicionamiento",
+    "goal": "Acondicionamiento General & Fuerza",
+    "total_weeks": 6,
+    "current_week": 1,
+    "progress_percent": 15,
+    "trainer": null,
+    "trainer_notes": "¡Bienvenido a Vitalis! Esta rutina inicial de adaptación te permitirá preparar articulaciones y músculos. Enfócate en la técnica antes de subir cargas.",
+    "is_active": true
+  }
+},
+{
+  "model": "portal.workoutroutine",
+  "pk": 7,
+  "fields": {
+    "created_at": "2026-08-25T23:21:22.090Z",
+    "updated_at": "2026-08-25T23:21:22.090Z",
+    "member": 3,
+    "name": "Adaptación y Acondicionamiento",
+    "goal": "Acondicionamiento General & Fuerza",
+    "total_weeks": 6,
+    "current_week": 1,
+    "progress_percent": 15,
+    "trainer": null,
+    "trainer_notes": "¡Bienvenido a Vitalis! Esta rutina inicial de adaptación te permitirá preparar articulaciones y músculos. Enfócate en la técnica antes de subir cargas.",
+    "is_active": true
+  }
+},
+{
+  "model": "portal.workoutroutine",
+  "pk": 8,
+  "fields": {
+    "created_at": "2026-08-25T23:21:22.994Z",
+    "updated_at": "2026-08-25T23:21:22.994Z",
+    "member": 2,
+    "name": "Adaptación y Acondicionamiento",
+    "goal": "Acondicionamiento General & Fuerza",
+    "total_weeks": 6,
+    "current_week": 1,
+    "progress_percent": 15,
+    "trainer": null,
+    "trainer_notes": "¡Bienvenido a Vitalis! Esta rutina inicial de adaptación te permitirá preparar articulaciones y músculos. Enfócate en la técnica antes de subir cargas.",
+    "is_active": true
+  }
+},
+{
+  "model": "portal.workoutroutine",
+  "pk": 9,
+  "fields": {
+    "created_at": "2026-08-25T23:21:24.080Z",
+    "updated_at": "2026-08-25T23:21:24.080Z",
+    "member": 1,
+    "name": "Adaptación y Acondicionamiento",
+    "goal": "Acondicionamiento General & Fuerza",
+    "total_weeks": 6,
+    "current_week": 1,
+    "progress_percent": 15,
+    "trainer": null,
+    "trainer_notes": "¡Bienvenido a Vitalis! Esta rutina inicial de adaptación te permitirá preparar articulaciones y músculos. Enfócate en la técnica antes de subir cargas.",
+    "is_active": true
+  }
+},
+{
+  "model": "portal.routineday",
+  "pk": 6,
+  "fields": {
+    "created_at": "2026-08-25T22:56:51.985Z",
+    "updated_at": "2026-08-25T22:56:51.985Z",
+    "routine": 2,
+    "day_name": "Lunes",
+    "subtitle": "Empuje (Pecho/Tríceps)",
+    "is_rest_day": false,
+    "order": 1
+  }
+},
+{
+  "model": "portal.routineday",
+  "pk": 7,
+  "fields": {
+    "created_at": "2026-08-25T22:56:51.991Z",
+    "updated_at": "2026-08-25T22:56:51.991Z",
+    "routine": 2,
+    "day_name": "Martes",
+    "subtitle": "Tracción (Espalda/Bíceps)",
+    "is_rest_day": false,
+    "order": 2
+  }
+},
+{
+  "model": "portal.routineday",
+  "pk": 8,
+  "fields": {
+    "created_at": "2026-08-25T22:56:51.999Z",
+    "updated_at": "2026-08-25T22:56:51.999Z",
+    "routine": 2,
+    "day_name": "Miércoles",
+    "subtitle": "Pierna Completa",
+    "is_rest_day": false,
+    "order": 3
+  }
+},
+{
+  "model": "portal.routineday",
+  "pk": 9,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.006Z",
+    "updated_at": "2026-08-25T22:56:52.006Z",
+    "routine": 2,
+    "day_name": "Jueves",
+    "subtitle": "Hombros y Brazos",
+    "is_rest_day": false,
+    "order": 4
+  }
+},
+{
+  "model": "portal.routineday",
+  "pk": 10,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.011Z",
+    "updated_at": "2026-08-25T22:56:52.011Z",
+    "routine": 2,
+    "day_name": "Viernes",
+    "subtitle": "Fullbody / Funcional",
+    "is_rest_day": false,
+    "order": 5
+  }
+},
+{
+  "model": "portal.routineday",
+  "pk": 11,
+  "fields": {
+    "created_at": "2026-08-25T23:21:17.605Z",
+    "updated_at": "2026-08-25T23:21:17.605Z",
+    "routine": 3,
+    "day_name": "Lunes",
+    "subtitle": "Fullbody A (Fuerza & Core)",
+    "is_rest_day": false,
+    "order": 1
+  }
+},
+{
+  "model": "portal.routineday",
+  "pk": 12,
+  "fields": {
+    "created_at": "2026-08-25T23:21:17.619Z",
+    "updated_at": "2026-08-25T23:21:17.619Z",
+    "routine": 3,
+    "day_name": "Miércoles",
+    "subtitle": "Fullbody B (Resistencia)",
+    "is_rest_day": false,
+    "order": 2
+  }
+},
+{
+  "model": "portal.routineday",
+  "pk": 13,
+  "fields": {
+    "created_at": "2026-08-25T23:21:17.632Z",
+    "updated_at": "2026-08-25T23:21:17.632Z",
+    "routine": 3,
+    "day_name": "Viernes",
+    "subtitle": "Fullbody C (Funcional)",
+    "is_rest_day": false,
+    "order": 3
+  }
+},
+{
+  "model": "portal.routineday",
+  "pk": 14,
+  "fields": {
+    "created_at": "2026-08-25T23:21:18.520Z",
+    "updated_at": "2026-08-25T23:21:18.520Z",
+    "routine": 4,
+    "day_name": "Lunes",
+    "subtitle": "Fullbody A (Fuerza & Core)",
+    "is_rest_day": false,
+    "order": 1
+  }
+},
+{
+  "model": "portal.routineday",
+  "pk": 15,
+  "fields": {
+    "created_at": "2026-08-25T23:21:18.531Z",
+    "updated_at": "2026-08-25T23:21:18.531Z",
+    "routine": 4,
+    "day_name": "Miércoles",
+    "subtitle": "Fullbody B (Resistencia)",
+    "is_rest_day": false,
+    "order": 2
+  }
+},
+{
+  "model": "portal.routineday",
+  "pk": 16,
+  "fields": {
+    "created_at": "2026-08-25T23:21:18.542Z",
+    "updated_at": "2026-08-25T23:21:18.542Z",
+    "routine": 4,
+    "day_name": "Viernes",
+    "subtitle": "Fullbody C (Funcional)",
+    "is_rest_day": false,
+    "order": 3
+  }
+},
+{
+  "model": "portal.routineday",
+  "pk": 17,
+  "fields": {
+    "created_at": "2026-08-25T23:21:19.750Z",
+    "updated_at": "2026-08-25T23:21:19.750Z",
+    "routine": 5,
+    "day_name": "Lunes",
+    "subtitle": "Fullbody A (Fuerza & Core)",
+    "is_rest_day": false,
+    "order": 1
+  }
+},
+{
+  "model": "portal.routineday",
+  "pk": 18,
+  "fields": {
+    "created_at": "2026-08-25T23:21:19.763Z",
+    "updated_at": "2026-08-25T23:21:19.763Z",
+    "routine": 5,
+    "day_name": "Miércoles",
+    "subtitle": "Fullbody B (Resistencia)",
+    "is_rest_day": false,
+    "order": 2
+  }
+},
+{
+  "model": "portal.routineday",
+  "pk": 19,
+  "fields": {
+    "created_at": "2026-08-25T23:21:19.775Z",
+    "updated_at": "2026-08-25T23:21:19.775Z",
+    "routine": 5,
+    "day_name": "Viernes",
+    "subtitle": "Fullbody C (Funcional)",
+    "is_rest_day": false,
+    "order": 3
+  }
+},
+{
+  "model": "portal.routineday",
+  "pk": 20,
+  "fields": {
+    "created_at": "2026-08-25T23:21:21.181Z",
+    "updated_at": "2026-08-25T23:21:21.181Z",
+    "routine": 6,
+    "day_name": "Lunes",
+    "subtitle": "Fullbody A (Fuerza & Core)",
+    "is_rest_day": false,
+    "order": 1
+  }
+},
+{
+  "model": "portal.routineday",
+  "pk": 21,
+  "fields": {
+    "created_at": "2026-08-25T23:21:21.191Z",
+    "updated_at": "2026-08-25T23:21:21.191Z",
+    "routine": 6,
+    "day_name": "Miércoles",
+    "subtitle": "Fullbody B (Resistencia)",
+    "is_rest_day": false,
+    "order": 2
+  }
+},
+{
+  "model": "portal.routineday",
+  "pk": 22,
+  "fields": {
+    "created_at": "2026-08-25T23:21:21.205Z",
+    "updated_at": "2026-08-25T23:21:21.205Z",
+    "routine": 6,
+    "day_name": "Viernes",
+    "subtitle": "Fullbody C (Funcional)",
+    "is_rest_day": false,
+    "order": 3
+  }
+},
+{
+  "model": "portal.routineday",
+  "pk": 23,
+  "fields": {
+    "created_at": "2026-08-25T23:21:22.104Z",
+    "updated_at": "2026-08-25T23:21:22.104Z",
+    "routine": 7,
+    "day_name": "Lunes",
+    "subtitle": "Fullbody A (Fuerza & Core)",
+    "is_rest_day": false,
+    "order": 1
+  }
+},
+{
+  "model": "portal.routineday",
+  "pk": 24,
+  "fields": {
+    "created_at": "2026-08-25T23:21:22.116Z",
+    "updated_at": "2026-08-25T23:21:22.116Z",
+    "routine": 7,
+    "day_name": "Miércoles",
+    "subtitle": "Fullbody B (Resistencia)",
+    "is_rest_day": false,
+    "order": 2
+  }
+},
+{
+  "model": "portal.routineday",
+  "pk": 25,
+  "fields": {
+    "created_at": "2026-08-25T23:21:22.129Z",
+    "updated_at": "2026-08-25T23:21:22.129Z",
+    "routine": 7,
+    "day_name": "Viernes",
+    "subtitle": "Fullbody C (Funcional)",
+    "is_rest_day": false,
+    "order": 3
+  }
+},
+{
+  "model": "portal.routineday",
+  "pk": 26,
+  "fields": {
+    "created_at": "2026-08-25T23:21:23.006Z",
+    "updated_at": "2026-08-25T23:21:23.006Z",
+    "routine": 8,
+    "day_name": "Lunes",
+    "subtitle": "Fullbody A (Fuerza & Core)",
+    "is_rest_day": false,
+    "order": 1
+  }
+},
+{
+  "model": "portal.routineday",
+  "pk": 27,
+  "fields": {
+    "created_at": "2026-08-25T23:21:23.019Z",
+    "updated_at": "2026-08-25T23:21:23.019Z",
+    "routine": 8,
+    "day_name": "Miércoles",
+    "subtitle": "Fullbody B (Resistencia)",
+    "is_rest_day": false,
+    "order": 2
+  }
+},
+{
+  "model": "portal.routineday",
+  "pk": 28,
+  "fields": {
+    "created_at": "2026-08-25T23:21:23.029Z",
+    "updated_at": "2026-08-25T23:21:23.029Z",
+    "routine": 8,
+    "day_name": "Viernes",
+    "subtitle": "Fullbody C (Funcional)",
+    "is_rest_day": false,
+    "order": 3
+  }
+},
+{
+  "model": "portal.routineday",
+  "pk": 29,
+  "fields": {
+    "created_at": "2026-08-25T23:21:24.092Z",
+    "updated_at": "2026-08-25T23:21:24.092Z",
+    "routine": 9,
+    "day_name": "Lunes",
+    "subtitle": "Fullbody A (Fuerza & Core)",
+    "is_rest_day": false,
+    "order": 1
+  }
+},
+{
+  "model": "portal.routineday",
+  "pk": 30,
+  "fields": {
+    "created_at": "2026-08-25T23:21:24.105Z",
+    "updated_at": "2026-08-25T23:21:24.105Z",
+    "routine": 9,
+    "day_name": "Miércoles",
+    "subtitle": "Fullbody B (Resistencia)",
+    "is_rest_day": false,
+    "order": 2
+  }
+},
+{
+  "model": "portal.routineday",
+  "pk": 31,
+  "fields": {
+    "created_at": "2026-08-25T23:21:24.119Z",
+    "updated_at": "2026-08-25T23:21:24.119Z",
+    "routine": 9,
+    "day_name": "Viernes",
+    "subtitle": "Fullbody C (Funcional)",
+    "is_rest_day": false,
+    "order": 3
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 21,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.018Z",
+    "updated_at": "2026-08-25T22:56:52.018Z",
+    "routine_day": 6,
+    "name": "Press de Banca Plano",
+    "muscle_group": "Pecho",
+    "series_reps": "4 x 10",
+    "rest_seconds": 90,
+    "image_url": "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=300&auto=format&fit=crop&q=80",
+    "order": 1,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 22,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.024Z",
+    "updated_at": "2026-08-25T22:56:52.024Z",
+    "routine_day": 6,
+    "name": "Aperturas con Mancuernas",
+    "muscle_group": "Pecho",
+    "series_reps": "3 x 12",
+    "rest_seconds": 60,
+    "image_url": "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=300&auto=format&fit=crop&q=80",
+    "order": 2,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 23,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.033Z",
+    "updated_at": "2026-08-25T22:56:52.033Z",
+    "routine_day": 6,
+    "name": "Press Inclinado con Mancuernas",
+    "muscle_group": "Pecho",
+    "series_reps": "4 x 8",
+    "rest_seconds": 90,
+    "image_url": "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=300&auto=format&fit=crop&q=80",
+    "order": 3,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 24,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.038Z",
+    "updated_at": "2026-08-25T22:56:52.038Z",
+    "routine_day": 6,
+    "name": "Fondos en Paralelas",
+    "muscle_group": "Tríceps / Pecho",
+    "series_reps": "3 x 12",
+    "rest_seconds": 60,
+    "image_url": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=300&auto=format&fit=crop&q=80",
+    "order": 4,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 25,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.044Z",
+    "updated_at": "2026-08-25T22:56:52.044Z",
+    "routine_day": 6,
+    "name": "Extensión de Tríceps en Polea",
+    "muscle_group": "Tríceps",
+    "series_reps": "3 x 15",
+    "rest_seconds": 45,
+    "image_url": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=300&auto=format&fit=crop&q=80",
+    "order": 5,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 26,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.052Z",
+    "updated_at": "2026-08-25T22:56:52.052Z",
+    "routine_day": 7,
+    "name": "Jalón al Pecho en Polea",
+    "muscle_group": "Espalda",
+    "series_reps": "4 x 10",
+    "rest_seconds": 90,
+    "image_url": "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=300&auto=format&fit=crop&q=80",
+    "order": 1,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 27,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.056Z",
+    "updated_at": "2026-08-25T22:56:52.056Z",
+    "routine_day": 7,
+    "name": "Remo con Barra T",
+    "muscle_group": "Espalda",
+    "series_reps": "4 x 8",
+    "rest_seconds": 90,
+    "image_url": "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=300&auto=format&fit=crop&q=80",
+    "order": 2,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 28,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.062Z",
+    "updated_at": "2026-08-25T22:56:52.062Z",
+    "routine_day": 7,
+    "name": "Curl de Bíceps con Barra Z",
+    "muscle_group": "Bíceps",
+    "series_reps": "3 x 12",
+    "rest_seconds": 60,
+    "image_url": "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=300&auto=format&fit=crop&q=80",
+    "order": 3,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 29,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.071Z",
+    "updated_at": "2026-08-25T22:56:52.071Z",
+    "routine_day": 7,
+    "name": "Curl Martillo en Banco Inclinado",
+    "muscle_group": "Bíceps",
+    "series_reps": "3 x 12",
+    "rest_seconds": 60,
+    "image_url": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=300&auto=format&fit=crop&q=80",
+    "order": 4,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 30,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.079Z",
+    "updated_at": "2026-08-25T22:56:52.079Z",
+    "routine_day": 8,
+    "name": "Sentadilla Trasera con Barra",
+    "muscle_group": "Cuádriceps",
+    "series_reps": "4 x 8",
+    "rest_seconds": 120,
+    "image_url": "https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=300&auto=format&fit=crop&q=80",
+    "order": 1,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 31,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.085Z",
+    "updated_at": "2026-08-25T22:56:52.085Z",
+    "routine_day": 8,
+    "name": "Prensa de Piernas 45°",
+    "muscle_group": "Piernas",
+    "series_reps": "4 x 12",
+    "rest_seconds": 90,
+    "image_url": "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=300&auto=format&fit=crop&q=80",
+    "order": 2,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 32,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.091Z",
+    "updated_at": "2026-08-25T22:56:52.091Z",
+    "routine_day": 8,
+    "name": "Curl Femoral Tumbado",
+    "muscle_group": "Isquiosurales",
+    "series_reps": "3 x 12",
+    "rest_seconds": 60,
+    "image_url": "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=300&auto=format&fit=crop&q=80",
+    "order": 3,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 33,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.099Z",
+    "updated_at": "2026-08-25T22:56:52.099Z",
+    "routine_day": 8,
+    "name": "Elevación de Talones en Máquina",
+    "muscle_group": "Gemelos",
+    "series_reps": "4 x 15",
+    "rest_seconds": 45,
+    "image_url": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=300&auto=format&fit=crop&q=80",
+    "order": 4,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 34,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.105Z",
+    "updated_at": "2026-08-25T22:56:52.105Z",
+    "routine_day": 9,
+    "name": "Press Militar con Barra",
+    "muscle_group": "Hombros",
+    "series_reps": "4 x 8",
+    "rest_seconds": 90,
+    "image_url": "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=300&auto=format&fit=crop&q=80",
+    "order": 1,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 35,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.111Z",
+    "updated_at": "2026-08-25T22:56:52.111Z",
+    "routine_day": 9,
+    "name": "Elevaciones Laterales con Mancuernas",
+    "muscle_group": "Deltoides Medio",
+    "series_reps": "4 x 15",
+    "rest_seconds": 45,
+    "image_url": "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=300&auto=format&fit=crop&q=80",
+    "order": 2,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 36,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.118Z",
+    "updated_at": "2026-08-25T22:56:52.118Z",
+    "routine_day": 9,
+    "name": "Pájaros en Polea Posterior",
+    "muscle_group": "Deltoides Posterior",
+    "series_reps": "3 x 15",
+    "rest_seconds": 45,
+    "image_url": "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=300&auto=format&fit=crop&q=80",
+    "order": 3,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 37,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.123Z",
+    "updated_at": "2026-08-25T22:56:52.123Z",
+    "routine_day": 9,
+    "name": "Fondos Tríceps en Banco",
+    "muscle_group": "Tríceps",
+    "series_reps": "3 x 15",
+    "rest_seconds": 45,
+    "image_url": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=300&auto=format&fit=crop&q=80",
+    "order": 4,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 38,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.128Z",
+    "updated_at": "2026-08-25T22:56:52.128Z",
+    "routine_day": 10,
+    "name": "Peso Muerto Rumano",
+    "muscle_group": "Cadena Posterior",
+    "series_reps": "4 x 10",
+    "rest_seconds": 90,
+    "image_url": "https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=300&auto=format&fit=crop&q=80",
+    "order": 1,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 39,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.136Z",
+    "updated_at": "2026-08-25T22:56:52.136Z",
+    "routine_day": 10,
+    "name": "Dominadas con Agarre Neutro",
+    "muscle_group": "Espalda/Brazos",
+    "series_reps": "3 x 10",
+    "rest_seconds": 90,
+    "image_url": "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=300&auto=format&fit=crop&q=80",
+    "order": 2,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 40,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.142Z",
+    "updated_at": "2026-08-25T22:56:52.142Z",
+    "routine_day": 10,
+    "name": "Flexiones con Déficit",
+    "muscle_group": "Pecho/Core",
+    "series_reps": "3 x 15",
+    "rest_seconds": 60,
+    "image_url": "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=300&auto=format&fit=crop&q=80",
+    "order": 3,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 41,
+  "fields": {
+    "created_at": "2026-08-25T23:21:17.642Z",
+    "updated_at": "2026-08-25T23:21:17.642Z",
+    "routine_day": 11,
+    "name": "Sentadilla con Mancuerna",
+    "muscle_group": "Piernas",
+    "series_reps": "3 x 12",
+    "rest_seconds": 60,
+    "image_url": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&auto=format&fit=crop&q=80",
+    "order": 1,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 42,
+  "fields": {
+    "created_at": "2026-08-25T23:21:17.655Z",
+    "updated_at": "2026-08-25T23:21:17.655Z",
+    "routine_day": 11,
+    "name": "Press de Banca con Mancuernas",
+    "muscle_group": "Pecho",
+    "series_reps": "3 x 10",
+    "rest_seconds": 60,
+    "image_url": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&auto=format&fit=crop&q=80",
+    "order": 2,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 43,
+  "fields": {
+    "created_at": "2026-08-25T23:21:17.667Z",
+    "updated_at": "2026-08-25T23:21:17.667Z",
+    "routine_day": 11,
+    "name": "Jalón al Pecho en Polea",
+    "muscle_group": "Espalda",
+    "series_reps": "3 x 12",
+    "rest_seconds": 60,
+    "image_url": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&auto=format&fit=crop&q=80",
+    "order": 3,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 44,
+  "fields": {
+    "created_at": "2026-08-25T23:21:17.676Z",
+    "updated_at": "2026-08-25T23:21:17.676Z",
+    "routine_day": 11,
+    "name": "Plancha Abdominal",
+    "muscle_group": "Core",
+    "series_reps": "3 x 30s",
+    "rest_seconds": 45,
+    "image_url": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&auto=format&fit=crop&q=80",
+    "order": 4,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 45,
+  "fields": {
+    "created_at": "2026-08-25T23:21:18.553Z",
+    "updated_at": "2026-08-25T23:21:18.553Z",
+    "routine_day": 14,
+    "name": "Sentadilla con Mancuerna",
+    "muscle_group": "Piernas",
+    "series_reps": "3 x 12",
+    "rest_seconds": 60,
+    "image_url": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&auto=format&fit=crop&q=80",
+    "order": 1,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 46,
+  "fields": {
+    "created_at": "2026-08-25T23:21:18.564Z",
+    "updated_at": "2026-08-25T23:21:18.564Z",
+    "routine_day": 14,
+    "name": "Press de Banca con Mancuernas",
+    "muscle_group": "Pecho",
+    "series_reps": "3 x 10",
+    "rest_seconds": 60,
+    "image_url": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&auto=format&fit=crop&q=80",
+    "order": 2,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 47,
+  "fields": {
+    "created_at": "2026-08-25T23:21:18.574Z",
+    "updated_at": "2026-08-25T23:21:18.574Z",
+    "routine_day": 14,
+    "name": "Jalón al Pecho en Polea",
+    "muscle_group": "Espalda",
+    "series_reps": "3 x 12",
+    "rest_seconds": 60,
+    "image_url": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&auto=format&fit=crop&q=80",
+    "order": 3,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 48,
+  "fields": {
+    "created_at": "2026-08-25T23:21:18.585Z",
+    "updated_at": "2026-08-25T23:21:18.585Z",
+    "routine_day": 14,
+    "name": "Plancha Abdominal",
+    "muscle_group": "Core",
+    "series_reps": "3 x 30s",
+    "rest_seconds": 45,
+    "image_url": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&auto=format&fit=crop&q=80",
+    "order": 4,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 49,
+  "fields": {
+    "created_at": "2026-08-25T23:21:19.789Z",
+    "updated_at": "2026-08-25T23:21:19.789Z",
+    "routine_day": 17,
+    "name": "Sentadilla con Mancuerna",
+    "muscle_group": "Piernas",
+    "series_reps": "3 x 12",
+    "rest_seconds": 60,
+    "image_url": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&auto=format&fit=crop&q=80",
+    "order": 1,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 50,
+  "fields": {
+    "created_at": "2026-08-25T23:21:19.803Z",
+    "updated_at": "2026-08-25T23:21:19.803Z",
+    "routine_day": 17,
+    "name": "Press de Banca con Mancuernas",
+    "muscle_group": "Pecho",
+    "series_reps": "3 x 10",
+    "rest_seconds": 60,
+    "image_url": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&auto=format&fit=crop&q=80",
+    "order": 2,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 51,
+  "fields": {
+    "created_at": "2026-08-25T23:21:19.818Z",
+    "updated_at": "2026-08-25T23:21:19.818Z",
+    "routine_day": 17,
+    "name": "Jalón al Pecho en Polea",
+    "muscle_group": "Espalda",
+    "series_reps": "3 x 12",
+    "rest_seconds": 60,
+    "image_url": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&auto=format&fit=crop&q=80",
+    "order": 3,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 52,
+  "fields": {
+    "created_at": "2026-08-25T23:21:19.831Z",
+    "updated_at": "2026-08-25T23:21:19.831Z",
+    "routine_day": 17,
+    "name": "Plancha Abdominal",
+    "muscle_group": "Core",
+    "series_reps": "3 x 30s",
+    "rest_seconds": 45,
+    "image_url": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&auto=format&fit=crop&q=80",
+    "order": 4,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 53,
+  "fields": {
+    "created_at": "2026-08-25T23:21:21.218Z",
+    "updated_at": "2026-08-25T23:21:21.218Z",
+    "routine_day": 20,
+    "name": "Sentadilla con Mancuerna",
+    "muscle_group": "Piernas",
+    "series_reps": "3 x 12",
+    "rest_seconds": 60,
+    "image_url": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&auto=format&fit=crop&q=80",
+    "order": 1,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 54,
+  "fields": {
+    "created_at": "2026-08-25T23:21:21.233Z",
+    "updated_at": "2026-08-25T23:21:21.233Z",
+    "routine_day": 20,
+    "name": "Press de Banca con Mancuernas",
+    "muscle_group": "Pecho",
+    "series_reps": "3 x 10",
+    "rest_seconds": 60,
+    "image_url": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&auto=format&fit=crop&q=80",
+    "order": 2,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 55,
+  "fields": {
+    "created_at": "2026-08-25T23:21:21.247Z",
+    "updated_at": "2026-08-25T23:21:21.247Z",
+    "routine_day": 20,
+    "name": "Jalón al Pecho en Polea",
+    "muscle_group": "Espalda",
+    "series_reps": "3 x 12",
+    "rest_seconds": 60,
+    "image_url": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&auto=format&fit=crop&q=80",
+    "order": 3,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 56,
+  "fields": {
+    "created_at": "2026-08-25T23:21:21.256Z",
+    "updated_at": "2026-08-25T23:21:21.256Z",
+    "routine_day": 20,
+    "name": "Plancha Abdominal",
+    "muscle_group": "Core",
+    "series_reps": "3 x 30s",
+    "rest_seconds": 45,
+    "image_url": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&auto=format&fit=crop&q=80",
+    "order": 4,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 57,
+  "fields": {
+    "created_at": "2026-08-25T23:21:22.140Z",
+    "updated_at": "2026-08-25T23:21:22.140Z",
+    "routine_day": 23,
+    "name": "Sentadilla con Mancuerna",
+    "muscle_group": "Piernas",
+    "series_reps": "3 x 12",
+    "rest_seconds": 60,
+    "image_url": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&auto=format&fit=crop&q=80",
+    "order": 1,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 58,
+  "fields": {
+    "created_at": "2026-08-25T23:21:22.154Z",
+    "updated_at": "2026-08-25T23:21:22.154Z",
+    "routine_day": 23,
+    "name": "Press de Banca con Mancuernas",
+    "muscle_group": "Pecho",
+    "series_reps": "3 x 10",
+    "rest_seconds": 60,
+    "image_url": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&auto=format&fit=crop&q=80",
+    "order": 2,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 59,
+  "fields": {
+    "created_at": "2026-08-25T23:21:22.167Z",
+    "updated_at": "2026-08-25T23:21:22.167Z",
+    "routine_day": 23,
+    "name": "Jalón al Pecho en Polea",
+    "muscle_group": "Espalda",
+    "series_reps": "3 x 12",
+    "rest_seconds": 60,
+    "image_url": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&auto=format&fit=crop&q=80",
+    "order": 3,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 60,
+  "fields": {
+    "created_at": "2026-08-25T23:21:22.179Z",
+    "updated_at": "2026-08-25T23:21:22.179Z",
+    "routine_day": 23,
+    "name": "Plancha Abdominal",
+    "muscle_group": "Core",
+    "series_reps": "3 x 30s",
+    "rest_seconds": 45,
+    "image_url": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&auto=format&fit=crop&q=80",
+    "order": 4,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 61,
+  "fields": {
+    "created_at": "2026-08-25T23:21:23.043Z",
+    "updated_at": "2026-08-25T23:21:23.043Z",
+    "routine_day": 26,
+    "name": "Sentadilla con Mancuerna",
+    "muscle_group": "Piernas",
+    "series_reps": "3 x 12",
+    "rest_seconds": 60,
+    "image_url": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&auto=format&fit=crop&q=80",
+    "order": 1,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 62,
+  "fields": {
+    "created_at": "2026-08-25T23:21:23.054Z",
+    "updated_at": "2026-08-25T23:21:23.054Z",
+    "routine_day": 26,
+    "name": "Press de Banca con Mancuernas",
+    "muscle_group": "Pecho",
+    "series_reps": "3 x 10",
+    "rest_seconds": 60,
+    "image_url": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&auto=format&fit=crop&q=80",
+    "order": 2,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 63,
+  "fields": {
+    "created_at": "2026-08-25T23:21:23.069Z",
+    "updated_at": "2026-08-25T23:21:23.071Z",
+    "routine_day": 26,
+    "name": "Jalón al Pecho en Polea",
+    "muscle_group": "Espalda",
+    "series_reps": "3 x 12",
+    "rest_seconds": 60,
+    "image_url": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&auto=format&fit=crop&q=80",
+    "order": 3,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 64,
+  "fields": {
+    "created_at": "2026-08-25T23:21:23.083Z",
+    "updated_at": "2026-08-25T23:21:23.083Z",
+    "routine_day": 26,
+    "name": "Plancha Abdominal",
+    "muscle_group": "Core",
+    "series_reps": "3 x 30s",
+    "rest_seconds": 45,
+    "image_url": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&auto=format&fit=crop&q=80",
+    "order": 4,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 65,
+  "fields": {
+    "created_at": "2026-08-25T23:21:24.129Z",
+    "updated_at": "2026-08-25T23:21:24.129Z",
+    "routine_day": 29,
+    "name": "Sentadilla con Mancuerna",
+    "muscle_group": "Piernas",
+    "series_reps": "3 x 12",
+    "rest_seconds": 60,
+    "image_url": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&auto=format&fit=crop&q=80",
+    "order": 1,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 66,
+  "fields": {
+    "created_at": "2026-08-25T23:21:24.140Z",
+    "updated_at": "2026-08-25T23:21:24.140Z",
+    "routine_day": 29,
+    "name": "Press de Banca con Mancuernas",
+    "muscle_group": "Pecho",
+    "series_reps": "3 x 10",
+    "rest_seconds": 60,
+    "image_url": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&auto=format&fit=crop&q=80",
+    "order": 2,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 67,
+  "fields": {
+    "created_at": "2026-08-25T23:21:24.155Z",
+    "updated_at": "2026-08-25T23:21:24.155Z",
+    "routine_day": 29,
+    "name": "Jalón al Pecho en Polea",
+    "muscle_group": "Espalda",
+    "series_reps": "3 x 12",
+    "rest_seconds": 60,
+    "image_url": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&auto=format&fit=crop&q=80",
+    "order": 3,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.routineexercise",
+  "pk": 68,
+  "fields": {
+    "created_at": "2026-08-25T23:21:24.167Z",
+    "updated_at": "2026-08-25T23:21:24.167Z",
+    "routine_day": 29,
+    "name": "Plancha Abdominal",
+    "muscle_group": "Core",
+    "series_reps": "3 x 30s",
+    "rest_seconds": 45,
+    "image_url": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&auto=format&fit=crop&q=80",
+    "order": 4,
+    "notes": ""
+  }
+},
+{
+  "model": "portal.bodymetric",
+  "pk": 8,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.155Z",
+    "updated_at": "2026-08-25T22:56:52.155Z",
+    "member": 8,
+    "date": "2026-08-24",
+    "weight_kg": "78.50",
+    "body_fat_pct": "18.2",
+    "muscle_mass_kg": "42.10",
+    "waist_cm": "86.00",
+    "chest_cm": "102.00",
+    "photo_front": "",
+    "photo_url": "",
+    "notes": ""
+  }
+},
+{
+  "model": "portal.bodymetric",
+  "pk": 9,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.161Z",
+    "updated_at": "2026-08-25T22:56:52.161Z",
+    "member": 8,
+    "date": "2026-08-10",
+    "weight_kg": "79.30",
+    "body_fat_pct": "18.6",
+    "muscle_mass_kg": "41.80",
+    "waist_cm": "87.00",
+    "chest_cm": "101.50",
+    "photo_front": "",
+    "photo_url": "",
+    "notes": ""
+  }
+},
+{
+  "model": "portal.bodymetric",
+  "pk": 10,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.168Z",
+    "updated_at": "2026-08-25T22:56:52.168Z",
+    "member": 8,
+    "date": "2026-07-27",
+    "weight_kg": "80.20",
+    "body_fat_pct": "19.1",
+    "muscle_mass_kg": "41.50",
+    "waist_cm": "88.50",
+    "chest_cm": "101.00",
+    "photo_front": "",
+    "photo_url": "",
+    "notes": ""
+  }
+},
+{
+  "model": "portal.bodymetric",
+  "pk": 11,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.172Z",
+    "updated_at": "2026-08-25T22:56:52.172Z",
+    "member": 8,
+    "date": "2026-07-15",
+    "weight_kg": "79.00",
+    "body_fat_pct": "18.5",
+    "muscle_mass_kg": "41.70",
+    "waist_cm": "87.50",
+    "chest_cm": "101.50",
+    "photo_front": "",
+    "photo_url": "",
+    "notes": ""
+  }
+},
+{
+  "model": "portal.bodymetric",
+  "pk": 12,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.178Z",
+    "updated_at": "2026-08-25T22:56:52.178Z",
+    "member": 8,
+    "date": "2026-07-01",
+    "weight_kg": "79.40",
+    "body_fat_pct": "18.8",
+    "muscle_mass_kg": "41.60",
+    "waist_cm": "88.00",
+    "chest_cm": "101.00",
+    "photo_front": "",
+    "photo_url": "",
+    "notes": ""
+  }
+},
+{
+  "model": "portal.bodymetric",
+  "pk": 13,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.184Z",
+    "updated_at": "2026-08-25T22:56:52.184Z",
+    "member": 8,
+    "date": "2026-06-15",
+    "weight_kg": "80.10",
+    "body_fat_pct": "19.3",
+    "muscle_mass_kg": "41.30",
+    "waist_cm": "89.00",
+    "chest_cm": "100.50",
+    "photo_front": "",
+    "photo_url": "",
+    "notes": ""
+  }
+},
+{
+  "model": "portal.bodymetric",
+  "pk": 14,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.188Z",
+    "updated_at": "2026-08-25T22:56:52.188Z",
+    "member": 8,
+    "date": "2026-06-01",
+    "weight_kg": "80.80",
+    "body_fat_pct": "19.5",
+    "muscle_mass_kg": "41.20",
+    "waist_cm": "89.50",
+    "chest_cm": "100.00",
+    "photo_front": "",
+    "photo_url": "",
+    "notes": ""
+  }
+},
+{
+  "model": "portal.personalrecord",
+  "pk": 4,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.199Z",
+    "updated_at": "2026-08-25T22:56:52.199Z",
+    "member": 8,
+    "exercise_name": "Press de Banca Plano",
+    "weight_kg": "85.00",
+    "achieved_date": "2026-08-12",
+    "badge_type": "fire",
+    "order": 1
+  }
+},
+{
+  "model": "portal.personalrecord",
+  "pk": 5,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.204Z",
+    "updated_at": "2026-08-25T22:56:52.204Z",
+    "member": 8,
+    "exercise_name": "Sentadilla Trasera",
+    "weight_kg": "120.00",
+    "achieved_date": "2026-07-05",
+    "badge_type": "crown",
+    "order": 2
+  }
+},
+{
+  "model": "portal.personalrecord",
+  "pk": 6,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.209Z",
+    "updated_at": "2026-08-25T22:56:52.209Z",
+    "member": 8,
+    "exercise_name": "Peso Muerto Convencional",
+    "weight_kg": "140.00",
+    "achieved_date": "2026-06-20",
+    "badge_type": "bolt",
+    "order": 3
+  }
+},
+{
+  "model": "portal.memberactivityday",
+  "pk": 8,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.222Z",
+    "updated_at": "2026-08-25T22:56:52.222Z",
+    "member": 8,
+    "date": "2026-08-17",
+    "day_name": "Lunes",
+    "day_number": 17,
+    "status": "ENTRENADO"
+  }
+},
+{
+  "model": "portal.memberactivityday",
+  "pk": 9,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.227Z",
+    "updated_at": "2026-08-25T22:56:52.227Z",
+    "member": 8,
+    "date": "2026-08-18",
+    "day_name": "Martes",
+    "day_number": 18,
+    "status": "ENTRENADO"
+  }
+},
+{
+  "model": "portal.memberactivityday",
+  "pk": 10,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.233Z",
+    "updated_at": "2026-08-25T22:56:52.233Z",
+    "member": 8,
+    "date": "2026-08-19",
+    "day_name": "Miércoles",
+    "day_number": 19,
+    "status": "DESCANSO"
+  }
+},
+{
+  "model": "portal.memberactivityday",
+  "pk": 11,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.239Z",
+    "updated_at": "2026-08-25T22:56:52.239Z",
+    "member": 8,
+    "date": "2026-08-20",
+    "day_name": "Jueves",
+    "day_number": 20,
+    "status": "ENTRENADO"
+  }
+},
+{
+  "model": "portal.memberactivityday",
+  "pk": 12,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.244Z",
+    "updated_at": "2026-08-25T22:56:52.244Z",
+    "member": 8,
+    "date": "2026-08-21",
+    "day_name": "Viernes",
+    "day_number": 21,
+    "status": "ENTRENADO"
+  }
+},
+{
+  "model": "portal.memberactivityday",
+  "pk": 13,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.250Z",
+    "updated_at": "2026-08-25T22:56:52.250Z",
+    "member": 8,
+    "date": "2026-08-22",
+    "day_name": "Sábado",
+    "day_number": 22,
+    "status": "DESCANSO"
+  }
+},
+{
+  "model": "portal.memberactivityday",
+  "pk": 14,
+  "fields": {
+    "created_at": "2026-08-25T22:56:52.255Z",
+    "updated_at": "2026-08-25T22:56:52.255Z",
+    "member": 8,
+    "date": "2026-08-23",
+    "day_name": "Domingo",
+    "day_number": 23,
+    "status": "DESCANSO"
+  }
+}
+]

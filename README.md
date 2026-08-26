@@ -48,8 +48,52 @@ Navega a:
 
 ---
 
+## ⚙️ Variables de Entorno & Configuración de Base de Datos
+
+El proyecto incluye soporte para **Variables de Entorno (`.env`)** y cambio fluido entre **SQLite** y **PostgreSQL**.
+
+### 1. Crear archivo `.env`
+Copia la plantilla `.env.example`:
+```powershell
+copy .env.example .env
+```
+
+### 2. Configurar PostgreSQL (Opcional)
+Para conectar con una base de datos PostgreSQL, edita `.env`:
+```env
+USE_POSTGRES=True
+DB_NAME=vitalis_gym
+DB_USER=postgres
+DB_PASSWORD=tu_contraseña_aqui
+DB_HOST=localhost
+DB_PORT=5432
+```
+*O bien mediante una URL de conexión única (Neon, Supabase, Railway, Render):*
+```env
+DATABASE_URL=postgresql://usuario:contraseña@servidor.com:5432/vitalis_gym
+```
+
+*(Si `USE_POSTGRES=False`, el sistema utilizará SQLite local automáticamente).*
+
+---
+
+## 📦 Extracción y Carga de Datos (Backup & Migración)
+
+### Exportar datos de la base de datos a JSON:
+```powershell
+python manage.py dumpdata --natural-foreign --natural-primary -e contenttypes -e auth.Permission --indent 2 --output data_backup.json
+```
+
+### Cargar los datos en una nueva base de datos (ej. PostgreSQL):
+```powershell
+python manage.py migrate
+python manage.py loaddata data_backup.json
+```
+
+---
+
 ## 🧪 Ejecutar la suite de pruebas automatizadas
 ```powershell
 python manage.py test
 ```
-* **46 pruebas unitarias e integrales pasando con éxito (OK 100%)**.
+* **64 pruebas unitarias e integrales pasando con éxito (OK 100%)**.
