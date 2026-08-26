@@ -179,7 +179,7 @@
     "last_login": null,
     "is_superuser": false,
     "username": "martinfuentes",
-    "first_name": "Martín",
+    "first_name": "MartÃ­n",
     "last_name": "Fuentes",
     "email": "martin.fuentes@vitalis.com",
     "is_staff": false,
@@ -196,7 +196,7 @@
     "last_login": null,
     "is_superuser": false,
     "username": "38492019",
-    "first_name": "Martín",
+    "first_name": "MartÃ­n",
     "last_name": "Fuentes",
     "email": "martin.fuentes@vitalis.com",
     "is_staff": false,
@@ -315,7 +315,7 @@
     "last_login": null,
     "is_superuser": false,
     "username": "18432910K",
-    "first_name": "Sofía",
+    "first_name": "SofÃ­a",
     "last_name": "Rodriguez",
     "email": "sofia.rodriguez@email.com",
     "is_staff": false,
@@ -380,7 +380,7 @@
     "created_at": "2026-08-25T15:24:42.062Z",
     "updated_at": "2026-08-25T15:24:42.062Z",
     "gym_name": "Vitalis Fitness Club",
-    "branch_name": "Sede Central • Palermo Soho",
+    "branch_name": "Sede Central â€¢ Palermo Soho",
     "tax_id": "30-71829304-5",
     "address": "Av. del Libertador 4500, Palermo, CABA",
     "phone": "+54 11 4899-2030",
@@ -404,7 +404,7 @@
     "price": "65000.00",
     "duration_days": 30,
     "color": "#f5b82e",
-    "description": "Acceso ilimitado a todas las sedes, clases premium, sauna y evaluación física mensual.",
+    "description": "Acceso ilimitado a todas las sedes, clases premium, sauna y evaluaciÃ³n fÃ­sica mensual.",
     "is_active": true
   }
 },
@@ -414,11 +414,11 @@
   "fields": {
     "created_at": "2026-08-24T16:24:28.825Z",
     "updated_at": "2026-08-24T16:24:28.825Z",
-    "name": "Membresía Studio",
+    "name": "MembresÃ­a Studio",
     "price": "42000.00",
     "duration_days": 30,
     "color": "#e2e8f0",
-    "description": "Acceso a sala de musculación, cardio y 8 clases grupales por mes.",
+    "description": "Acceso a sala de musculaciÃ³n, cardio y 8 clases grupales por mes.",
     "is_active": true
   }
 },
@@ -428,11 +428,11 @@
   "fields": {
     "created_at": "2026-08-24T16:24:28.907Z",
     "updated_at": "2026-08-24T16:24:28.907Z",
-    "name": "Pase Estándar",
+    "name": "Pase EstÃ¡ndar",
     "price": "29900.00",
     "duration_days": 30,
     "color": "#64748b",
-    "description": "Acceso en horario valle (09:00 a 16:00) a sala de musculación.",
+    "description": "Acceso en horario valle (09:00 a 16:00) a sala de musculaciÃ³n.",
     "is_active": true
   }
 },
@@ -445,7 +445,7 @@
     "user": [
       "18432910K"
     ],
-    "first_name": "Sofía",
+    "first_name": "SofÃ­a",
     "last_name": "Rodriguez",
     "dni": "18.432.910-K",
     "email": "sofia.rodriguez@email.com",
@@ -487,9 +487,9 @@
     "status": "PENDIENTE",
     "start_date": "2026-02-02",
     "end_date": "2026-08-02",
-    "emergency_contact_name": "Lucía Mendoza (Hermana)",
+    "emergency_contact_name": "LucÃ­a Mendoza (Hermana)",
     "emergency_contact_phone": "+56 9 9988 7766",
-    "medical_notes": "Comprobante de transferencia bancaria en revisión."
+    "medical_notes": "Comprobante de transferencia bancaria en revisiÃ³n."
   }
 },
 {
@@ -517,7 +517,7 @@
     "end_date": "2025-12-12",
     "emergency_contact_name": "Esteban Ortiz (Padre)",
     "emergency_contact_phone": "+56 9 3344 5566",
-    "medical_notes": "Membresía vencida. Notificada por correo."
+    "medical_notes": "MembresÃ­a vencida. Notificada por correo."
   }
 },
 {
@@ -620,7 +620,7 @@
     "phone": "3885104530",
     "date_of_birth": "1987-12-28",
     "gender": "M",
-    "address": "Av. Fuerza Aérea 331",
+    "address": "Av. Fuerza AÃ©rea 331",
     "avatar_file": "",
     "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80",
     "plan": 1,
@@ -641,7 +641,7 @@
     "user": [
       "38492019"
     ],
-    "first_name": "Martín",
+    "first_name": "MartÃ­n",
     "last_name": "Fuentes",
     "dni": "38492019",
     "email": "martin.fuentes@vitalis.com",
@@ -657,7 +657,7 @@
     "end_date": "2026-09-09",
     "emergency_contact_name": "Laura Fuentes",
     "emergency_contact_phone": "+54 9 11 4433-2211",
-    "medical_notes": "Apto médico al día presentado en Julio 2026."
+    "medical_notes": "Apto mÃ©dico al dÃ­a presentado en Julio 2026."
   }
 },
 {
@@ -673,7 +673,7 @@
     "phone": "+56 9 9123 4567",
     "avatar_file": "",
     "avatar": "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=120&auto=format&fit=crop&q=80",
-    "bio": "Especialista en acondicionamiento físico, entrenamiento funcional de alta intensidad y cross training con 8 años de experiencia.",
+    "bio": "Especialista en acondicionamiento fÃ­sico, entrenamiento funcional de alta intensidad y cross training con 8 aÃ±os de experiencia.",
     "is_active": true
   }
 },
@@ -684,13 +684,13 @@
     "created_at": "2026-08-24T16:33:00.292Z",
     "updated_at": "2026-08-25T13:44:54.920Z",
     "first_name": "Ana",
-    "last_name": "Sofía",
+    "last_name": "SofÃ­a",
     "specialty": "Power Yoga & Flexibilidad",
     "email": "ana.sofia@vitalisfitness.com",
     "phone": "+56 9 8234 5678",
     "avatar_file": "",
     "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&auto=format&fit=crop&q=80",
-    "bio": "Instructora certificada de Vinyasa y Ashtanga Yoga. Especialista en movilidad articular y reducción del estrés.",
+    "bio": "Instructora certificada de Vinyasa y Ashtanga Yoga. Especialista en movilidad articular y reducciÃ³n del estrÃ©s.",
     "is_active": true
   }
 },
@@ -707,7 +707,7 @@
     "phone": "+56 9 7345 6789",
     "avatar_file": "",
     "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&auto=format&fit=crop&q=80",
-    "bio": "Entrenador de alta exigencia cardiovascular, spinning y resistencia metabólica.",
+    "bio": "Entrenador de alta exigencia cardiovascular, spinning y resistencia metabÃ³lica.",
     "is_active": true
   }
 },
@@ -719,7 +719,7 @@
     "updated_at": "2026-08-25T13:44:55.087Z",
     "name": "Entrenamiento Funcional",
     "color": "#f5b82e",
-    "description": "Ejercicios multiarticulares para fuerza, agilidad y resistencia metabólica.",
+    "description": "Ejercicios multiarticulares para fuerza, agilidad y resistencia metabÃ³lica.",
     "icon": "dumbbell"
   }
 },
@@ -731,7 +731,7 @@
     "updated_at": "2026-08-25T13:44:55.161Z",
     "name": "Crossfit WOD",
     "color": "#06b6d4",
-    "description": "Workout of the Day con levantamiento olímpico y gimnasia.",
+    "description": "Workout of the Day con levantamiento olÃ­mpico y gimnasia.",
     "icon": "dumbbell"
   }
 },
@@ -743,7 +743,7 @@
     "updated_at": "2026-08-25T13:44:55.237Z",
     "name": "Power Yoga Flow",
     "color": "#84cc16",
-    "description": "Secuencias dinámicas de posturas con respiración consciente.",
+    "description": "Secuencias dinÃ¡micas de posturas con respiraciÃ³n consciente.",
     "icon": "dumbbell"
   }
 },
@@ -767,7 +767,7 @@
     "updated_at": "2026-08-25T13:44:55.412Z",
     "name": "HIIT Training",
     "color": "#ec4899",
-    "description": "Intervalos cortos de esfuerzo máximo para quema calórica.",
+    "description": "Intervalos cortos de esfuerzo mÃ¡ximo para quema calÃ³rica.",
     "icon": "dumbbell"
   }
 },
@@ -3032,7 +3032,7 @@
     "member": 6,
     "status": "RESERVADO",
     "booking_date": "2026-08-25T13:44:57.004Z",
-    "notes": "Inscripción regular"
+    "notes": "InscripciÃ³n regular"
   }
 },
 {
@@ -3045,7 +3045,7 @@
     "member": 5,
     "status": "RESERVADO",
     "booking_date": "2026-08-25T13:44:57.110Z",
-    "notes": "Inscripción regular"
+    "notes": "InscripciÃ³n regular"
   }
 },
 {
@@ -3071,7 +3071,7 @@
     "member": 6,
     "status": "RESERVADO",
     "booking_date": "2026-08-25T13:44:57.318Z",
-    "notes": "Inscripción regular"
+    "notes": "InscripciÃ³n regular"
   }
 },
 {
@@ -3084,7 +3084,7 @@
     "member": 5,
     "status": "RESERVADO",
     "booking_date": "2026-08-25T13:44:57.429Z",
-    "notes": "Inscripción regular"
+    "notes": "InscripciÃ³n regular"
   }
 },
 {
@@ -3110,7 +3110,7 @@
     "member": 6,
     "status": "RESERVADO",
     "booking_date": "2026-08-25T13:44:57.637Z",
-    "notes": "Inscripción regular"
+    "notes": "InscripciÃ³n regular"
   }
 },
 {
@@ -3123,7 +3123,7 @@
     "member": 5,
     "status": "RESERVADO",
     "booking_date": "2026-08-25T13:44:57.751Z",
-    "notes": "Inscripción regular"
+    "notes": "InscripciÃ³n regular"
   }
 },
 {
@@ -3178,7 +3178,7 @@
     "status": "COMPLETADO",
     "payment_date": "2026-08-23",
     "invoice_number": "REC-2026-0001",
-    "notes": "Pago aprobado vía Mercado Pago QR. Ref #MP-883912.",
+    "notes": "Pago aprobado vÃ­a Mercado Pago QR. Ref #MP-883912.",
     "auto_renew_membership": true
   }
 },
@@ -3212,7 +3212,7 @@
     "status": "COMPLETADO",
     "payment_date": "2026-08-15",
     "invoice_number": "REC-2026-0003",
-    "notes": "Cobro POS terminal en recepción. Visa Débito.",
+    "notes": "Cobro POS terminal en recepciÃ³n. Visa DÃ©bito.",
     "auto_renew_membership": true
   }
 },
@@ -3229,7 +3229,7 @@
     "status": "PENDIENTE",
     "payment_date": "2026-08-24",
     "invoice_number": "REC-2026-0004",
-    "notes": "Seña de reserva pendiente de completar en recepción.",
+    "notes": "SeÃ±a de reserva pendiente de completar en recepciÃ³n.",
     "auto_renew_membership": false
   }
 },
@@ -3246,7 +3246,7 @@
     "status": "COMPLETADO",
     "payment_date": "2026-08-07",
     "invoice_number": "REC-2026-0005",
-    "notes": "Pago en efectivo abonado en recepción.",
+    "notes": "Pago en efectivo abonado en recepciÃ³n.",
     "auto_renew_membership": true
   }
 },
@@ -3257,13 +3257,13 @@
     "created_at": "2026-08-25T22:56:51.977Z",
     "updated_at": "2026-08-25T22:56:51.977Z",
     "member": 8,
-    "name": "Hipertrofia Clásica",
-    "goal": "Hipertrofia de Empuje: Pecho y Tríceps",
+    "name": "Hipertrofia ClÃ¡sica",
+    "goal": "Hipertrofia de Empuje: Pecho y TrÃ­ceps",
     "total_weeks": 8,
     "current_week": 3,
     "progress_percent": 38,
     "trainer": 1,
-    "trainer_notes": "Para este entrenamiento de empuje, enfócate en la fase excéntrica (bajada) en el Press de Banca. Mantén una bajada controlada de 3 segundos para maximizar el reclutamiento de fibras musculares. Si completas todas las series con buena técnica, incrementa 2.5 kg en la última de press inclinado.",
+    "trainer_notes": "Para este entrenamiento de empuje, enfÃ³cate en la fase excÃ©ntrica (bajada) en el Press de Banca. MantÃ©n una bajada controlada de 3 segundos para maximizar el reclutamiento de fibras musculares. Si completas todas las series con buena tÃ©cnica, incrementa 2.5 kg en la Ãºltima de press inclinado.",
     "is_active": true
   }
 },
@@ -3274,13 +3274,13 @@
     "created_at": "2026-08-25T23:21:17.591Z",
     "updated_at": "2026-08-25T23:21:17.591Z",
     "member": 7,
-    "name": "Adaptación y Acondicionamiento",
+    "name": "AdaptaciÃ³n y Acondicionamiento",
     "goal": "Acondicionamiento General & Fuerza",
     "total_weeks": 6,
     "current_week": 1,
     "progress_percent": 15,
     "trainer": null,
-    "trainer_notes": "¡Bienvenido a Vitalis! Esta rutina inicial de adaptación te permitirá preparar articulaciones y músculos. Enfócate en la técnica antes de subir cargas.",
+    "trainer_notes": "Â¡Bienvenido a Vitalis! Esta rutina inicial de adaptaciÃ³n te permitirÃ¡ preparar articulaciones y mÃºsculos. EnfÃ³cate en la tÃ©cnica antes de subir cargas.",
     "is_active": true
   }
 },
@@ -3291,13 +3291,13 @@
     "created_at": "2026-08-25T23:21:18.508Z",
     "updated_at": "2026-08-25T23:21:18.508Z",
     "member": 6,
-    "name": "Adaptación y Acondicionamiento",
+    "name": "AdaptaciÃ³n y Acondicionamiento",
     "goal": "Acondicionamiento General & Fuerza",
     "total_weeks": 6,
     "current_week": 1,
     "progress_percent": 15,
     "trainer": null,
-    "trainer_notes": "¡Bienvenido a Vitalis! Esta rutina inicial de adaptación te permitirá preparar articulaciones y músculos. Enfócate en la técnica antes de subir cargas.",
+    "trainer_notes": "Â¡Bienvenido a Vitalis! Esta rutina inicial de adaptaciÃ³n te permitirÃ¡ preparar articulaciones y mÃºsculos. EnfÃ³cate en la tÃ©cnica antes de subir cargas.",
     "is_active": true
   }
 },
@@ -3308,13 +3308,13 @@
     "created_at": "2026-08-25T23:21:19.734Z",
     "updated_at": "2026-08-25T23:21:19.734Z",
     "member": 5,
-    "name": "Adaptación y Acondicionamiento",
+    "name": "AdaptaciÃ³n y Acondicionamiento",
     "goal": "Acondicionamiento General & Fuerza",
     "total_weeks": 6,
     "current_week": 1,
     "progress_percent": 15,
     "trainer": null,
-    "trainer_notes": "¡Bienvenido a Vitalis! Esta rutina inicial de adaptación te permitirá preparar articulaciones y músculos. Enfócate en la técnica antes de subir cargas.",
+    "trainer_notes": "Â¡Bienvenido a Vitalis! Esta rutina inicial de adaptaciÃ³n te permitirÃ¡ preparar articulaciones y mÃºsculos. EnfÃ³cate en la tÃ©cnica antes de subir cargas.",
     "is_active": true
   }
 },
@@ -3325,13 +3325,13 @@
     "created_at": "2026-08-25T23:21:21.167Z",
     "updated_at": "2026-08-25T23:21:21.167Z",
     "member": 4,
-    "name": "Adaptación y Acondicionamiento",
+    "name": "AdaptaciÃ³n y Acondicionamiento",
     "goal": "Acondicionamiento General & Fuerza",
     "total_weeks": 6,
     "current_week": 1,
     "progress_percent": 15,
     "trainer": null,
-    "trainer_notes": "¡Bienvenido a Vitalis! Esta rutina inicial de adaptación te permitirá preparar articulaciones y músculos. Enfócate en la técnica antes de subir cargas.",
+    "trainer_notes": "Â¡Bienvenido a Vitalis! Esta rutina inicial de adaptaciÃ³n te permitirÃ¡ preparar articulaciones y mÃºsculos. EnfÃ³cate en la tÃ©cnica antes de subir cargas.",
     "is_active": true
   }
 },
@@ -3342,13 +3342,13 @@
     "created_at": "2026-08-25T23:21:22.090Z",
     "updated_at": "2026-08-25T23:21:22.090Z",
     "member": 3,
-    "name": "Adaptación y Acondicionamiento",
+    "name": "AdaptaciÃ³n y Acondicionamiento",
     "goal": "Acondicionamiento General & Fuerza",
     "total_weeks": 6,
     "current_week": 1,
     "progress_percent": 15,
     "trainer": null,
-    "trainer_notes": "¡Bienvenido a Vitalis! Esta rutina inicial de adaptación te permitirá preparar articulaciones y músculos. Enfócate en la técnica antes de subir cargas.",
+    "trainer_notes": "Â¡Bienvenido a Vitalis! Esta rutina inicial de adaptaciÃ³n te permitirÃ¡ preparar articulaciones y mÃºsculos. EnfÃ³cate en la tÃ©cnica antes de subir cargas.",
     "is_active": true
   }
 },
@@ -3359,13 +3359,13 @@
     "created_at": "2026-08-25T23:21:22.994Z",
     "updated_at": "2026-08-25T23:21:22.994Z",
     "member": 2,
-    "name": "Adaptación y Acondicionamiento",
+    "name": "AdaptaciÃ³n y Acondicionamiento",
     "goal": "Acondicionamiento General & Fuerza",
     "total_weeks": 6,
     "current_week": 1,
     "progress_percent": 15,
     "trainer": null,
-    "trainer_notes": "¡Bienvenido a Vitalis! Esta rutina inicial de adaptación te permitirá preparar articulaciones y músculos. Enfócate en la técnica antes de subir cargas.",
+    "trainer_notes": "Â¡Bienvenido a Vitalis! Esta rutina inicial de adaptaciÃ³n te permitirÃ¡ preparar articulaciones y mÃºsculos. EnfÃ³cate en la tÃ©cnica antes de subir cargas.",
     "is_active": true
   }
 },
@@ -3376,13 +3376,13 @@
     "created_at": "2026-08-25T23:21:24.080Z",
     "updated_at": "2026-08-25T23:21:24.080Z",
     "member": 1,
-    "name": "Adaptación y Acondicionamiento",
+    "name": "AdaptaciÃ³n y Acondicionamiento",
     "goal": "Acondicionamiento General & Fuerza",
     "total_weeks": 6,
     "current_week": 1,
     "progress_percent": 15,
     "trainer": null,
-    "trainer_notes": "¡Bienvenido a Vitalis! Esta rutina inicial de adaptación te permitirá preparar articulaciones y músculos. Enfócate en la técnica antes de subir cargas.",
+    "trainer_notes": "Â¡Bienvenido a Vitalis! Esta rutina inicial de adaptaciÃ³n te permitirÃ¡ preparar articulaciones y mÃºsculos. EnfÃ³cate en la tÃ©cnica antes de subir cargas.",
     "is_active": true
   }
 },
@@ -3394,7 +3394,7 @@
     "updated_at": "2026-08-25T22:56:51.985Z",
     "routine": 2,
     "day_name": "Lunes",
-    "subtitle": "Empuje (Pecho/Tríceps)",
+    "subtitle": "Empuje (Pecho/TrÃ­ceps)",
     "is_rest_day": false,
     "order": 1
   }
@@ -3407,7 +3407,7 @@
     "updated_at": "2026-08-25T22:56:51.991Z",
     "routine": 2,
     "day_name": "Martes",
-    "subtitle": "Tracción (Espalda/Bíceps)",
+    "subtitle": "TracciÃ³n (Espalda/BÃ­ceps)",
     "is_rest_day": false,
     "order": 2
   }
@@ -3419,7 +3419,7 @@
     "created_at": "2026-08-25T22:56:51.999Z",
     "updated_at": "2026-08-25T22:56:51.999Z",
     "routine": 2,
-    "day_name": "Miércoles",
+    "day_name": "MiÃ©rcoles",
     "subtitle": "Pierna Completa",
     "is_rest_day": false,
     "order": 3
@@ -3471,7 +3471,7 @@
     "created_at": "2026-08-25T23:21:17.619Z",
     "updated_at": "2026-08-25T23:21:17.619Z",
     "routine": 3,
-    "day_name": "Miércoles",
+    "day_name": "MiÃ©rcoles",
     "subtitle": "Fullbody B (Resistencia)",
     "is_rest_day": false,
     "order": 2
@@ -3510,7 +3510,7 @@
     "created_at": "2026-08-25T23:21:18.531Z",
     "updated_at": "2026-08-25T23:21:18.531Z",
     "routine": 4,
-    "day_name": "Miércoles",
+    "day_name": "MiÃ©rcoles",
     "subtitle": "Fullbody B (Resistencia)",
     "is_rest_day": false,
     "order": 2
@@ -3549,7 +3549,7 @@
     "created_at": "2026-08-25T23:21:19.763Z",
     "updated_at": "2026-08-25T23:21:19.763Z",
     "routine": 5,
-    "day_name": "Miércoles",
+    "day_name": "MiÃ©rcoles",
     "subtitle": "Fullbody B (Resistencia)",
     "is_rest_day": false,
     "order": 2
@@ -3588,7 +3588,7 @@
     "created_at": "2026-08-25T23:21:21.191Z",
     "updated_at": "2026-08-25T23:21:21.191Z",
     "routine": 6,
-    "day_name": "Miércoles",
+    "day_name": "MiÃ©rcoles",
     "subtitle": "Fullbody B (Resistencia)",
     "is_rest_day": false,
     "order": 2
@@ -3627,7 +3627,7 @@
     "created_at": "2026-08-25T23:21:22.116Z",
     "updated_at": "2026-08-25T23:21:22.116Z",
     "routine": 7,
-    "day_name": "Miércoles",
+    "day_name": "MiÃ©rcoles",
     "subtitle": "Fullbody B (Resistencia)",
     "is_rest_day": false,
     "order": 2
@@ -3666,7 +3666,7 @@
     "created_at": "2026-08-25T23:21:23.019Z",
     "updated_at": "2026-08-25T23:21:23.019Z",
     "routine": 8,
-    "day_name": "Miércoles",
+    "day_name": "MiÃ©rcoles",
     "subtitle": "Fullbody B (Resistencia)",
     "is_rest_day": false,
     "order": 2
@@ -3705,7 +3705,7 @@
     "created_at": "2026-08-25T23:21:24.105Z",
     "updated_at": "2026-08-25T23:21:24.105Z",
     "routine": 9,
-    "day_name": "Miércoles",
+    "day_name": "MiÃ©rcoles",
     "subtitle": "Fullbody B (Resistencia)",
     "is_rest_day": false,
     "order": 2
@@ -3780,7 +3780,7 @@
     "updated_at": "2026-08-25T22:56:52.038Z",
     "routine_day": 6,
     "name": "Fondos en Paralelas",
-    "muscle_group": "Tríceps / Pecho",
+    "muscle_group": "TrÃ­ceps / Pecho",
     "series_reps": "3 x 12",
     "rest_seconds": 60,
     "image_url": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=300&auto=format&fit=crop&q=80",
@@ -3795,8 +3795,8 @@
     "created_at": "2026-08-25T22:56:52.044Z",
     "updated_at": "2026-08-25T22:56:52.044Z",
     "routine_day": 6,
-    "name": "Extensión de Tríceps en Polea",
-    "muscle_group": "Tríceps",
+    "name": "ExtensiÃ³n de TrÃ­ceps en Polea",
+    "muscle_group": "TrÃ­ceps",
     "series_reps": "3 x 15",
     "rest_seconds": 45,
     "image_url": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=300&auto=format&fit=crop&q=80",
@@ -3811,7 +3811,7 @@
     "created_at": "2026-08-25T22:56:52.052Z",
     "updated_at": "2026-08-25T22:56:52.052Z",
     "routine_day": 7,
-    "name": "Jalón al Pecho en Polea",
+    "name": "JalÃ³n al Pecho en Polea",
     "muscle_group": "Espalda",
     "series_reps": "4 x 10",
     "rest_seconds": 90,
@@ -3843,8 +3843,8 @@
     "created_at": "2026-08-25T22:56:52.062Z",
     "updated_at": "2026-08-25T22:56:52.062Z",
     "routine_day": 7,
-    "name": "Curl de Bíceps con Barra Z",
-    "muscle_group": "Bíceps",
+    "name": "Curl de BÃ­ceps con Barra Z",
+    "muscle_group": "BÃ­ceps",
     "series_reps": "3 x 12",
     "rest_seconds": 60,
     "image_url": "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=300&auto=format&fit=crop&q=80",
@@ -3860,7 +3860,7 @@
     "updated_at": "2026-08-25T22:56:52.071Z",
     "routine_day": 7,
     "name": "Curl Martillo en Banco Inclinado",
-    "muscle_group": "Bíceps",
+    "muscle_group": "BÃ­ceps",
     "series_reps": "3 x 12",
     "rest_seconds": 60,
     "image_url": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=300&auto=format&fit=crop&q=80",
@@ -3876,7 +3876,7 @@
     "updated_at": "2026-08-25T22:56:52.079Z",
     "routine_day": 8,
     "name": "Sentadilla Trasera con Barra",
-    "muscle_group": "Cuádriceps",
+    "muscle_group": "CuÃ¡driceps",
     "series_reps": "4 x 8",
     "rest_seconds": 120,
     "image_url": "https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=300&auto=format&fit=crop&q=80",
@@ -3891,7 +3891,7 @@
     "created_at": "2026-08-25T22:56:52.085Z",
     "updated_at": "2026-08-25T22:56:52.085Z",
     "routine_day": 8,
-    "name": "Prensa de Piernas 45°",
+    "name": "Prensa de Piernas 45Â°",
     "muscle_group": "Piernas",
     "series_reps": "4 x 12",
     "rest_seconds": 90,
@@ -3923,7 +3923,7 @@
     "created_at": "2026-08-25T22:56:52.099Z",
     "updated_at": "2026-08-25T22:56:52.099Z",
     "routine_day": 8,
-    "name": "Elevación de Talones en Máquina",
+    "name": "ElevaciÃ³n de Talones en MÃ¡quina",
     "muscle_group": "Gemelos",
     "series_reps": "4 x 15",
     "rest_seconds": 45,
@@ -3971,7 +3971,7 @@
     "created_at": "2026-08-25T22:56:52.118Z",
     "updated_at": "2026-08-25T22:56:52.118Z",
     "routine_day": 9,
-    "name": "Pájaros en Polea Posterior",
+    "name": "PÃ¡jaros en Polea Posterior",
     "muscle_group": "Deltoides Posterior",
     "series_reps": "3 x 15",
     "rest_seconds": 45,
@@ -3987,8 +3987,8 @@
     "created_at": "2026-08-25T22:56:52.123Z",
     "updated_at": "2026-08-25T22:56:52.123Z",
     "routine_day": 9,
-    "name": "Fondos Tríceps en Banco",
-    "muscle_group": "Tríceps",
+    "name": "Fondos TrÃ­ceps en Banco",
+    "muscle_group": "TrÃ­ceps",
     "series_reps": "3 x 15",
     "rest_seconds": 45,
     "image_url": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=300&auto=format&fit=crop&q=80",
@@ -4035,7 +4035,7 @@
     "created_at": "2026-08-25T22:56:52.142Z",
     "updated_at": "2026-08-25T22:56:52.142Z",
     "routine_day": 10,
-    "name": "Flexiones con Déficit",
+    "name": "Flexiones con DÃ©ficit",
     "muscle_group": "Pecho/Core",
     "series_reps": "3 x 15",
     "rest_seconds": 60,
@@ -4083,7 +4083,7 @@
     "created_at": "2026-08-25T23:21:17.667Z",
     "updated_at": "2026-08-25T23:21:17.667Z",
     "routine_day": 11,
-    "name": "Jalón al Pecho en Polea",
+    "name": "JalÃ³n al Pecho en Polea",
     "muscle_group": "Espalda",
     "series_reps": "3 x 12",
     "rest_seconds": 60,
@@ -4147,7 +4147,7 @@
     "created_at": "2026-08-25T23:21:18.574Z",
     "updated_at": "2026-08-25T23:21:18.574Z",
     "routine_day": 14,
-    "name": "Jalón al Pecho en Polea",
+    "name": "JalÃ³n al Pecho en Polea",
     "muscle_group": "Espalda",
     "series_reps": "3 x 12",
     "rest_seconds": 60,
@@ -4211,7 +4211,7 @@
     "created_at": "2026-08-25T23:21:19.818Z",
     "updated_at": "2026-08-25T23:21:19.818Z",
     "routine_day": 17,
-    "name": "Jalón al Pecho en Polea",
+    "name": "JalÃ³n al Pecho en Polea",
     "muscle_group": "Espalda",
     "series_reps": "3 x 12",
     "rest_seconds": 60,
@@ -4275,7 +4275,7 @@
     "created_at": "2026-08-25T23:21:21.247Z",
     "updated_at": "2026-08-25T23:21:21.247Z",
     "routine_day": 20,
-    "name": "Jalón al Pecho en Polea",
+    "name": "JalÃ³n al Pecho en Polea",
     "muscle_group": "Espalda",
     "series_reps": "3 x 12",
     "rest_seconds": 60,
@@ -4339,7 +4339,7 @@
     "created_at": "2026-08-25T23:21:22.167Z",
     "updated_at": "2026-08-25T23:21:22.167Z",
     "routine_day": 23,
-    "name": "Jalón al Pecho en Polea",
+    "name": "JalÃ³n al Pecho en Polea",
     "muscle_group": "Espalda",
     "series_reps": "3 x 12",
     "rest_seconds": 60,
@@ -4403,7 +4403,7 @@
     "created_at": "2026-08-25T23:21:23.069Z",
     "updated_at": "2026-08-25T23:21:23.071Z",
     "routine_day": 26,
-    "name": "Jalón al Pecho en Polea",
+    "name": "JalÃ³n al Pecho en Polea",
     "muscle_group": "Espalda",
     "series_reps": "3 x 12",
     "rest_seconds": 60,
@@ -4467,7 +4467,7 @@
     "created_at": "2026-08-25T23:21:24.155Z",
     "updated_at": "2026-08-25T23:21:24.155Z",
     "routine_day": 29,
-    "name": "Jalón al Pecho en Polea",
+    "name": "JalÃ³n al Pecho en Polea",
     "muscle_group": "Espalda",
     "series_reps": "3 x 12",
     "rest_seconds": 60,
@@ -4694,7 +4694,7 @@
     "updated_at": "2026-08-25T22:56:52.233Z",
     "member": 8,
     "date": "2026-08-19",
-    "day_name": "Miércoles",
+    "day_name": "MiÃ©rcoles",
     "day_number": 19,
     "status": "DESCANSO"
   }
@@ -4733,7 +4733,7 @@
     "updated_at": "2026-08-25T22:56:52.250Z",
     "member": 8,
     "date": "2026-08-22",
-    "day_name": "Sábado",
+    "day_name": "SÃ¡bado",
     "day_number": 22,
     "status": "DESCANSO"
   }
