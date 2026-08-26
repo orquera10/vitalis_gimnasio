@@ -1,0 +1,201 @@
+{% extends 'base.html' %}
+
+{% block title %}Almanaque & Horarios de Clases | Vitalis Fitness{% endblock %}
+
+{% block content %}
+<!-- 1. Cabecera del Almanaque -->
+<div class="calendar-header-section">
+    <div>
+        <h1 class="page-title">Almanaque de Clases</h1>
+        <p class="page-subtitle">Programa, visualiza y gestiona las clases y horarios grupales de Vitalis Fitness.</p>
+    </div>
+    
+    <div class="calendar-header-actions">
+        <a href="{% url 'classes:session_create' %}" class="btn-outline" style="font-size: 0.85rem; padding: 0.6rem 1rem; text-decoration: none;">
+            + Sesión Puntual
+        </a>
+        <a href="{% url 'classes:schedule_create' %}" class="btn-gold" style="font-size: 0.85rem; padding: 0.6rem 1.25rem; text-decoration: none;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            Programar Horario Recurrente
+        </a>
+    </div>
+</div>
+
+<!-- 2. Barra de Navegación del Calendario y Filtros -->
+<div class="calendar-nav-card">
+    <div class="calendar-nav-controls">
+        <div class="nav-arrows">
+            <a href="?date={{ prev_week }}&category={{ current_category }}&trainer={{ current_trainer }}" class="btn-nav-arrow" title="Semana anterior">
+                &larr;
+            </a>
+            <a href="?date={{ today_str }}&category={{ current_category }}&trainer={{ current_trainer }}" class="btn-nav-today">
+                Hoy
+            </a>
+            <a href="?date={{ next_week }}&category={{ current_category }}&trainer={{ current_trainer }}" class="btn-nav-arrow" title="Semana siguiente">
+                &rarr;
+            </a>
+        </div>
+
+        <div class="calendar-range-display">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+                <line x1="16" x2="16" y1="2" y2="6"/>
+                <line x1="8" x2="8" y1="2" y2="6"/>
+                <line x1="3" x2="21" y1="10" y2="10"/>
+            </svg>
+            <span>{{ start_of_week|date:"d M" }} - {{ end_of_week|date:"d M Y" }}</span>
+        </div>
+    </div>
+
+    <!-- Filtros de Disciplina & Entrenador -->
+    <form method="get" class="calendar-filter-form">
+        <input type="hidden" name="date" value="{{ start_of_week|date:'Y-m-d' }}">
+        
+        <select name="category" class="filter-select" onchange="this.form.submit()">
+            <option value="">Todas las Disciplinas</option>
+            {% for cat in categories %}
+                <option value="{{ cat.id }}" {% if current_category == cat.id|stringformat:"i" %}selected{% endif %}>
+                    {{ cat.name }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <select name="trainer" class="filter-select" onchange="this.form.submit()">
+            <option value="">Todos los Entrenadores</option>
+            {% for tr in trainers %}
+                <option value="{{ tr.id }}" {% if current_trainer == tr.id|stringformat:"i" %}selected{% endif %}>
+                    {{ tr.full_name }}
+                </option>
+            {% endfor %}
+        </select>
+
+        {% if current_category or current_trainer %}
+            <a href="?date={{ start_of_week|date:'Y-m-d' }}" class="btn-filter-clear">
+                ✕ Limpiar
+            </a>
+        {% endif %}
+    </form>
+</div>
+
+<!-- Leyenda de Disciplinas -->
+<div class="disciplines-legend">
+    {% for cat in categories %}
+        <div class="discipline-tag" style="border-color: {{ cat.color }};">
+            <span class="discipline-dot" style="background-color: {{ cat.color }};"></span>
+            <span>{{ cat.name }}</span>
+        </div>
+    {% endfor %}
+</div>
+
+<!-- 3. Grilla Semanal del Almanaque -->
+<div class="calendar-week-grid">
+    {% for day in week_days %}
+        <div class="calendar-day-col {% if day.is_today %}is-today-col{% endif %}">
+            
+            <!-- Encabezado del Día -->
+            <div class="calendar-day-header {% if day.is_today %}is-today-header{% endif %}">
+                <span class="day-name">{{ day.name }}</span>
+                <span class="day-number">{{ day.day_num }}</span>
+            </div>
+
+            <!-- Contenedor de Clases del Día -->
+            <div class="day-sessions-container">
+                {% if day.sessions %}
+                    {% for session in day.sessions %}
+                        <a href="{% url 'classes:detail' session.pk %}" class="session-card" style="border-left: 3px solid {{ session.category.color }}; text-decoration: none;">
+                            <div class="session-time-row">
+                                <span class="session-time-text">{{ session.time_range }}</span>
+                                <span class="session-spots-badge {% if session.is_full %}full{% endif %}">
+                                    {{ session.available_spots }} cupos
+                                </span>
+                            </div>
+
+                            <div class="session-title-text">{{ session.title }}</div>
+                            
+                            <div class="session-trainer-row">
+                                <div class="trainer-micro-avatar">
+                                    {{ session.trainer.first_name|slice:":1" }}
+                                </div>
+                                <span class="session-trainer-name">Entr. {{ session.trainer.first_name }}</span>
+                            </div>
+
+                            <div class="session-room-tag">
+                                📍 {{ session.room }}
+                            </div>
+                        </a>
+                    {% endfor %}
+                {% else %}
+                    <div class="no-sessions-slot">
+                        <span style="font-size: 0.75rem; color: var(--text-muted);">Sin clases</span>
+                        <a href="{% url 'classes:session_create' %}?date={{ day.date|date:'Y-m-d' }}" class="btn-quick-add" title="Agendar clase en este día">
+                            +
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<!-- 4. Horarios Recurrentes Activos (Reglas del Gimnasio) -->
+<div class="table-card" style="margin-top: 2rem;">
+    <div class="card-header-flex">
+        <div>
+            <h3 class="card-title">Reglas de Horarios Semanales Recurrentes</h3>
+            <p class="card-subtitle">Clases fijas que se autoprograman en el almanaque cada semana</p>
+        </div>
+        <a href="{% url 'classes:schedule_create' %}" class="btn-gold" style="font-size: 0.8rem; padding: 0.5rem 1rem; text-decoration: none;">
+            + Nueva Regla
+        </a>
+    </div>
+
+    {% if schedules %}
+    <div class="table-responsive">
+        <table class="custom-table">
+            <thead>
+                <tr>
+                    <th>Clase / Disciplina</th>
+                    <th>Día de la Semana</th>
+                    <th>Horario</th>
+                    <th>Entrenador</th>
+                    <th>Salón</th>
+                    <th>Cupo Máximo</th>
+                    <th style="text-align: right;">Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sch in schedules %}
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.6rem;">
+                                <span class="discipline-dot" style="background-color: {{ sch.category.color }}; width: 10px; height: 10px;"></span>
+                                <span style="font-weight: 700; color: #ffffff;">{{ sch.title }}</span>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="badge" style="background-color: var(--bg-input); border: 1px solid var(--border-gold); color: var(--gold-primary);">
+                                {{ sch.day_name }}
+                            </span>
+                        </td>
+                        <td style="font-family: monospace; font-size: 0.9rem; color: #ffffff;">
+                            {{ sch.start_time|time:"H:i" }} - {{ sch.end_time|time:"H:i" }}
+                        </td>
+                        <td>{{ sch.trainer.full_name }}</td>
+                        <td>{{ sch.room }}</td>
+                        <td>{{ sch.capacity }} alumnos</td>
+                        <td style="text-align: right;">
+                            <span class="badge badge-success">Activo</span>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        <p style="color: var(--text-muted); font-size: 0.85rem; padding: 1rem 0;">No hay reglas de horarios fijas creadas aún.</p>
+    {% endif %}
+</div>
+{% endblock %}

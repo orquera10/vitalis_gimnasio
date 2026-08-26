@@ -1,0 +1,239 @@
+{% extends 'base.html' %}
+
+{% block title %}vitalis-admin-dashboard | Vitalis Fitness{% endblock %}
+
+{% block content %}
+<!-- 1. Fila de KPIs (4 Cards con Iconografía SVG exacta) -->
+<section class="kpi-grid">
+    <!-- Card 1: Total Miembros -->
+    <div class="kpi-card">
+        <div>
+            <div class="kpi-title">{{ kpis.total_members.label }}</div>
+            <div class="kpi-value">{{ kpis.total_members.value }}</div>
+            <div class="kpi-trend trend-positive">
+                <span>↗ {{ kpis.total_members.trend }}</span>
+                <span class="period">{{ kpis.total_members.period }}</span>
+            </div>
+        </div>
+        <div class="kpi-icon-pill">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Card 2: Ingresos del Mes -->
+    <div class="kpi-card">
+        <div>
+            <div class="kpi-title">{{ kpis.monthly_revenue.label }}</div>
+            <div class="kpi-value">{{ kpis.monthly_revenue.value }}</div>
+            <div class="kpi-trend trend-positive">
+                <span>↗ {{ kpis.monthly_revenue.trend }}</span>
+                <span class="period">{{ kpis.monthly_revenue.period }}</span>
+            </div>
+        </div>
+        <div class="kpi-icon-pill">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" x2="12" y1="2" y2="22"/>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Card 3: Clases Hoy -->
+    <div class="kpi-card">
+        <div>
+            <div class="kpi-title">{{ kpis.classes_today.label }}</div>
+            <div class="kpi-value">{{ kpis.classes_today.value }}</div>
+            <div class="kpi-trend trend-positive">
+                <span>↗ {{ kpis.classes_today.trend }}</span>
+                <span class="period">{{ kpis.classes_today.period }}</span>
+            </div>
+        </div>
+        <div class="kpi-icon-pill">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+                <line x1="16" x2="16" y1="2" y2="6"/>
+                <line x1="8" x2="8" y1="2" y2="6"/>
+                <line x1="3" x2="21" y1="10" y2="10"/>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Card 4: Nuevas Inscripciones -->
+    <div class="kpi-card">
+        <div>
+            <div class="kpi-title">{{ kpis.new_signups.label }}</div>
+            <div class="kpi-value">{{ kpis.new_signups.value }}</div>
+            <div class="kpi-trend trend-negative">
+                <span>↘ {{ kpis.new_signups.trend }}</span>
+                <span class="period">{{ kpis.new_signups.period }}</span>
+            </div>
+        </div>
+        <div class="kpi-icon-pill">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <line x1="19" x2="19" y1="8" y2="14"/>
+                <line x1="22" x2="16" y1="11" y2="11"/>
+            </svg>
+        </div>
+    </div>
+</section>
+
+<!-- 2. Estructura Principal del Dashboard: Panel Central (Izquierda) + Panel Derecho -->
+<div class="dashboard-main-layout">
+
+    <!-- =========================================================================
+         PANEL CENTRAL / IZQUIERDO (Tendencia de Ingresos + Miembros Recientes)
+         ========================================================================= -->
+    <div class="dashboard-center-panel">
+        
+        <!-- Gráfico de Tendencia de Ingresos -->
+        <div class="chart-card">
+            <div class="card-header-flex">
+                <div>
+                    <h3 class="card-title">Tendencia de Ingresos</h3>
+                    <p class="card-subtitle">Historial mensual acumulado de membresías</p>
+                </div>
+                <div class="filter-badge">
+                    <span class="indicator-gold"></span>
+                    <span>Este Año</span>
+                </div>
+            </div>
+            
+            <div class="chart-container" style="height: 220px; width: 100%;">
+                <canvas id="revenueChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Tabla de Miembros Recientes -->
+        <div class="table-card">
+            <div class="card-header-flex">
+                <div>
+                    <h3 class="card-title">Miembros Recientes</h3>
+                </div>
+                <a href="{% url 'members:list' %}" style="font-size: 0.8rem; font-weight: 600; color: var(--gold-primary);">
+                    Ver todos
+                </a>
+            </div>
+
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Plan</th>
+                        <th>Fecha Inicio</th>
+                        <th style="text-align: right;">Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for member in recent_members %}
+                        <tr>
+                            <td>
+                                <div class="member-cell">
+                                    <img src="{{ member.avatar }}" alt="{{ member.name }}" class="member-avatar">
+                                    <span class="member-name">{{ member.name }}</span>
+                                </div>
+                            </td>
+                            <td>{{ member.plan }}</td>
+                            <td>{{ member.start_date }}</td>
+                            <td style="text-align: right;">
+                                <span class="badge {{ member.status_class }}">
+                                    {{ member.status }}
+                                </span>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- =========================================================================
+         PANEL DERECHO (Distribución de Planes + Clases de Hoy)
+         ========================================================================= -->
+    <div class="dashboard-right-panel">
+        
+        <!-- Gráfico de Distribución de Planes -->
+        <div class="chart-card">
+            <div class="card-header-flex">
+                <div>
+                    <h3 class="card-title">Distribución de Planes</h3>
+                </div>
+            </div>
+
+            <div class="donut-wrapper">
+                <div class="donut-chart-container">
+                    <canvas id="plansDonutChart"></canvas>
+                    <div class="donut-center-text">
+                        <div class="donut-center-value">1,247</div>
+                        <div class="donut-center-label">Miembros</div>
+                    </div>
+                </div>
+
+                <!-- Leyenda de Planes con valores exactos de Figma -->
+                <div class="plans-legend">
+                    {% for plan in plans_distribution %}
+                        <div class="legend-item">
+                            <div class="legend-left">
+                                <span class="legend-dot" style="background-color: {{ plan.color }};"></span>
+                                <span>{{ plan.name }}</span>
+                            </div>
+                            <div class="legend-percent">{{ plan.percentage }}%</div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Lista de Clases de Hoy -->
+        <div class="table-card">
+            <div class="card-header-flex">
+                <div>
+                    <h3 class="card-title">Clases de Hoy</h3>
+                </div>
+                <div class="filter-badge" style="font-size: 0.72rem; padding: 0.25rem 0.65rem; border-radius: var(--radius-full); background: rgba(245, 184, 46, 0.08); border: 1px solid rgba(245, 184, 46, 0.25); color: var(--gold-primary); font-weight: 600;">
+                    {{ today_badge|default:"Sáb, 24 Ago" }}
+                </div>
+            </div>
+
+            <div class="classes-list">
+                {% for c in today_classes %}
+                    {% if c.id %}
+                    <a href="{% url 'classes:detail' c.id %}" class="class-item">
+                    {% else %}
+                    <div class="class-item">
+                    {% endif %}
+                        <div class="class-time-col">
+                            <span class="class-time">{{ c.time }}</span>
+                            <span class="class-time-label">Hora</span>
+                        </div>
+                        <div class="class-info">
+                            <div class="class-title">{{ c.title }}</div>
+                            <div class="class-trainer">Entr. {{ c.trainer }}</div>
+                        </div>
+                        <div class="class-spots">
+                            <div class="spots-count">{{ c.spots }}</div>
+                            <div class="spots-label">Cupos</div>
+                        </div>
+                    {% if c.id %}
+                    </a>
+                    {% else %}
+                    </div>
+                    {% endif %}
+                {% empty %}
+                    <div style="text-align: center; padding: 2rem 1rem; color: var(--text-muted); font-size: 0.85rem;">
+                        No hay clases programadas para hoy.
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,407 @@
+﻿{% extends 'base.html' %}
+
+{% block title %}Ficha de {{ member.full_name }} | Vitalis Fitness{% endblock %}
+
+{% block content %}
+<div class="profile-page-container">
+    
+    <!-- Barra Superior de Navegación del Perfil -->
+    <div class="form-header-flex">
+        <div>
+            <a href="{% url 'members:list' %}" class="back-link">
+                &larr; Volver a Socios
+            </a>
+            <h1 class="page-title" style="margin-top: 0.5rem;">Ficha del Socio</h1>
+        </div>
+        <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
+            <a href="{% url 'portal:home' %}?socio_id={{ member.pk }}" target="_blank" class="btn-gold" style="text-decoration: none; padding: 0.6rem 1.25rem; display: flex; align-items: center; gap: 0.4rem;">
+                <span>👁</span> Ver Portal del Socio ↗
+            </a>
+            <a href="{% url 'payments:create' %}?member={{ member.pk }}" class="btn-outline" style="text-decoration: none; padding: 0.6rem 1.1rem; border-color: var(--border-gold); color: var(--gold-primary);">
+                💳 Cobrar Cuota
+            </a>
+            <a href="{% url 'members:update' member.pk %}" class="btn-outline" style="text-decoration: none; padding: 0.6rem 1.1rem;">
+                ✏️ Editar
+            </a>
+            <form action="{% url 'members:delete' member.pk %}" method="post" onsubmit="return confirm('¿Estás seguro de eliminar este socio?');" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="logout-icon-btn" style="border: 1px solid rgba(239, 68, 68, 0.3); padding: 0.55rem 0.85rem; border-radius: var(--radius-md);" title="Eliminar Socio">
+                    🗑️
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Tarjeta Principal de Perfil VIP -->
+    <div class="profile-grid">
+        
+        <!-- Columna Izquierda: Tarjeta de Identificación & Acceso al Portal -->
+        <div class="profile-card">
+            <div class="profile-header-center">
+                <img src="{{ member.avatar_url }}" alt="{{ member.full_name }}" class="profile-big-avatar">
+                <h2 class="profile-name">{{ member.full_name }}</h2>
+                <div class="profile-dni">DNI: {{ member.dni }}</div>
+                
+                <div style="margin-top: 0.75rem;">
+                    <span class="badge {{ member.status_badge_class }}" style="font-size: 0.85rem; padding: 0.35rem 0.9rem;">
+                        {{ member.get_status_display }}
+                    </span>
+                </div>
+            </div>
+
+            <div class="profile-divider"></div>
+
+            <div class="profile-detail-list">
+                <div class="profile-detail-item">
+                    <span class="detail-label">Correo:</span>
+                    <span class="detail-val">{{ member.email }}</span>
+                </div>
+                <div class="profile-detail-item">
+                    <span class="detail-label">Teléfono:</span>
+                    <span class="detail-val">{{ member.phone|default:"No registrado" }}</span>
+                </div>
+                <div class="profile-detail-item">
+                    <span class="detail-label">Género:</span>
+                    <span class="detail-val">{{ member.get_gender_display }}</span>
+                </div>
+                <div class="profile-detail-item">
+                    <span class="detail-label">F. Nacimiento:</span>
+                    <span class="detail-val">{{ member.date_of_birth|date:"d M Y"|default:"No registrada" }}</span>
+                </div>
+                <div class="profile-detail-item">
+                    <span class="detail-label">Dirección:</span>
+                    <span class="detail-val">{{ member.address|default:"No registrada" }}</span>
+                </div>
+            </div>
+
+            <!-- Módulo: Credenciales de Acceso a la App Móvil / Portal -->
+            <div style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid rgba(255, 255, 255, 0.08);">
+                <h4 style="font-size: 0.9rem; color: var(--gold-primary); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.4rem;">
+                    📱 Acceso a la App de Clientes
+                </h4>
+                
+                <div style="background: rgba(245, 184, 46, 0.04); border: 1px solid rgba(245, 184, 46, 0.15); border-radius: var(--radius-md); padding: 0.85rem; font-size: 0.85rem; margin-bottom: 0.85rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.35rem;">
+                        <span style="color: var(--text-muted);">Usuario Portal:</span>
+                        <strong style="color: #ffffff; font-family: monospace;">{{ portal_user.username|default:member.dni }}</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.35rem;">
+                        <span style="color: var(--text-muted);">Estado:</span>
+                        <span style="color: var(--accent-green); font-weight: 700;">✓ Habilitado</span>
+                    </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <a href="{% url 'portal:home' %}?socio_id={{ member.pk }}" target="_blank" class="btn-gold" style="width: 100%; text-align: center; text-decoration: none; font-size: 0.85rem; padding: 0.5rem;">
+                        👁️ Abrir Portal como {{ member.first_name }} ↗
+                    </a>
+                    
+                    <form action="{% url 'members:reset_portal_password' member.pk %}" method="post" onsubmit="return confirm('¿Restablecer la contraseña del portal de este socio al número de DNI ({{ member.dni }})?');">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-outline" style="width: 100%; font-size: 0.8rem; padding: 0.45rem; border-color: rgba(255, 255, 255, 0.15); color: var(--text-secondary);">
+                            🔑 Resetear Clave (DNI)
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Columna Derecha: Membresía, Rutina, Mediciones, Clases & Pagos -->
+        <div class="profile-right-col">
+            
+            <!-- Tarjeta de Membresía Actual -->
+            <div class="table-card">
+                <h3 class="card-title" style="margin-bottom: 1rem; color: var(--gold-primary);">
+                    👑 Membresía Activa
+                </h3>
+
+                <div class="membership-status-box">
+                    {% if member.plan %}
+                        <div class="plan-hero-row">
+                            <div>
+                                <div class="plan-hero-name">{{ member.plan.name }}</div>
+                                <div class="plan-hero-desc">{{ member.plan.description|default:"Acceso a instalaciones y clases según plan" }}</div>
+                            </div>
+                            <div class="plan-hero-price">
+                                ${{ member.plan.price|floatformat:0 }}
+                                <span>/mes</span>
+                            </div>
+                        </div>
+
+                        <div class="dates-progress-grid">
+                            <div class="date-box">
+                                <span class="date-box-label">Fecha de Inicio</span>
+                                <div class="date-box-val">{{ member.start_date|date:"d M Y" }}</div>
+                            </div>
+                            <div class="date-box">
+                                <span class="date-box-label">Fecha de Vencimiento</span>
+                                <div class="date-box-val" style="color: var(--gold-primary);">
+                                    {{ member.end_date|date:"d M Y"|default:"Indefinida" }}
+                                </div>
+                            </div>
+                            <div class="date-box">
+                                <span class="date-box-label">Duración</span>
+                                <div class="date-box-val">{{ member.plan.duration_days }} Días</div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <p style="color: var(--text-muted);">El socio no tiene ningún plan asignado actualmente.</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Tarjeta de Rutina de Entrenamiento Asignada en el Portal -->
+            <div class="table-card" style="margin-top: 1.25rem;">
+                <div class="card-header-flex" style="margin-bottom: 0.75rem;">
+                    <div>
+                        <h3 class="card-title" style="color: var(--gold-primary);">
+                            🏋️ Rutina de Entrenamiento Activa
+                        </h3>
+                        <p class="card-subtitle">Rutina visualizada por el socio en su aplicación</p>
+                    </div>
+                    {% if active_routine %}
+                    <span class="badge" style="background: rgba(245, 184, 46, 0.15); color: var(--gold-primary); font-weight: 700;">
+                        Semana {{ active_routine.current_week }} de {{ active_routine.total_weeks }}
+                    </span>
+                    {% endif %}
+                </div>
+
+                {% if active_routine %}
+                <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: var(--radius-md); padding: 1rem; margin-bottom: 1rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <strong style="color: #ffffff; font-size: 1.05rem;">{{ active_routine.name }}</strong>
+                        <span style="color: var(--text-muted); font-size: 0.85rem;">Progreso: <strong style="color: var(--gold-primary);">{{ active_routine.progress_percent }}%</strong></span>
+                    </div>
+                    <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 0.75rem;">
+                        Objetivo: {{ active_routine.goal }} {% if active_routine.trainer %} • Coach: {{ active_routine.trainer.full_name }}{% endif %}
+                    </p>
+
+                    <!-- Días de entrenamiento -->
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        {% for day in active_routine.days.all %}
+                        <span style="background: rgba(255, 255, 255, 0.05); padding: 0.35rem 0.75rem; border-radius: var(--radius-sm); font-size: 0.8rem; color: #ffffff;">
+                            <strong>{{ day.day_name }}:</strong> {{ day.subtitle }} ({{ day.exercises.count }} ejercicios)
+                        </span>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% else %}
+                <p style="color: var(--text-muted); font-size: 0.85rem; padding: 0.5rem 0;">
+                    El socio no cuenta con una rutina activa en este momento.
+                </p>
+                {% endif %}
+            </div>
+
+            <!-- Tarjeta de Evolución Física y PRs del Socio -->
+            <div class="table-card" style="margin-top: 1.25rem;">
+                <div class="card-header-flex" style="margin-bottom: 0.75rem;">
+                    <div>
+                        <h3 class="card-title" style="color: var(--gold-primary);">
+                            📈 Métricas Corporales & Récords Personales (PRs)
+                        </h3>
+                        <p class="card-subtitle">Seguimiento antropométrico registrado en la app</p>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <!-- PRs List -->
+                    <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: var(--radius-md); padding: 0.85rem;">
+                        <span style="font-size: 0.8rem; color: var(--gold-primary); font-weight: 700; display: block; margin-bottom: 0.5rem;">🔥 Mejores Marcas (PRs)</span>
+                        {% if personal_records %}
+                            {% for pr in personal_records %}
+                            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.35rem;">
+                                <span style="color: var(--text-secondary);">{{ pr.exercise_name }}:</span>
+                                <strong style="color: #ffffff;">{{ pr.weight_kg }} kg</strong>
+                            </div>
+                            {% endfor %}
+                        {% else %}
+                            <span style="color: var(--text-muted); font-size: 0.8rem;">Sin PRs registrados aún.</span>
+                        {% endif %}
+                    </div>
+
+                    <!-- Latest Metrics -->
+                    <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: var(--radius-md); padding: 0.85rem;">
+                        <span style="font-size: 0.8rem; color: var(--gold-primary); font-weight: 700; display: block; margin-bottom: 0.5rem;">⚖️ Última Medición Registrada</span>
+                        {% with last_m=recent_metrics.first %}
+                            {% if last_m %}
+                            <div style="font-size: 0.85rem;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                                    <span style="color: var(--text-secondary);">Peso:</span>
+                                    <strong style="color: #ffffff;">{{ last_m.weight_kg }} kg</strong>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                                    <span style="color: var(--text-secondary);">Grasa:</span>
+                                    <strong style="color: var(--gold-primary);">{{ last_m.body_fat_pct|default:"-" }}%</strong>
+                                </div>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span style="color: var(--text-secondary);">Fecha:</span>
+                                    <span style="color: var(--text-muted);">{{ last_m.date|date:"d M Y" }}</span>
+                                </div>
+                            </div>
+                            {% else %}
+                            <span style="color: var(--text-muted); font-size: 0.8rem;">Sin mediciones registradas.</span>
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjeta de Emergencia & Salud -->
+            <div class="table-card" style="margin-top: 1.25rem;">
+                <h3 class="card-title" style="margin-bottom: 1rem;">
+                    🩺 Contacto de Emergencia & Salud
+                </h3>
+
+                <div class="emergency-grid">
+                    <div class="profile-detail-item">
+                        <span class="detail-label">Contacto:</span>
+                        <span class="detail-val">{{ member.emergency_contact_name|default:"No especificado" }}</span>
+                    </div>
+                    <div class="profile-detail-item">
+                        <span class="detail-label">Tel. Urgencia:</span>
+                        <span class="detail-val">{{ member.emergency_contact_phone|default:"No especificado" }}</span>
+                    </div>
+                </div>
+
+                <div style="margin-top: 1rem;">
+                    <span class="detail-label" style="display: block; margin-bottom: 0.35rem;">Observaciones Médicas:</span>
+                    <div class="medical-notes-box">
+                        {{ member.medical_notes|default:"Sin condiciones médicas ni observaciones registradas."|linebreaks }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjeta de Clases y Asistencias del Socio -->
+            <div class="table-card" style="margin-top: 1.25rem;">
+                <div class="card-header-flex" style="margin-bottom: 0.75rem;">
+                    <div>
+                        <h3 class="card-title" style="color: var(--gold-primary);">
+                            📅 Historial de Clases & Asistencias
+                        </h3>
+                        <p class="card-subtitle">Clases grupales a las que este socio está o estuvo inscripto</p>
+                    </div>
+                </div>
+
+                {% if member.class_bookings.all %}
+                    <div class="table-responsive">
+                        <table class="custom-table">
+                            <thead>
+                                <tr>
+                                    <th>Clase</th>
+                                    <th>Fecha</th>
+                                    <th>Horario</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for b in member.class_bookings.all %}
+                                <tr>
+                                    <td>
+                                        <a href="{% url 'classes:detail' b.session.pk %}" style="font-weight: 700; color: #ffffff; text-decoration: none;">
+                                            {{ b.session.title }}
+                                        </a>
+                                    </td>
+                                    <td style="font-size: 0.85rem; color: var(--text-secondary);">
+                                        {{ b.session.date|date:"d/m/Y" }}
+                                    </td>
+                                    <td style="font-family: monospace; font-size: 0.85rem; color: var(--gold-primary);">
+                                        {{ b.session.time_range }}
+                                    </td>
+                                    <td>
+                                        <span class="badge {{ b.status_badge_class }}">
+                                            {{ b.get_status_display }}
+                                        </span>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p style="color: var(--text-muted); font-size: 0.85rem; padding: 0.5rem 0;">
+                        Este socio aún no ha sido inscripto en ninguna clase.
+                    </p>
+                {% endif %}
+            </div>
+
+            <!-- Tarjeta de Historial de Pagos y Facturación -->
+            <div class="table-card" style="margin-top: 1.25rem;">
+                <div class="card-header-flex" style="margin-bottom: 0.75rem;">
+                    <div>
+                        <h3 class="card-title" style="color: var(--gold-primary);">
+                            💳 Historial de Pagos & Facturación
+                        </h3>
+                        <p class="card-subtitle">Recibos emitidos y cuotas abonadas por este socio</p>
+                    </div>
+                    <a href="{% url 'payments:create' %}?member={{ member.pk }}" class="btn-gold" style="font-size: 0.8rem; padding: 0.4rem 0.85rem; text-decoration: none;">
+                        + Nuevo Cobro
+                    </a>
+                </div>
+
+                {% if member.payments.all %}
+                    <div class="table-responsive">
+                        <table class="custom-table">
+                            <thead>
+                                <tr>
+                                    <th>N° Recibo</th>
+                                    <th>Concepto</th>
+                                    <th>Fecha</th>
+                                    <th>Monto</th>
+                                    <th>Estado</th>
+                                    <th style="text-align: right;">Recibo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for p in member.payments.all %}
+                                <tr>
+                                    <td>
+                                        <a href="{% url 'payments:detail' p.pk %}" style="font-family: monospace; font-weight: 700; color: var(--gold-primary); text-decoration: none;">
+                                            {{ p.invoice_number }}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        {% if p.plan %}
+                                            <span class="badge" style="background: rgba(245, 184, 46, 0.1); border: 1px solid var(--border-gold); color: var(--gold-primary);">
+                                                {{ p.plan.name }}
+                                            </span>
+                                        {% else %}
+                                            <span style="font-size: 0.85rem;">Cuota General</span>
+                                        {% endif %}
+                                    </td>
+                                    <td style="font-size: 0.85rem; color: var(--text-secondary);">
+                                        {{ p.payment_date|date:"d/m/Y" }}
+                                    </td>
+                                    <td>
+                                        <span style="font-family: monospace; font-weight: 700; color: #ffffff;">
+                                            ${{ p.amount|floatformat:0 }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="badge {{ p.status_badge_class }}">
+                                            {{ p.get_status_display }}
+                                        </span>
+                                    </td>
+                                    <td style="text-align: right;">
+                                        <a href="{% url 'payments:detail' p.pk %}" class="btn-outline" style="padding: 0.25rem 0.5rem; font-size: 0.75rem; text-decoration: none;">
+                                            📄 Ver
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p style="color: var(--text-muted); font-size: 0.85rem; padding: 0.5rem 0;">
+                        No hay registros de pagos para este socio.
+                    </p>
+                {% endif %}
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

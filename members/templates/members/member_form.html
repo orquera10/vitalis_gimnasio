@@ -1,0 +1,257 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ action_title }} | Vitalis Fitness{% endblock %}
+
+{% block content %}
+<div class="form-page-container">
+    <div class="form-header-flex">
+        <div>
+            <a href="{% url 'members:list' %}" class="back-link">
+                &larr; Volver al Listado de Socios
+            </a>
+            <h1 class="page-title" style="margin-top: 0.5rem;">{{ action_title }}</h1>
+        </div>
+    </div>
+
+    <form method="post" enctype="multipart/form-data" class="luxury-form-card" novalidate>
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+            <div class="messages-container">
+                {% for error in form.non_field_errors %}
+                    <div class="alert alert-error">
+                        <span>{{ error }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Sección 1: Datos Personales -->
+        <div class="form-section">
+            <h3 class="form-section-title">
+                <span class="section-number">1</span>
+                Información Personal
+            </h3>
+
+            <div class="form-row-2">
+                <div class="form-group">
+                    <label class="form-label" for="{{ form.first_name.id_for_label }}">
+                        Nombre <span class="required">*</span>
+                    </label>
+                    {{ form.first_name }}
+                    {% if form.first_name.errors %}<div class="form-error">{{ form.first_name.errors.0 }}</div>{% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="{{ form.last_name.id_for_label }}">
+                        Apellido <span class="required">*</span>
+                    </label>
+                    {{ form.last_name }}
+                    {% if form.last_name.errors %}<div class="form-error">{{ form.last_name.errors.0 }}</div>{% endif %}
+                </div>
+            </div>
+
+            <div class="form-row-3">
+                <div class="form-group">
+                    <label class="form-label" for="{{ form.dni.id_for_label }}">
+                        DNI / Cédula <span class="required">*</span>
+                    </label>
+                    {{ form.dni }}
+                    {% if form.dni.errors %}<div class="form-error">{{ form.dni.errors.0 }}</div>{% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="{{ form.email.id_for_label }}">
+                        Correo Electrónico <span class="required">*</span>
+                    </label>
+                    {{ form.email }}
+                    {% if form.email.errors %}<div class="form-error">{{ form.email.errors.0 }}</div>{% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="{{ form.phone.id_for_label }}">
+                        Teléfono / WhatsApp
+                    </label>
+                    {{ form.phone }}
+                    {% if form.phone.errors %}<div class="form-error">{{ form.phone.errors.0 }}</div>{% endif %}
+                </div>
+            </div>
+
+            <div class="form-row-2">
+                <div class="form-group">
+                    <label class="form-label" for="{{ form.date_of_birth.id_for_label }}">
+                        Fecha de Nacimiento
+                    </label>
+                    {{ form.date_of_birth }}
+                    {% if form.date_of_birth.errors %}<div class="form-error">{{ form.date_of_birth.errors.0 }}</div>{% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="{{ form.gender.id_for_label }}">
+                        Género
+                    </label>
+                    {{ form.gender }}
+                    {% if form.gender.errors %}<div class="form-error">{{ form.gender.errors.0 }}</div>{% endif %}
+                </div>
+            </div>
+
+            <!-- Foto de Perfil: Subir Archivo o URL -->
+            <div class="form-group" style="padding: 1.25rem; background: var(--bg-input); border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-bottom: 1.5rem;">
+                <label class="form-label" style="margin-bottom: 0.75rem; color: var(--gold-primary); font-weight: 700;">
+                    📸 Fotografía / Imagen de Perfil
+                </label>
+                
+                <div style="display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap;">
+                    <div style="text-align: center;">
+                        <img id="avatar-preview" src="{{ form.instance.avatar_url|default:'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80' }}" alt="Preview" style="width: 75px; height: 75px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold-primary); box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                        <span style="display: block; font-size: 0.7rem; color: var(--text-muted); margin-top: 0.25rem;">Vista previa</span>
+                    </div>
+
+                    <div style="flex: 1; min-width: 250px; display: flex; flex-direction: column; gap: 0.75rem;">
+                        <div>
+                            <label class="form-label" for="avatar-file-input" style="font-size: 0.8rem;">
+                                📁 Cargar archivo desde tu computadora (JPG, PNG, WebP):
+                            </label>
+                            {{ form.avatar_file }}
+                            {% if form.avatar_file.errors %}<div class="form-error">{{ form.avatar_file.errors.0 }}</div>{% endif %}
+                        </div>
+
+                        <div>
+                            <label class="form-label" for="avatar-url-input" style="font-size: 0.75rem; color: var(--text-muted);">
+                                O pegar una URL de imagen externa:
+                            </label>
+                            {{ form.avatar }}
+                            {% if form.avatar.errors %}<div class="form-error">{{ form.avatar.errors.0 }}</div>{% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="{{ form.address.id_for_label }}">
+                    Dirección Residencial
+                </label>
+                {{ form.address }}
+                {% if form.address.errors %}<div class="form-error">{{ form.address.errors.0 }}</div>{% endif %}
+            </div>
+        </div>
+
+        <!-- Sección 2: Plan & Membresía -->
+        <div class="form-section">
+            <h3 class="form-section-title">
+                <span class="section-number">2</span>
+                Membresía & Estado
+            </h3>
+
+            <div class="form-row-2">
+                <div class="form-group">
+                    <label class="form-label" for="{{ form.plan.id_for_label }}">
+                        Plan de Membresía
+                    </label>
+                    {{ form.plan }}
+                    {% if form.plan.errors %}<div class="form-error">{{ form.plan.errors.0 }}</div>{% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="{{ form.status.id_for_label }}">
+                        Estado del Socio
+                    </label>
+                    {{ form.status }}
+                    {% if form.status.errors %}<div class="form-error">{{ form.status.errors.0 }}</div>{% endif %}
+                </div>
+            </div>
+
+            <div class="form-row-2">
+                <div class="form-group">
+                    <label class="form-label" for="{{ form.start_date.id_for_label }}">
+                        Fecha de Inicio
+                    </label>
+                    {{ form.start_date }}
+                    {% if form.start_date.errors %}<div class="form-error">{{ form.start_date.errors.0 }}</div>{% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="{{ form.end_date.id_for_label }}">
+                        Fecha de Vencimiento
+                    </label>
+                    {{ form.end_date }}
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">Si se deja vacío, se calculará según los días del plan.</span>
+                    {% if form.end_date.errors %}<div class="form-error">{{ form.end_date.errors.0 }}</div>{% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección 3: Contacto de Emergencia & Ficha Médica -->
+        <div class="form-section">
+            <h3 class="form-section-title">
+                <span class="section-number">3</span>
+                Emergencia & Observaciones Médicas
+            </h3>
+
+            <div class="form-row-2">
+                <div class="form-group">
+                    <label class="form-label" for="{{ form.emergency_contact_name.id_for_label }}">
+                        Nombre de Contacto de Emergencia
+                    </label>
+                    {{ form.emergency_contact_name }}
+                    {% if form.emergency_contact_name.errors %}<div class="form-error">{{ form.emergency_contact_name.errors.0 }}</div>{% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="{{ form.emergency_contact_phone.id_for_label }}">
+                        Teléfono de Emergencia
+                    </label>
+                    {{ form.emergency_contact_phone }}
+                    {% if form.emergency_contact_phone.errors %}<div class="form-error">{{ form.emergency_contact_phone.errors.0 }}</div>{% endif %}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="{{ form.medical_notes.id_for_label }}">
+                    Ficha / Notas Médicas (Lesiones, alergias, condiciones)
+                </label>
+                {{ form.medical_notes }}
+                {% if form.medical_notes.errors %}<div class="form-error">{{ form.medical_notes.errors.0 }}</div>{% endif %}
+            </div>
+        </div>
+
+        <!-- Botones de Acción -->
+        <div class="form-actions-bar">
+            <a href="{% url 'members:list' %}" class="btn-cancel">
+                Cancelar
+            </a>
+            <button type="submit" class="btn-gold" style="width: auto; min-width: 180px;">
+                {{ btn_text }} &rarr;
+            </button>
+        </div>
+    </form>
+</div>
+
+<script>
+    // Vista previa en vivo para archivo local o URL
+    const fileInput = document.getElementById('avatar-file-input');
+    const urlInput = document.getElementById('avatar-url-input');
+    const avatarPreview = document.getElementById('avatar-preview');
+
+    if (fileInput && avatarPreview) {
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    avatarPreview.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+
+    if (urlInput && avatarPreview) {
+        urlInput.addEventListener('input', function() {
+            if (this.value.trim().startsWith('http')) {
+                avatarPreview.src = this.value.trim();
+            }
+        });
+    }
+</script>
+{% endblock %}

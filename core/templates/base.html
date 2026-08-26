@@ -1,0 +1,277 @@
+﻿{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}vitalis-admin-dashboard | Vitalis Fitness{% endblock %}</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{% static 'core/img/vitalis_logo.png' %}">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="{% static 'core/css/styles.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+    {% if user.is_authenticated %}
+    <!-- Layout con Sidebar y Área Principal -->
+    <div class="layout-wrapper">
+        
+        <!-- Sidebar Izquierda -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <img src="{% static 'core/img/vitalis_logo.png' %}" alt="Vitalis Logo" class="sidebar-logo-img">
+                <div class="sidebar-brand-text">
+                    <h2>VITALIS</h2>
+                    <span>FITNESS</span>
+                </div>
+            </div>
+
+            <ul class="sidebar-menu">
+                <li class="menu-item {% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+                    <a href="{% url 'core:home' %}">
+                        <span class="menu-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                                <polyline points="9 22 9 12 15 12 15 22"/>
+                            </svg>
+                        </span>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="menu-item {% if request.resolver_match.app_name == 'members' %}active{% endif %}">
+                    <a href="{% url 'members:list' %}">
+                        <span class="menu-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                        </span>
+                        <span>Miembros</span>
+                    </a>
+                </li>
+
+                <li class="menu-item {% if request.resolver_match.app_name == 'classes' and 'trainer' not in request.resolver_match.url_name %}active{% endif %}">
+                    <a href="{% url 'classes:calendar' %}">
+                        <span class="menu-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+                                <line x1="16" x2="16" y1="2" y2="6"/>
+                                <line x1="8" x2="8" y1="2" y2="6"/>
+                                <line x1="3" x2="21" y1="10" y2="10"/>
+                            </svg>
+                        </span>
+                        <span>Clases</span>
+                    </a>
+                </li>
+
+                <li class="menu-item {% if 'trainer' in request.resolver_match.url_name %}active{% endif %}">
+                    <a href="{% url 'classes:trainer_list' %}">
+                        <span class="menu-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m6.5 6.5 11 11"/>
+                                <path d="m21 21-1-1a5 5 0 0 0-7.07 0l-.93.93"/>
+                                <path d="m3 3 1 1a5 5 0 0 0 7.07 0l.93-.93"/>
+                                <path d="m14 10 3.5-3.5a2.12 2.12 0 0 1 3 3L17 13"/>
+                                <path d="m10 14-3.5 3.5a2.12 2.12 0 0 1-3-3L7 11"/>
+                            </svg>
+                        </span>
+                        <span>Entrenadores</span>
+                    </a>
+                </li>
+                {% if can_access_payments %}
+                <li class="menu-item {% if request.resolver_match.app_name == 'payments' %}active{% endif %}">
+                    <a href="{% url 'payments:list' %}">
+                        <span class="menu-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect width="20" height="14" x="2" y="5" rx="2"/>
+                                <line x1="2" x2="22" y1="10" y2="10"/>
+                            </svg>
+                        </span>
+                        <span>Pagos</span>
+                    </a>
+                </li>
+                {% endif %}
+
+                {% if can_access_reports %}
+                <li class="menu-item {% if request.resolver_match.app_name == 'reports' %}active{% endif %}">
+                    <a href="{% url 'reports:dashboard' %}">
+                        <span class="menu-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" x2="18" y1="20" y2="10"/>
+                                <line x1="12" x2="12" y1="20" y2="4"/>
+                                <line x1="6" x2="6" y1="20" y2="14"/>
+                            </svg>
+                        </span>
+                        <span>Reportes</span>
+                    </a>
+                </li>
+                {% endif %}
+
+                {% if can_access_settings %}
+                <li class="menu-item {% if request.resolver_match.url_name == 'settings' %}active{% endif %}">
+                    <a href="{% url 'core:settings' %}">
+                        <span class="menu-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+                                <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                        </span>
+                        <span>Configuración</span>
+                    </a>
+                </li>
+                {% endif %}
+                <li class="menu-item">
+                    <a href="{% url 'portal:home' %}" target="_blank" style="color: var(--primary-gold);">
+                        <span class="menu-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </span>
+                        <span>Portal Socios ↗</span>
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Tarjeta Promocional Vitalis Elite -->
+            <div class="sidebar-elite-card">
+                <h4>VITALIS ELITE</h4>
+                <p>Consola ejecutiva para sedes prémium. Soporte activo 24/7.</p>
+            </div>
+        </aside>
+
+        <!-- Main Wrapper -->
+        <div class="main-area">
+            <!-- Header Top Bar -->
+            <header class="top-navbar">
+                <!-- Buscador Global -->
+                <div class="search-box">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"/>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                    <input type="text" placeholder="Buscar miembros, clases, reportes..." class="search-input">
+                </div>
+
+                <div class="top-navbar-right">
+                    <!-- Notificaciones con Dropdown -->
+                    <div class="notification-dropdown-wrapper">
+                        <button type="button" class="notification-btn" id="notifDropdownToggle" title="Notificaciones" aria-label="Abrir centro de alertas">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/>
+                                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
+                            </svg>
+                            {% if notifications_count > 0 %}
+                                <div class="notification-dot"></div>
+                            {% endif %}
+                        </button>
+
+                        <!-- Panel Desplegable de Notificaciones -->
+                        <div class="notification-dropdown-menu" id="notifDropdownMenu">
+                            <div class="notif-dropdown-header">
+                                <div class="notif-header-title">
+                                    <span>Centro de Alertas</span>
+                                    {% if notifications_count > 0 %}
+                                        <span class="badge-notif-count">{{ notifications_count }} activas</span>
+                                    {% endif %}
+                                </div>
+                                <span class="notif-header-subtitle">Avisos y estados operativos del gimnasio</span>
+                            </div>
+
+                            <div class="notif-dropdown-body">
+                                {% if system_notifications %}
+                                    <ul class="notif-list">
+                                        {% for notif in system_notifications %}
+                                            <li class="notif-item">
+                                                <a href="{{ notif.link }}" class="notif-link">
+                                                    <div class="notif-icon-box">{{ notif.icon }}</div>
+                                                    <div class="notif-content">
+                                                        <div class="notif-row-top">
+                                                            <span class="notif-title">{{ notif.title }}</span>
+                                                            <span class="badge {{ notif.tag_class }} notif-pill">{{ notif.tag }}</span>
+                                                        </div>
+                                                        <p class="notif-desc">{{ notif.description }}</p>
+                                                        <span class="notif-time">{{ notif.date_str }}</span>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% else %}
+                                    <div class="notif-empty-state">
+                                        <span class="notif-empty-icon">âœ¨</span>
+                                        <p class="notif-empty-title">¡Todo al día!</p>
+                                        <p class="notif-empty-desc">No hay alertas ni vencimientos pendientes en este momento.</p>
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="notif-dropdown-footer">
+                                {% if can_access_reports %}
+                                    <a href="{% url 'reports:dashboard' %}" class="notif-footer-link">Ver métricas y reportes ejecutivos &rarr;</a>
+                                {% else %}
+                                    <span class="notif-footer-text">Vitalis Fitness â€¢ Control de Operaciones</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Perfil de Usuario -->
+                    <div class="user-profile-badge">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Avatar" class="user-avatar-img">
+                        <div class="user-info-text">
+                            <div class="user-info-name">{{ user.first_name|default:user.username|capfirst }}</div>
+                            <div class="user-info-role">{{ current_user_role_label|default:"Sede Premium" }}</div>
+                        </div>
+
+                        <!-- Botón de Cerrar Sesión -->
+                        <form action="{% url 'core:logout' %}" method="post" style="display: inline; margin-left: 0.25rem;">
+                            {% csrf_token %}
+                            <button type="submit" class="logout-icon-btn" title="Cerrar sesión">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M18.36 6.64a9 9 0 1 1-12.73 0"/>
+                                    <line x1="12" x2="12" y1="2" y2="12"/>
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Contenido Dinámico -->
+            <main class="content-wrapper">
+                {% if messages %}
+                    <div class="messages-container">
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags|default:'info' }}">
+                                <span>{{ message }}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                {% block content %}{% endblock %}
+            </main>
+        </div>
+    </div>
+    {% else %}
+        <!-- Layout para Vistas Públicas / No Autenticadas (Login) -->
+        {% block public_content %}
+            {% block content_public %}{% endblock %}
+        {% endblock %}
+    {% endif %}
+
+    <!-- Scripts -->
+    <script src="{% static 'core/js/main.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
+
+

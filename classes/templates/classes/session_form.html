@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+
+{% block title %}Agendar Sesión Puntual | Vitalis Fitness{% endblock %}
+
+{% block content %}
+<div class="form-page-container">
+    <div class="form-header-flex">
+        <div>
+            <a href="{% url 'classes:calendar' %}" class="back-link">
+                &larr; Volver al Almanaque de Clases
+            </a>
+            <h1 class="page-title" style="margin-top: 0.5rem;">Agendar Sesión Puntual</h1>
+            <p class="page-subtitle">Programa una clase para una fecha y hora específica en el calendario.</p>
+        </div>
+    </div>
+
+    <form method="post" class="luxury-form-card" novalidate>
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+            <div class="messages-container">
+                {% for error in form.non_field_errors %}
+                    <div class="alert alert-error">
+                        <span>{{ error }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="form-section">
+            <h3 class="form-section-title">
+                <span class="section-number">1</span>
+                Información de la Sesión
+            </h3>
+
+            <div class="form-row-2">
+                <div class="form-group">
+                    <label class="form-label" for="{{ form.title.id_for_label }}">
+                        Nombre de la Clase <span class="required">*</span>
+                    </label>
+                    {{ form.title }}
+                    {% if form.title.errors %}<div class="form-error">{{ form.title.errors.0 }}</div>{% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="{{ form.category.id_for_label }}">
+                        Disciplina <span class="required">*</span>
+                    </label>
+                    {{ form.category }}
+                    {% if form.category.errors %}<div class="form-error">{{ form.category.errors.0 }}</div>{% endif %}
+                </div>
+            </div>
+
+            <div class="form-row-2">
+                <div class="form-group">
+                    <label class="form-label" for="{{ form.trainer.id_for_label }}">
+                        Entrenador <span class="required">*</span>
+                    </label>
+                    {{ form.trainer }}
+                    {% if form.trainer.errors %}<div class="form-error">{{ form.trainer.errors.0 }}</div>{% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="{{ form.room.id_for_label }}">
+                        Salón / Box <span class="required">*</span>
+                    </label>
+                    {{ form.room }}
+                    {% if form.room.errors %}<div class="form-error">{{ form.room.errors.0 }}</div>{% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h3 class="form-section-title">
+                <span class="section-number">2</span>
+                Fecha, Horario y Cupos
+            </h3>
+
+            <div class="form-row-3">
+                <div class="form-group">
+                    <label class="form-label" for="{{ form.date.id_for_label }}">
+                        Fecha <span class="required">*</span>
+                    </label>
+                    {{ form.date }}
+                    {% if form.date.errors %}<div class="form-error">{{ form.date.errors.0 }}</div>{% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="{{ form.start_time.id_for_label }}">
+                        Hora Inicio <span class="required">*</span>
+                    </label>
+                    {{ form.start_time }}
+                    {% if form.start_time.errors %}<div class="form-error">{{ form.start_time.errors.0 }}</div>{% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="{{ form.end_time.id_for_label }}">
+                        Hora Fin <span class="required">*</span>
+                    </label>
+                    {{ form.end_time }}
+                    {% if form.end_time.errors %}<div class="form-error">{{ form.end_time.errors.0 }}</div>{% endif %}
+                </div>
+            </div>
+
+            <div class="form-row-3">
+                <div class="form-group">
+                    <label class="form-label" for="{{ form.capacity.id_for_label }}">
+                        Cupo Total <span class="required">*</span>
+                    </label>
+                    {{ form.capacity }}
+                    {% if form.capacity.errors %}<div class="form-error">{{ form.capacity.errors.0 }}</div>{% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="{{ form.booked_count.id_for_label }}">
+                        Cupos Reservados
+                    </label>
+                    {{ form.booked_count }}
+                    {% if form.booked_count.errors %}<div class="form-error">{{ form.booked_count.errors.0 }}</div>{% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="{{ form.status.id_for_label }}">
+                        Estado
+                    </label>
+                    {{ form.status }}
+                    {% if form.status.errors %}<div class="form-error">{{ form.status.errors.0 }}</div>{% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions-bar">
+            <a href="{% url 'classes:calendar' %}" class="btn-cancel">
+                Cancelar
+            </a>
+            <button type="submit" class="btn-gold" style="width: auto; min-width: 180px;">
+                Agendar Sesión &rarr;
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

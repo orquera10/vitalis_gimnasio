@@ -1,0 +1,149 @@
+﻿{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Vitalis Fitness Club | Portal de Socios{% endblock %}</title>
+  
+  <!-- Favicon & PWA Theme -->
+  <link rel="shortcut icon" href="{% static 'core/img/vitalis_logo.png' %}" type="image/x-icon">
+  <meta name="theme-color" content="#0b0f17">
+  
+  <!-- CSS Styles -->
+  <link rel="stylesheet" href="{% static 'portal/css/portal.css' %}">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Staff Preview Bar -->
+  {% if request.user.is_staff or request.user.is_superuser %}
+  <div style="background: rgba(245, 184, 46, 0.12); border-bottom: 1px solid var(--border-gold); padding: 0.4rem 1.5rem; font-size: 0.8rem; display: flex; align-items: center; justify-content: space-between; color: var(--primary-gold); flex-wrap: wrap; gap: 0.5rem;">
+    <div style="display: flex; align-items: center; gap: 0.5rem;">
+      <i class="fa-solid fa-eye"></i>
+      <span><strong>Modo Staff / Vista Previa:</strong> Viendo portal de <u>{{ member.full_name }}</u></span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 0.5rem;">
+      <span style="color: var(--text-muted);">Cambiar de socio:</span>
+      <select onchange="location.href='?socio_id=' + this.value" style="background: #0f172a; color: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 0.2rem 0.5rem; font-size: 0.8rem; cursor: pointer;">
+        {% for m in all_members %}
+        <option value="{{ m.id }}" {% if m.id == member.id %}selected{% endif %}>{{ m.full_name }} (DNI: {{ m.dni }})</option>
+        {% endfor %}
+      </select>
+      <a href="{% url 'members:detail' member.id %}" style="color: #ffffff; text-decoration: underline; margin-left: 0.5rem;">Ficha Admin &rarr;</a>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Top Header Navigation -->
+  <header class="portal-header">
+    <div class="portal-header-container">
+      
+            <!-- Brand Logo -->
+      <a href="{% url 'portal:home' %}" class="brand-logo">
+        <img src="{% static 'core/img/vitalis_logo.png' %}" alt="Vitalis Fitness" class="brand-logo-img">
+        <div class="brand-text-group">
+          <span class="brand-name">VITALIS</span>
+        </div>
+      </a>
+
+      <!-- Center Navigation Tabs -->
+      <nav class="portal-nav">
+        <a href="{% url 'portal:home' %}" class="portal-nav-link {% if active_tab == 'panel' %}active{% endif %}">
+          <i class="fa-solid fa-house-chimney"></i> Mi Panel
+        </a>
+        <a href="{% url 'portal:routine' %}" class="portal-nav-link {% if active_tab == 'rutina' %}active{% endif %}">
+          <i class="fa-solid fa-dumbbell"></i> Mi Rutina
+        </a>
+        <a href="{% url 'portal:progress' %}" class="portal-nav-link {% if active_tab == 'avances' %}active{% endif %}">
+          <i class="fa-solid fa-chart-line"></i> Mis Avances
+        </a>
+        <a href="{% url 'portal:profile' %}" class="portal-nav-link {% if active_tab == 'perfil' %}active{% endif %}">
+          <i class="fa-solid fa-id-card"></i> Perfil
+        </a>
+      </nav>
+
+      <!-- User Profile & Notifications -->
+      <div class="portal-header-actions">
+        <!-- Notification Bell -->
+        <button class="btn-icon-round" title="Notificaciones">
+          <i class="fa-regular fa-bell"></i>
+          <span class="notification-dot"></span>
+        </button>
+
+                <!-- Member Pill -->
+        <a href="{% url 'portal:profile' %}" class="member-profile-pill">
+          <div class="member-pill-info">
+            <span class="member-pill-name">{{ member.full_name|default:"Martín Fuentes" }}</span>
+            <span class="member-pill-badge">{{ member.plan.name|default:"Miembro Elite" }}</span>
+          </div>
+          <img src="{{ member.avatar_url|default:'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=80' }}" alt="{{ member.full_name }}" class="member-avatar-img">
+        </a>
+
+        <!-- Logout Action -->
+        <form method="post" action="{% url 'portal:logout' %}" style="display: inline; margin: 0;">
+          {% csrf_token %}
+          <button type="submit" class="btn-icon-round" title="Cerrar Sesión" style="color: #ef4444; border-color: rgba(239, 68, 68, 0.25);">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Messages / Flash Alerts -->
+  {% if messages %}
+  <div style="max-width: 1280px; margin: 1rem auto 0; padding: 0 1.5rem;">
+    {% for message in messages %}
+    <div style="background: rgba(16, 185, 129, 0.15); border: 1px solid var(--accent-green); color: var(--accent-green); padding: 0.75rem 1.25rem; border-radius: var(--radius-md); font-weight: 600; font-size: 0.9rem; margin-bottom: 0.75rem; display: flex; align-items: center; justify-content: space-between;">
+      <span><i class="fa-solid fa-circle-check"></i> {{ message }}</span>
+      <button onclick="this.parentElement.remove()" style="background: none; border: none; color: inherit; cursor: pointer; font-size: 1rem;">&times;</button>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <!-- Main Content Block -->
+  <main class="portal-main">
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  <!-- Floating Rest Timer Modal -->
+  <div id="restTimerModal" class="timer-modal-overlay">
+    <div class="timer-modal-box">
+      <h3 id="timerExerciseName" style="color: var(--primary-gold); font-size: 1.1rem; margin-bottom: 0.5rem;">Descanso Activo</h3>
+      <p style="color: var(--text-muted); font-size: 0.85rem;">Recupera el aliento antes de la siguiente serie</p>
+
+      <div class="timer-circle-wrap">
+        <svg class="timer-svg" viewBox="0 0 180 180">
+          <circle class="timer-bg-circle" cx="90" cy="90" r="80"></circle>
+          <circle id="timerProgressCircle" class="timer-progress-circle" cx="90" cy="90" r="80"></circle>
+        </svg>
+        <div id="timerDigits" class="timer-digits-center">90s</div>
+      </div>
+
+      <div class="timer-controls-row">
+        <button id="pauseTimerBtn" class="btn-dark" style="padding: 0.5rem 1rem;">⏸ Pausar</button>
+        <button id="add30TimerBtn" class="btn-dark" style="padding: 0.5rem 1rem;">+30s</button>
+        <button id="resetTimerBtn" class="btn-dark" style="padding: 0.5rem 1rem;">↺ Reiniciar</button>
+      </div>
+
+      <button id="closeTimerBtn" class="btn-gold-solid" style="width: 100%; margin-top: 1.5rem; justify-content: center;">
+        ✓ Listo para la serie
+      </button>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="{% static 'portal/js/portal.js' %}"></script>
+  {% block extra_js %}{% endblock %}
+
+</body>
+</html>
+
+
+

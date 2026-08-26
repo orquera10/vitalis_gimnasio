@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Iniciar Sesión | Vitalis Fitness{% endblock %}
+
+{% block public_content %}
+<div class="login-page-bg">
+    <div class="luxury-login-card">
+        
+        <!-- Logo y Cabecera de Vitalis -->
+        <div class="login-brand-header">
+            <img src="{% static 'core/img/vitalis_logo.png' %}" alt="Vitalis Logo" class="login-logo-img">
+            <h1>VITALIS FITNESS</h1>
+            <p>Consola de Gestión y Administración</p>
+        </div>
+
+        {% if form.non_field_errors %}
+            <div class="messages-container">
+                {% for error in form.non_field_errors %}
+                    <div class="alert alert-error">
+                        <span>{{ error }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if messages %}
+            <div class="messages-container">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags|default:'info' }}">
+                        <span>{{ message }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <form method="post" novalidate>
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label class="form-label" for="{{ form.username.id_for_label }}">
+                    Usuario
+                </label>
+                {{ form.username }}
+                {% if form.username.errors %}
+                    <div class="alert alert-error" style="margin-top: 0.35rem; padding: 0.4rem 0.75rem; font-size: 0.8rem;">
+                        {{ form.username.errors.0 }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="{{ form.password.id_for_label }}">
+                    Contraseña
+                </label>
+                {{ form.password }}
+                {% if form.password.errors %}
+                    <div class="alert alert-error" style="margin-top: 0.35rem; padding: 0.4rem 0.75rem; font-size: 0.8rem;">
+                        {{ form.password.errors.0 }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <input type="hidden" name="next" value="{{ next }}">
+
+            <button type="submit" class="btn-gold" style="margin-top: 1.5rem;">
+                Ingresar al Dashboard &rarr;
+            </button>
+        </form>
+
+        <div style="text-align: center; margin-top: 1.5rem; font-size: 0.75rem; color: var(--text-muted);">
+            Vitalis Fitness &bull; Sede Central &bull; v1.0
+        </div>
+    </div>
+</div>
+{% endblock %}

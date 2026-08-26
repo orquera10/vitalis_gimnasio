@@ -1,0 +1,194 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Comprobante {{ payment.invoice_number }} | Vitalis Fitness{% endblock %}
+
+{% block content %}
+<div class="form-page-container">
+    
+    <!-- Barra Superior de Acciones -->
+    <div class="form-header-flex" id="receipt-action-bar">
+        <div>
+            <a href="{% url 'payments:list' %}" class="back-link">
+                &larr; Volver a Pagos
+            </a>
+            <h1 class="page-title" style="margin-top: 0.5rem;">Recibo de Pago: {{ payment.invoice_number }}</h1>
+        </div>
+        <div style="display: flex; gap: 0.75rem; align-items: center;">
+            <button onclick="window.print()" class="btn-gold" style="padding: 0.6rem 1.25rem;">
+                🖨️ Imprimir / Guardar PDF
+            </button>
+            {% if payment.status != 'ANULADO' %}
+                <form action="{% url 'payments:cancel' payment.pk %}" method="post" onsubmit="return confirm('¿Estás seguro de anular este comprobante de pago?');" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="logout-icon-btn" style="border: 1px solid rgba(239, 68, 68, 0.3); padding: 0.55rem 0.85rem; border-radius: var(--radius-md);" title="Anular Comprobante">
+                        🚫 Anular Pago
+                    </button>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Documento de Recibo Oficial -->
+    <div class="receipt-document-card" id="printable-receipt" style="background: var(--bg-card); border: 1px solid var(--border-gold); border-radius: var(--radius-lg); padding: 2.5rem; max-width: 800px; margin: 0 auto; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position: relative;">
+        
+        <!-- Header del Recibo -->
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid var(--border-color); padding-bottom: 1.5rem; margin-bottom: 2rem;">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <img src="{% static 'core/img/vitalis_logo.png' %}" alt="Vitalis Logo" style="width: 50px; height: 50px; object-fit: contain;">
+                <div>
+                    <h2 style="font-family: 'Outfit', sans-serif; font-size: 1.6rem; font-weight: 900; color: #ffffff; letter-spacing: 2px; margin: 0;">VITALIS</h2>
+                    <span style="font-size: 0.75rem; font-weight: 700; color: var(--gold-primary); letter-spacing: 3px;">FITNESS CLUB</span>
+                </div>
+            </div>
+
+            <div style="text-align: right;">
+                <span class="badge {{ payment.status_badge_class }}" style="font-size: 0.9rem; padding: 0.4rem 1rem; margin-bottom: 0.5rem; display: inline-block;">
+                    {{ payment.get_status_display|upper }}
+                </span>
+                <div style="font-family: monospace; font-size: 1.1rem; font-weight: 700; color: var(--gold-primary);">
+                    {{ payment.invoice_number }}
+                </div>
+                <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">
+                    Fecha de Emisión: {{ payment.payment_date|date:"d/m/Y" }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Información del Gimnasio y del Cliente -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem; font-size: 0.85rem;">
+            <!-- Gimnasio Emisor -->
+            <div style="background: var(--bg-input); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                <span style="display: block; font-weight: 700; color: var(--gold-primary); margin-bottom: 0.5rem; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px;">
+                    🏢 Emisor
+                </span>
+                <p style="font-weight: 700; color: #ffffff; margin-bottom: 0.25rem;">Vitalis Fitness Club S.A.</p>
+                <p style="color: var(--text-secondary); margin-bottom: 0.2rem;">Av. Libertador 1234, Centro</p>
+                <p style="color: var(--text-muted);">contacto@vitalisfitness.com | +56 9 8765 4321</p>
+            </div>
+
+            <!-- Socio Receptor -->
+            <div style="background: var(--bg-input); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                <span style="display: block; font-weight: 700; color: var(--gold-primary); margin-bottom: 0.5rem; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px;">
+                    👤 Socio / Cliente
+                </span>
+                <p style="font-weight: 700; color: #ffffff; margin-bottom: 0.25rem;">
+                    <a href="{% url 'members:detail' payment.member.pk %}" style="color: inherit; text-decoration: none;">
+                        {{ payment.member.full_name }}
+                    </a>
+                </p>
+                <p style="color: var(--text-secondary); margin-bottom: 0.2rem;">DNI: {{ payment.member.dni }}</p>
+                <p style="color: var(--text-muted);">{{ payment.member.email }} | {{ payment.member.phone|default:"Sin teléfono" }}</p>
+            </div>
+        </div>
+
+        <!-- Tabla de Conceptos -->
+        <div style="margin-bottom: 2rem;">
+            <table class="custom-table" style="width: 100%;">
+                <thead>
+                    <tr style="background: rgba(245, 184, 46, 0.08);">
+                        <th style="padding: 0.85rem 1rem;">Descripción / Concepto</th>
+                        <th>Método</th>
+                        <th>Vigencia</th>
+                        <th style="text-align: right; padding: 0.85rem 1rem;">Importe</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 1.25rem 1rem;">
+                            <div style="font-weight: 700; color: #ffffff; font-size: 0.95rem;">
+                                {% if payment.plan %}
+                                    Cuota de Membresía: {{ payment.plan.name }}
+                                {% else %}
+                                    Pago de Cuota / Concepto General
+                                {% endif %}
+                            </div>
+                            {% if payment.notes %}
+                                <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.35rem;">
+                                    Notas: {{ payment.notes }}
+                                </div>
+                            {% endif %}
+                        </td>
+                        <td style="vertical-align: middle;">
+                            <span>{{ payment.method_icon }} {{ payment.get_payment_method_display }}</span>
+                        </td>
+                        <td style="vertical-align: middle; font-size: 0.85rem; color: var(--text-secondary);">
+                            {% if payment.plan %}
+                                {{ payment.plan.duration_days }} Días
+                            {% else %}
+                                30 Días
+                            {% endif %}
+                        </td>
+                        <td style="text-align: right; vertical-align: middle; padding: 1.25rem 1rem; font-family: monospace; font-size: 1.1rem; font-weight: 700; color: #ffffff;">
+                            ${{ payment.amount|floatformat:2 }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Total y Estado de la Membresía -->
+        <div style="display: flex; justify-content: space-between; align-items: center; background: var(--bg-input); border: 1px solid var(--border-gold); padding: 1.5rem; border-radius: var(--radius-md); margin-bottom: 2rem;">
+            <div>
+                <span style="font-size: 0.85rem; color: var(--text-muted); display: block;">Estado de Membresía del Socio:</span>
+                <span style="font-weight: 700; color: #10b981; font-size: 0.95rem;">
+                    ✅ Membresía Activa hasta el {{ payment.member.end_date|date:"d \d\e F \d\e Y"|default:"Indefinida" }}
+                </span>
+            </div>
+
+            <div style="text-align: right;">
+                <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; display: block;">Total Abonado</span>
+                <span style="font-family: monospace; font-size: 1.8rem; font-weight: 900; color: var(--gold-primary);">
+                    ${{ payment.amount|floatformat:2 }}
+                </span>
+            </div>
+        </div>
+
+        <!-- Pie de Recibo -->
+        <div style="border-top: 1px dashed var(--border-color); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: flex-end; font-size: 0.75rem; color: var(--text-muted);">
+            <div>
+                <p>Comprobante de pago generado por sistema Vitalis Fitness.</p>
+                <p>Válido como constancia oficial de cobro y acceso a instalaciones.</p>
+            </div>
+            <div style="text-align: center; width: 180px;">
+                <div style="border-bottom: 1px solid var(--border-color); height: 35px; margin-bottom: 0.25rem;"></div>
+                <span>Firma / Sello Autorizado</span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<style>
+@media print {
+    body {
+        background: #ffffff !important;
+        color: #000000 !important;
+    }
+    .sidebar, #receipt-action-bar, .topbar {
+        display: none !important;
+    }
+    .main-content, .layout-wrapper {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        background: transparent !important;
+    }
+    #printable-receipt {
+        background: #ffffff !important;
+        color: #000000 !important;
+        border: 2px solid #333333 !important;
+        box-shadow: none !important;
+        padding: 1.5rem !important;
+    }
+    #printable-receipt * {
+        color: #000000 !important;
+        border-color: #cccccc !important;
+        background: transparent !important;
+    }
+    #printable-receipt h2 {
+        color: #000000 !important;
+    }
+}
+</style>
+{% endblock %}

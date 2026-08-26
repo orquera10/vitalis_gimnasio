@@ -1,0 +1,202 @@
+﻿{% extends 'portal/base_portal.html' %}
+{% load static %}
+
+{% block title %}Mi Panel | Vitalis Fitness Club{% endblock %}
+
+{% block content %}
+
+<!-- 1. Hero Welcome Banner (Figma Banner) -->
+<div class="welcome-banner-card">
+  <div>
+    <h1 class="welcome-title">¡Hola, {{ member.first_name|default:"Martín" }}!</h1>
+    <p class="welcome-quote">
+      "El único entrenamiento malo es aquel que no hiciste." Tu plan de Hipertrofia va por excelente camino.
+    </p>
+  </div>
+  <div class="welcome-date-container">
+    <div class="date-label">Fecha de Hoy</div>
+    <div class="date-value">{{ today|date:"l, d \d\e F"|title }}</div>
+  </div>
+</div>
+
+<!-- 2. KPI Cards Grid -->
+<div class="kpi-grid">
+  <!-- Días Entrenados -->
+  <div class="kpi-card">
+    <div class="kpi-header">
+      <span class="kpi-label">Días Entrenados</span>
+      <div class="kpi-icon-box" style="color: var(--primary-gold);"><i class="fa-solid fa-medal"></i></div>
+    </div>
+    <div>
+      <div class="kpi-value">{{ kpis.days_trained.value }}</div>
+      <div class="kpi-subtext">{{ kpis.days_trained.subtext }}</div>
+    </div>
+  </div>
+
+  <!-- Racha Actual -->
+  <div class="kpi-card">
+    <div class="kpi-header">
+      <span class="kpi-label">Racha Actual</span>
+      <div class="kpi-icon-box" style="color: var(--accent-cyan);"><i class="fa-solid fa-fire-flame-curved"></i></div>
+    </div>
+    <div>
+      <div class="kpi-value cyan">{{ kpis.streak.value }}</div>
+      <div class="kpi-subtext positive">{{ kpis.streak.subtext }}</div>
+    </div>
+  </div>
+
+  <!-- Próxima Clase -->
+  <div class="kpi-card">
+    <div class="kpi-header">
+      <span class="kpi-label">Próxima Clase</span>
+      <div class="kpi-icon-box" style="color: var(--primary-gold);"><i class="fa-regular fa-calendar-check"></i></div>
+    </div>
+    <div>
+      <div class="kpi-value gold">{{ kpis.next_class.value }}</div>
+      <div class="kpi-subtext">{{ kpis.next_class.subtext }}</div>
+    </div>
+  </div>
+
+  <!-- Peso Actual -->
+  <div class="kpi-card">
+    <div class="kpi-header">
+      <span class="kpi-label">Peso Actual</span>
+      <div class="kpi-icon-box" style="color: var(--accent-green);"><i class="fa-solid fa-weight-scale"></i></div>
+    </div>
+    <div>
+      <div class="kpi-value">{{ kpis.current_weight.value }}</div>
+      <div class="kpi-subtext positive">{{ kpis.current_weight.subtext }}</div>
+    </div>
+  </div>
+</div>
+
+<!-- 3. Two Column Section (Entrenamiento de Hoy & Clases de Hoy) -->
+<div class="portal-two-col">
+  
+  <!-- Left: Entrenamiento de Hoy -->
+  <div class="content-card">
+    <div class="content-card-header">
+      <div class="card-title-group">
+        <h3>Entrenamiento de Hoy</h3>
+        <span class="card-subtitle">{{ today_routine_day.subtitle|default:"Hipertrofia de Empuje: Pecho y Tríceps" }}</span>
+      </div>
+      <a href="{% url 'portal:routine' %}?dia={{ today_routine_day.day_name|default:'Lunes' }}" class="btn-gold-outline">
+        Ir a la Rutina <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+
+    <table class="workout-table">
+      <thead>
+        <tr>
+          <th>Ejercicio</th>
+          <th>Grupo Muscular</th>
+          <th>Series x Reps</th>
+          <th>Descanso</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if today_routine_day and today_routine_day.exercises.all %}
+          {% for ex in today_routine_day.exercises.all|slice:":4" %}
+          <tr>
+            <td class="exercise-name-cell">{{ ex.name }}</td>
+            <td><span class="badge-tag">{{ ex.muscle_group }}</span></td>
+            <td style="font-weight: 600;">{{ ex.series_reps }}</td>
+            <td><span class="rest-time-gold">{{ ex.rest_seconds }}s</span></td>
+          </tr>
+          {% endfor %}
+        {% else %}
+          <tr>
+            <td class="exercise-name-cell">Press de Banca Plano</td>
+            <td><span class="badge-tag">Pecho</span></td>
+            <td style="font-weight: 600;">4 x 10</td>
+            <td><span class="rest-time-gold">90s</span></td>
+          </tr>
+          <tr>
+            <td class="exercise-name-cell">Press Inclinado con Mancuernas</td>
+            <td><span class="badge-tag">Pecho</span></td>
+            <td style="font-weight: 600;">4 x 8</td>
+            <td><span class="rest-time-gold">90s</span></td>
+          </tr>
+          <tr>
+            <td class="exercise-name-cell">Fondos en Paralelas</td>
+            <td><span class="badge-tag">Tríceps / Pecho</span></td>
+            <td style="font-weight: 600;">3 x 12</td>
+            <td><span class="rest-time-gold">60s</span></td>
+          </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Right: Clases de Hoy -->
+  <div class="content-card">
+    <div class="content-card-header">
+      <div class="card-title-group">
+        <h3>Clases de Hoy</h3>
+      </div>
+      <span class="badge-tag" style="background: rgba(245, 184, 46, 0.1); color: var(--primary-gold); font-weight: 700;">
+        {{ today|date:"D, d M"|title }}
+      </span>
+    </div>
+
+    <div class="classes-list">
+      {% for item in classes_info %}
+      <div class="class-item-card">
+        <div class="class-time-group">
+          <span class="class-time-badge">{{ item.time }}</span>
+          <div class="class-info-group">
+            <span class="class-title">{{ item.title }}</span>
+            <span class="class-trainer">Entr. {{ item.trainer_name }}</span>
+          </div>
+        </div>
+
+        <div>
+          {% if item.status_badge == "Realizado" %}
+            <span class="badge-status badge-realizado">Realizado</span>
+          {% elif item.status_badge == "Reservado" %}
+            <span class="badge-status badge-reservado">
+              <i class="fa-solid fa-check"></i> Reservado <span class="tag-hoy">¡Hoy!</span>
+            </span>
+          {% else %}
+            <form method="post" action="{% url 'portal:book_class_toggle' item.session.id %}" style="display: inline;">
+              {% csrf_token %}
+              <button type="submit" class="badge-status badge-disponible">
+                + Reservar
+              </button>
+            </form>
+          {% endif %}
+        </div>
+      </div>
+      {% empty %}
+      <div style="text-align: center; color: var(--text-muted); padding: 1.5rem;">
+        No hay clases programadas para hoy.
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+</div>
+
+<!-- 4. Activity Calendar (Bottom Section Figma) -->
+<div class="content-card">
+  <div class="content-card-header" style="margin-bottom: 0.5rem;">
+    <div class="card-title-group">
+      <h3>Calendario de Actividad</h3>
+      <span class="card-subtitle">Tus días de asistencia registrados esta semana</span>
+    </div>
+  </div>
+
+  <div class="activity-calendar-grid">
+    {% for day in activity_days %}
+    <div class="activity-day-card {% if day.status == 'ENTRENADO' %}trained{% endif %}">
+      <span class="activity-day-name">{{ day.day_name }}</span>
+      <span class="activity-day-num">{{ day.day_number }}</span>
+      <span class="activity-day-badge {% if day.status == 'ENTRENADO' %}trained-badge{% else %}rest-badge{% endif %}">
+        {% if day.status == 'ENTRENADO' %}Entrenado{% else %}Descanso{% endif %}
+      </span>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

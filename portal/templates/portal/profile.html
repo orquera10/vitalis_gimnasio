@@ -1,0 +1,138 @@
+﻿{% extends 'portal/base_portal.html' %}
+{% load static %}
+
+{% block title %}Mi Perfil & Carnet Digital | Vitalis Fitness Club{% endblock %}
+
+{% block content %}
+
+<div class="content-card-header" style="margin-bottom: 1.5rem;">
+  <div>
+    <h1 style="font-size: 2rem; font-weight: 800; color: #ffffff; margin-bottom: 0.25rem;">Mi Carnet Digital & Membresía</h1>
+    <p style="color: var(--text-muted); font-size: 0.95rem;">
+      Presenta este carnet o código QR en el lector del molinete para ingresar a la sede
+    </p>
+  </div>
+</div>
+
+<div class="portal-two-col" style="grid-template-columns: 1fr 1.2fr; align-items: start;">
+  
+  <!-- Left: Digital VIP Holographic Pass -->
+  <div class="digital-pass-wrapper" style="margin: 0;">
+    <div class="vip-card-container">
+      
+            <!-- Top Brand -->
+      <div class="vip-header">
+        <div class="brand-logo">
+          <img src="{% static 'core/img/vitalis_logo.png' %}" alt="Vitalis VIP" class="vip-pass-logo-img">
+          <span class="brand-name" style="font-size: 1.1rem;">VITALIS VIP</span>
+        </div>
+        <span class="badge-tag" style="background: rgba(245, 184, 46, 0.2); color: var(--primary-gold); font-weight: 800;">
+          PASS OFICIAL
+        </span>
+      </div>
+
+      <!-- Member Details -->
+      <div style="text-align: center; margin-bottom: 1rem;">
+        <img src="{{ member.avatar_url|default:'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&auto=format&fit=crop&q=80' }}" alt="{{ member.full_name }}" style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--primary-gold); object-fit: cover; margin: 0 auto 0.75rem;">
+        <h2 class="vip-member-name">{{ member.full_name|default:"Martín Fuentes" }}</h2>
+        <div class="vip-member-plan">{{ member.plan.name|default:"Black Pass VIP" }}</div>
+      </div>
+
+      <!-- Crisp QR Code Box -->
+      <div class="vip-qr-box">
+        <canvas id="memberQrCodeCanvas" data-qr-val="{{ qr_code_value }}" style="width: 160px; height: 160px; display: block;"></canvas>
+      </div>
+
+      <div style="text-align: center; font-size: 0.75rem; color: var(--text-subtle); letter-spacing: 0.05em; font-family: monospace;">
+        TOKEN: {{ qr_code_value }}
+      </div>
+
+      <!-- Footer Info -->
+      <div class="vip-footer-info">
+        <div>
+          <span style="display: block; font-size: 0.7rem; color: var(--text-subtle);">DNI / CÉDULA</span>
+          <strong style="color: #ffffff;">{{ member.dni|default:"38.492.019" }}</strong>
+        </div>
+        <div>
+          <span style="display: block; font-size: 0.7rem; color: var(--text-subtle);">VÁLIDO HASTA</span>
+          <strong style="color: var(--primary-gold);">{{ member.end_date|date:"d/m/Y"|default:"24/09/2026" }}</strong>
+        </div>
+        <div>
+          <span style="display: block; font-size: 0.7rem; color: var(--text-subtle);">ESTADO</span>
+          <strong style="color: var(--accent-green);">ACTIVO</strong>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Right: Account Details & Payment Section -->
+  <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+    
+    <!-- Membership Status Card -->
+    <div class="content-card">
+      <div class="content-card-header">
+        <div class="card-title-group">
+          <h3>Estado de mi Membresía</h3>
+          <span class="card-subtitle">Detalles de tu plan contratado</span>
+        </div>
+        <span class="badge-status badge-reservado">
+          <i class="fa-solid fa-circle-check"></i> Al Día
+        </span>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+        <div style="background: rgba(255, 255, 255, 0.02); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+          <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">Plan Actual</span>
+          <strong style="font-size: 1.1rem; color: var(--primary-gold);">{{ member.plan.name|default:"Black Pass VIP" }}</strong>
+        </div>
+        <div style="background: rgba(255, 255, 255, 0.02); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+          <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">Cuota Mensual</span>
+          <strong style="font-size: 1.1rem; color: #ffffff;">${{ member.plan.price|default:"35,000" }}</strong>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="{% url 'portal:home' %}" class="btn-gold-solid">
+          <i class="fa-solid fa-credit-card"></i> Renovar / Pagar con Mercado Pago
+        </a>
+        <button onclick="window.print()" class="btn-dark">
+          <i class="fa-solid fa-download"></i> Descargar Carnet
+        </button>
+      </div>
+    </div>
+
+    <!-- Personal & Emergency Contact Card -->
+    <div class="content-card">
+      <div class="content-card-header">
+        <div class="card-title-group">
+          <h3>Datos Personales & Ficha Médica</h3>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.9rem;">
+        <div>
+          <span style="color: var(--text-subtle); display: block; font-size: 0.75rem;">Email</span>
+          <span style="color: #ffffff;">{{ member.email|default:"martin.fuentes@vitalis.com" }}</span>
+        </div>
+        <div>
+          <span style="color: var(--text-subtle); display: block; font-size: 0.75rem;">Teléfono / WhatsApp</span>
+          <span style="color: #ffffff;">{{ member.phone|default:"+54 9 11 4829-1928" }}</span>
+        </div>
+        <div>
+          <span style="color: var(--text-subtle); display: block; font-size: 0.75rem;">Contacto de Emergencia</span>
+          <span style="color: #ffffff;">{{ member.emergency_contact_name|default:"Laura Fuentes" }} ({{ member.emergency_contact_phone|default:"+54 9 11 4433-2211" }})</span>
+        </div>
+        <div>
+          <span style="color: var(--text-subtle); display: block; font-size: 0.75rem;">Apto Médico</span>
+          <span style="color: var(--accent-green);"><i class="fa-solid fa-file-medical"></i> Vigente</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+{% endblock %}
+

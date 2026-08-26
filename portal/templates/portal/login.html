@@ -1,0 +1,149 @@
+﻿{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acceso Socios | Vitalis Fitness Club</title>
+  
+  <link rel="shortcut icon" href="{% static 'core/img/vitalis_logo.png' %}" type="image/x-icon">
+  <meta name="theme-color" content="#0b0f17">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="{% static 'portal/css/portal.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at top center, #172033 0%, #0b0f17 70%);
+      padding: 1.5rem;
+    }
+
+    .portal-login-card {
+      width: 100%;
+      max-width: 440px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 2rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(245, 184, 46, 0.1);
+      backdrop-filter: blur(16px);
+      text-align: center;
+      position: relative;
+    }
+
+    .portal-login-logo {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      border: 2px solid var(--primary-gold);
+      box-shadow: 0 0 25px rgba(245, 184, 46, 0.4);
+      margin: 0 auto 1.25rem;
+      display: block;
+      object-fit: cover;
+    }
+
+    .portal-form-control {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 0.85rem 1rem;
+      color: #ffffff;
+      font-size: 0.95rem;
+      transition: var(--transition-fast);
+      outline: none;
+    }
+
+    .portal-form-control:focus {
+      border-color: var(--primary-gold);
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 0 0 3px rgba(245, 184, 46, 0.2);
+    }
+
+    .hint-box {
+      background: rgba(245, 184, 46, 0.08);
+      border: 1px dashed rgba(245, 184, 46, 0.3);
+      border-radius: var(--radius-md);
+      padding: 0.85rem 1rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 1.5rem;
+      text-align: left;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="portal-login-card">
+    
+    <!-- Logo -->
+    <img src="{% static 'core/img/vitalis_logo.png' %}" alt="Vitalis Fitness" class="portal-login-logo">
+    
+    <div style="margin-bottom: 1.75rem;">
+      <span class="badge-tag" style="background: rgba(245, 184, 46, 0.15); color: var(--primary-gold); font-weight: 800; letter-spacing: 0.1em; font-size: 0.75rem; text-transform: uppercase;">
+        Portal de Socios
+      </span>
+      <h1 style="font-size: 1.6rem; font-weight: 800; color: #ffffff; margin-top: 0.5rem;">VITALIS FITNESS</h1>
+      <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.25rem;">
+        Ingresa con tu DNI para ver tus rutinas, avances y carnet
+      </p>
+    </div>
+
+    <!-- Messages -->
+    {% if messages %}
+      {% for message in messages %}
+      <div style="background: rgba(239, 68, 68, 0.15); border: 1px solid var(--accent-red); color: #fca5a5; padding: 0.75rem; border-radius: var(--radius-md); font-size: 0.85rem; margin-bottom: 1.25rem;">
+        {{ message }}
+      </div>
+      {% endfor %}
+    {% endif %}
+
+    <!-- Form -->
+    <form method="post" action="{% url 'portal:login' %}" style="text-align: left;">
+      {% csrf_token %}
+      
+      <div class="form-group" style="margin-bottom: 1.25rem;">
+        <label class="form-label" style="display: block; font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.4rem; font-weight: 600;">
+          <i class="fa-regular fa-id-card" style="color: var(--primary-gold);"></i> DNI / Cédula
+        </label>
+        {{ form.username_or_dni }}
+      </div>
+
+      <div class="form-group" style="margin-bottom: 1.5rem;">
+        <label class="form-label" style="display: block; font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.4rem; font-weight: 600;">
+          <i class="fa-solid fa-lock" style="color: var(--primary-gold);"></i> Contraseña
+        </label>
+        {{ form.password }}
+      </div>
+
+      <button type="submit" class="btn-gold-solid" style="width: 100%; justify-content: center; padding: 0.85rem; font-size: 0.95rem; font-weight: 700;">
+        Ingresar a mi Cuenta &rarr;
+      </button>
+    </form>
+
+    <!-- First Time Hint -->
+    <div class="hint-box">
+      <strong style="color: var(--primary-gold); display: block; margin-bottom: 0.2rem;">
+        <i class="fa-solid fa-circle-info"></i> ¿Primer ingreso a la App?
+      </strong>
+      Tu contraseña inicial es tu número de <strong>DNI sin puntos</strong>. Si no recuerdas tu clave, solicítala en la recepción de tu sede.
+    </div>
+
+    <!-- Staff Link -->
+    <div style="margin-top: 1.75rem; padding-top: 1.25rem; border-top: 1px solid var(--border-subtle); font-size: 0.8rem; color: var(--text-subtle);">
+      ¿Eres parte del equipo o administración? <br>
+      <a href="{% url 'core:login' %}" style="color: var(--primary-gold); text-decoration: underline; font-weight: 600; display: inline-block; margin-top: 0.35rem;">
+        Ingresar a Consola Administrativa &rarr;
+      </a>
+    </div>
+
+  </div>
+
+</body>
+</html>

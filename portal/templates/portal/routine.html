@@ -1,0 +1,218 @@
+﻿{% extends 'portal/base_portal.html' %}
+{% load static %}
+
+{% block title %}Mi Rutina | Vitalis Fitness Club{% endblock %}
+
+{% block content %}
+
+<!-- 1. Header Banner with Progress Bar -->
+<div class="routine-header-banner">
+  <div>
+    <h1 style="font-size: 2rem; font-weight: 800; color: #ffffff; margin-bottom: 0.25rem;">Mi Rutina Actual</h1>
+    <p style="color: var(--primary-gold); font-weight: 600; font-size: 0.95rem;">
+      Plan: {{ routine.name|default:"Hipertrofia Clásica" }} • Semana {{ routine.current_week|default:"3" }} de {{ routine.total_weeks|default:"8" }}
+    </p>
+  </div>
+
+  <div class="routine-progress-group">
+    <div style="text-align: right;">
+      <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">Progreso General del Plan</div>
+      <div class="progress-bar-container" style="margin-top: 0.4rem;">
+        <div class="progress-bar-fill" style="width: {{ routine.progress_percent|default:38 }}%;"></div>
+      </div>
+    </div>
+    <div class="progress-percentage">{{ routine.progress_percent|default:38 }}%</div>
+  </div>
+</div>
+
+<!-- 2. Day Selector Tabs (Lunes, Martes, Miércoles, etc.) -->
+<div class="routine-days-tabs">
+  {% if routine and routine.days.all %}
+    {% for day in routine.days.all %}
+    <a href="?dia={{ day.day_name }}" class="routine-day-tab {% if day.day_name == selected_day_name %}active{% endif %}">
+      <span class="tab-day-title">{{ day.day_name }}</span>
+      <span class="tab-day-subtitle">{{ day.subtitle }}</span>
+    </a>
+    {% endfor %}
+  {% else %}
+    <a href="?dia=Lunes" class="routine-day-tab active">
+      <span class="tab-day-title">Lunes</span>
+      <span class="tab-day-subtitle">Empuje (Pecho/Tríceps)</span>
+    </a>
+    <a href="?dia=Martes" class="routine-day-tab">
+      <span class="tab-day-title">Martes</span>
+      <span class="tab-day-subtitle">Tracción (Espalda/Bíceps)</span>
+    </a>
+    <a href="?dia=Miércoles" class="routine-day-tab">
+      <span class="tab-day-title">Miércoles</span>
+      <span class="tab-day-subtitle">Pierna Completa</span>
+    </a>
+    <a href="?dia=Jueves" class="routine-day-tab">
+      <span class="tab-day-title">Jueves</span>
+      <span class="tab-day-subtitle">Hombros y Brazos</span>
+    </a>
+    <a href="?dia=Viernes" class="routine-day-tab">
+      <span class="tab-day-title">Viernes</span>
+      <span class="tab-day-subtitle">Fullbody / Funcional</span>
+    </a>
+  {% endif %}
+</div>
+
+<!-- 3. Exercises Cards List -->
+<div class="exercise-cards-list">
+  {% if selected_day and selected_day.exercises.all %}
+    {% for ex in selected_day.exercises.all %}
+    <div class="exercise-card">
+      <div class="exercise-left-group">
+        <img src="{{ ex.image_url }}" alt="{{ ex.name }}" class="exercise-thumb-img">
+        <div class="exercise-meta-info">
+          <h3 class="exercise-title">{{ ex.name }}</h3>
+          <div class="exercise-tags-row">
+            <span class="badge-tag" style="background: rgba(245, 184, 46, 0.1); color: var(--primary-gold); font-weight: 700;">
+              {{ ex.muscle_group }}
+            </span>
+            <span class="exercise-reps-text">Series y Reps: <strong style="color: #ffffff;">{{ ex.series_reps }}</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exercise-right-group">
+        <div class="rest-indicator-group">
+          <span class="rest-indicator-label">Descanso</span>
+          <span class="rest-indicator-val">{{ ex.rest_seconds }}s</span>
+        </div>
+        <button class="btn-timer-trigger" data-rest="{{ ex.rest_seconds }}" data-exercise="{{ ex.name }}">
+          <i class="fa-regular fa-clock" style="color: var(--primary-gold);"></i> Iniciar Cronómetro
+        </button>
+      </div>
+    </div>
+    {% endfor %}
+  {% else %}
+    <!-- Fallback exercises matching Figma mockup -->
+    <div class="exercise-card">
+      <div class="exercise-left-group">
+        <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=300&auto=format&fit=crop&q=80" alt="Press de Banca" class="exercise-thumb-img">
+        <div class="exercise-meta-info">
+          <h3 class="exercise-title">Press de Banca Plano</h3>
+          <div class="exercise-tags-row">
+            <span class="badge-tag" style="background: rgba(245, 184, 46, 0.1); color: var(--primary-gold); font-weight: 700;">Pecho</span>
+            <span class="exercise-reps-text">Series y Reps: <strong style="color: #ffffff;">4x10</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="exercise-right-group">
+        <div class="rest-indicator-group">
+          <span class="rest-indicator-label">Descanso</span>
+          <span class="rest-indicator-val">90s</span>
+        </div>
+        <button class="btn-timer-trigger" data-rest="90" data-exercise="Press de Banca Plano">
+          <i class="fa-regular fa-clock" style="color: var(--primary-gold);"></i> Iniciar Cronómetro
+        </button>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="exercise-left-group">
+        <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=300&auto=format&fit=crop&q=80" alt="Aperturas" class="exercise-thumb-img">
+        <div class="exercise-meta-info">
+          <h3 class="exercise-title">Aperturas con Mancuernas</h3>
+          <div class="exercise-tags-row">
+            <span class="badge-tag" style="background: rgba(245, 184, 46, 0.1); color: var(--primary-gold); font-weight: 700;">Pecho</span>
+            <span class="exercise-reps-text">Series y Reps: <strong style="color: #ffffff;">3x12</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="exercise-right-group">
+        <div class="rest-indicator-group">
+          <span class="rest-indicator-label">Descanso</span>
+          <span class="rest-indicator-val">60s</span>
+        </div>
+        <button class="btn-timer-trigger" data-rest="60" data-exercise="Aperturas con Mancuernas">
+          <i class="fa-regular fa-clock" style="color: var(--primary-gold);"></i> Iniciar Cronómetro
+        </button>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="exercise-left-group">
+        <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=300&auto=format&fit=crop&q=80" alt="Press Inclinado" class="exercise-thumb-img">
+        <div class="exercise-meta-info">
+          <h3 class="exercise-title">Press Inclinado con Mancuernas</h3>
+          <div class="exercise-tags-row">
+            <span class="badge-tag" style="background: rgba(245, 184, 46, 0.1); color: var(--primary-gold); font-weight: 700;">Pecho</span>
+            <span class="exercise-reps-text">Series y Reps: <strong style="color: #ffffff;">4x8</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="exercise-right-group">
+        <div class="rest-indicator-group">
+          <span class="rest-indicator-label">Descanso</span>
+          <span class="rest-indicator-val">90s</span>
+        </div>
+        <button class="btn-timer-trigger" data-rest="90" data-exercise="Press Inclinado con Mancuernas">
+          <i class="fa-regular fa-clock" style="color: var(--primary-gold);"></i> Iniciar Cronómetro
+        </button>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="exercise-left-group">
+        <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=300&auto=format&fit=crop&q=80" alt="Fondos" class="exercise-thumb-img">
+        <div class="exercise-meta-info">
+          <h3 class="exercise-title">Fondos en Paralelas</h3>
+          <div class="exercise-tags-row">
+            <span class="badge-tag" style="background: rgba(245, 184, 46, 0.1); color: var(--primary-gold); font-weight: 700;">Tríceps / Pecho</span>
+            <span class="exercise-reps-text">Series y Reps: <strong style="color: #ffffff;">3x12</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="exercise-right-group">
+        <div class="rest-indicator-group">
+          <span class="rest-indicator-label">Descanso</span>
+          <span class="rest-indicator-val">60s</span>
+        </div>
+        <button class="btn-timer-trigger" data-rest="60" data-exercise="Fondos en Paralelas">
+          <i class="fa-regular fa-clock" style="color: var(--primary-gold);"></i> Iniciar Cronómetro
+        </button>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="exercise-left-group">
+        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=300&auto=format&fit=crop&q=80" alt="Tríceps Polea" class="exercise-thumb-img">
+        <div class="exercise-meta-info">
+          <h3 class="exercise-title">Extensión de Tríceps en Polea</h3>
+          <div class="exercise-tags-row">
+            <span class="badge-tag" style="background: rgba(245, 184, 46, 0.1); color: var(--primary-gold); font-weight: 700;">Tríceps</span>
+            <span class="exercise-reps-text">Series y Reps: <strong style="color: #ffffff;">3x15</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="exercise-right-group">
+        <div class="rest-indicator-group">
+          <span class="rest-indicator-label">Descanso</span>
+          <span class="rest-indicator-val">45s</span>
+        </div>
+        <button class="btn-timer-trigger" data-rest="45" data-exercise="Extensión de Tríceps en Polea">
+          <i class="fa-regular fa-clock" style="color: var(--primary-gold);"></i> Iniciar Cronómetro
+        </button>
+      </div>
+    </div>
+  {% endif %}
+</div>
+
+<!-- 4. Trainer Notes & Tips (Figma Bottom Card) -->
+<div class="trainer-notes-card">
+  <div class="trainer-avatar-box">
+    <img src="{{ routine.trainer.avatar_url|default:'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=120&auto=format&fit=crop&q=80' }}" alt="Entrenador" class="trainer-avatar-img">
+    <span class="trainer-avatar-name">{{ routine.trainer.full_name|default:"Lucas Torres" }}</span>
+  </div>
+  <div class="trainer-notes-content">
+    <h4>Notas y Consejos de tu Entrenador</h4>
+    <p>
+      {{ routine.trainer_notes|default:"Para este entrenamiento de empuje, enfócate en la fase excéntrica (bajada) en el Press de Banca. Mantén una bajada controlada de 3 segundos para maximizar el reclutamiento de fibras musculares. Si completas todas las series con buena técnica, incrementa 2.5 kg en la última de press inclinado." }}
+    </p>
+  </div>
+</div>
+
+{% endblock %}

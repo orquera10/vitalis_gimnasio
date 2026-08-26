@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+
+{% block title %}Directorio de Entrenadores | Vitalis Fitness{% endblock %}
+
+{% block content %}
+<!-- 1. Cabecera -->
+<div class="calendar-header-section">
+    <div>
+        <h1 class="page-title">Directorio de Entrenadores</h1>
+        <p class="page-subtitle">Gestiona el staff de instructores, especialidades, perfiles y horarios asignados.</p>
+    </div>
+    
+    <div class="calendar-header-actions">
+        <a href="{% url 'classes:trainer_create' %}" class="btn-gold" style="font-size: 0.85rem; padding: 0.6rem 1.25rem; text-decoration: none;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            Nuevo Entrenador
+        </a>
+    </div>
+</div>
+
+<!-- 2. Barra de Búsqueda y Filtros -->
+<div class="calendar-nav-card" style="margin-bottom: 1.5rem;">
+    <form method="get" class="search-form" style="display: flex; gap: 0.75rem; flex: 1; align-items: center;">
+        <div style="position: relative; flex: 1; max-width: 400px;">
+            <input type="text" name="q" value="{{ q }}" placeholder="Buscar por nombre, especialidad o correo..." class="form-control" style="padding-left: 2.2rem; font-size: 0.85rem;">
+            <span style="position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); opacity: 0.5;">
+                🔍
+            </span>
+        </div>
+
+        <select name="status" class="filter-select" onchange="this.form.submit()">
+            <option value="">Todos los Estados</option>
+            <option value="active" {% if current_status == 'active' %}selected{% endif %}>Solo Activos</option>
+            <option value="inactive" {% if current_status == 'inactive' %}selected{% endif %}>Solo Inactivos</option>
+        </select>
+
+        <button type="submit" class="btn-outline" style="padding: 0.55rem 1rem; font-size: 0.85rem;">
+            Buscar
+        </button>
+
+        {% if q or current_status %}
+            <a href="{% url 'classes:trainer_list' %}" class="btn-filter-clear">
+                ✕ Limpiar
+            </a>
+        {% endif %}
+    </form>
+
+    <div style="font-size: 0.85rem; color: var(--text-muted);">
+        Total: <strong style="color: #ffffff;">{{ trainers|length }}</strong> entrenadores
+    </div>
+</div>
+
+<!-- 3. Grilla de Tarjetas de Entrenadores -->
+{% if trainers %}
+<div class="trainers-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem;">
+    {% for trainer in trainers %}
+    <div class="table-card" style="display: flex; flex-direction: column; justify-content: space-between; border: 1px solid var(--border-color); transition: transform 0.2s ease, border-color 0.2s ease; position: relative;">
+        <div>
+            <!-- Header de Tarjeta: Avatar y Estado -->
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                <div style="position: relative;">
+                    <img src="{{ trainer.avatar_url }}" alt="{{ trainer.full_name }}" style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover; border: 2px solid {% if trainer.is_active %}var(--gold-primary){% else %}var(--text-muted){% endif %};">
+                    {% if trainer.is_active %}
+                        <span style="position: absolute; bottom: 2px; right: 2px; width: 14px; height: 14px; background: #10b981; border: 2px solid var(--bg-card); border-radius: 50%;" title="Activo"></span>
+                    {% endif %}
+                </div>
+
+                <div>
+                    {% if trainer.is_active %}
+                        <span class="badge badge-success">Activo</span>
+                    {% else %}
+                        <span class="badge badge-secondary">Inactivo</span>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Datos del Entrenador -->
+            <h3 style="font-size: 1.15rem; font-weight: 700; color: #ffffff; margin-bottom: 0.25rem;">
+                <a href="{% url 'classes:trainer_detail' trainer.pk %}" style="color: inherit; text-decoration: none;">
+                    {{ trainer.full_name }}
+                </a>
+            </h3>
+            
+            <p style="font-size: 0.85rem; color: var(--gold-primary); font-weight: 600; margin-bottom: 0.75rem;">
+                {{ trainer.specialty }}
+            </p>
+
+            <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 1rem;">
+                <div style="display: flex; align-items: center; gap: 0.4rem;">
+                    <span>📧</span>
+                    <span>{{ trainer.email|default:"Sin correo registrado" }}</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.4rem;">
+                    <span>📱</span>
+                    <span>{{ trainer.phone|default:"Sin teléfono registrado" }}</span>
+                </div>
+            </div>
+
+            {% if trainer.bio %}
+                <p style="font-size: 0.75rem; color: var(--text-secondary); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 1rem;">
+                    {{ trainer.bio }}
+                </p>
+            {% endif %}
+        </div>
+
+        <!-- Métricas y Botones de Acción -->
+        <div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; padding: 0.75rem; background: var(--bg-input); border-radius: var(--radius-md); margin-bottom: 1rem; text-align: center; border: 1px solid var(--border-color);">
+                <div>
+                    <span style="display: block; font-size: 1.1rem; font-weight: 700; color: #ffffff;">{{ trainer.schedules_count }}</span>
+                    <span style="font-size: 0.7rem; color: var(--text-muted);">Horarios Fijos</span>
+                </div>
+                <div>
+                    <span style="display: block; font-size: 1.1rem; font-weight: 700; color: var(--gold-primary);">{{ trainer.sessions_count }}</span>
+                    <span style="font-size: 0.7rem; color: var(--text-muted);">Clases Calendario</span>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 0.5rem;">
+                <a href="{% url 'classes:trainer_detail' trainer.pk %}" class="btn-outline" style="flex: 1; text-align: center; font-size: 0.8rem; padding: 0.45rem 0.5rem; text-decoration: none;">
+                    Ver Agenda
+                </a>
+                <a href="{% url 'classes:trainer_update' trainer.pk %}" class="btn-outline" style="text-align: center; font-size: 0.8rem; padding: 0.45rem 0.75rem; text-decoration: none; border-color: var(--border-gold); color: var(--gold-primary);">
+                    ✏️
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="table-card" style="text-align: center; padding: 3rem 1rem;">
+    <p style="font-size: 1.1rem; color: #ffffff; margin-bottom: 0.5rem;">No se encontraron entrenadores</p>
+    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem;">Prueba con otro término de búsqueda o registra un nuevo entrenador.</p>
+    <a href="{% url 'classes:trainer_create' %}" class="btn-gold" style="text-decoration: none; padding: 0.6rem 1.25rem;">
+        + Registrar Primer Entrenador
+    </a>
+</div>
+{% endif %}
+{% endblock %}

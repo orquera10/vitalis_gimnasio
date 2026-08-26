@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+
+{% block title %}Registrar Pago | Vitalis Fitness{% endblock %}
+
+{% block content %}
+<div class="form-page-container">
+    
+    <div class="form-header-flex">
+        <div>
+            <a href="{% url 'payments:list' %}" class="back-link">
+                &larr; Volver a Pagos
+            </a>
+            <h1 class="page-title" style="margin-top: 0.5rem;">💳 Registrar Cobro / Pago de Cuota</h1>
+            <p class="page-subtitle">Emite un comprobante oficial de pago y actualiza la vigencia de la membresía del socio.</p>
+        </div>
+    </div>
+
+    <div class="table-card form-main-card">
+        <form method="post" class="custom-form" id="payment-form">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger" style="margin-bottom: 1.5rem;">
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <!-- Sección 1: Socio y Plan -->
+            <h3 class="form-section-title">Datos del Socio y Plan</h3>
+            
+            <div class="form-grid">
+                <div class="form-group full-width">
+                    <label for="{{ form.member.id_for_label }}" class="form-label">Socio / Cliente *</label>
+                    {{ form.member }}
+                    {% if form.member.errors %}<span class="field-error">{{ form.member.errors.0 }}</span>{% endif %}
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="{{ form.plan.id_for_label }}" class="form-label">Plan / Concepto Abonado</label>
+                    {{ form.plan }}
+                    <small style="color: var(--text-muted); font-size: 0.75rem; display: block; margin-top: 0.25rem;">
+                        Al elegir un plan, el monto se autocompletará con el valor oficial del plan.
+                    </small>
+                    {% if form.plan.errors %}<span class="field-error">{{ form.plan.errors.0 }}</span>{% endif %}
+                </div>
+            </div>
+
+            <!-- Sección 2: Detalles del Cobro -->
+            <h3 class="form-section-title" style="margin-top: 2rem;">Detalles del Cobro</h3>
+            
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="{{ form.amount.id_for_label }}" class="form-label">Monto Abonado ($) *</label>
+                    {{ form.amount }}
+                    {% if form.amount.errors %}<span class="field-error">{{ form.amount.errors.0 }}</span>{% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.payment_method.id_for_label }}" class="form-label">Método de Pago *</label>
+                    {{ form.payment_method }}
+                    {% if form.payment_method.errors %}<span class="field-error">{{ form.payment_method.errors.0 }}</span>{% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.payment_date.id_for_label }}" class="form-label">Fecha de Pago *</label>
+                    {{ form.payment_date }}
+                    {% if form.payment_date.errors %}<span class="field-error">{{ form.payment_date.errors.0 }}</span>{% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.status.id_for_label }}" class="form-label">Estado del Pago *</label>
+                    {{ form.status }}
+                    {% if form.status.errors %}<span class="field-error">{{ form.status.errors.0 }}</span>{% endif %}
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="{{ form.invoice_number.id_for_label }}" class="form-label">N° de Recibo / Comprobante</label>
+                    {{ form.invoice_number }}
+                    <small style="color: var(--text-muted); font-size: 0.75rem; display: block; margin-top: 0.25rem;">
+                        Si se deja en blanco, el sistema generará automáticamente un número secuencial oficial (ej. REC-2026-0001).
+                    </small>
+                    {% if form.invoice_number.errors %}<span class="field-error">{{ form.invoice_number.errors.0 }}</span>{% endif %}
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="{{ form.notes.id_for_label }}" class="form-label">Notas / Referencia de Transacción (Opcional)</label>
+                    {{ form.notes }}
+                    {% if form.notes.errors %}<span class="field-error">{{ form.notes.errors.0 }}</span>{% endif %}
+                </div>
+
+                <div class="form-group full-width" style="display: flex; align-items: center; gap: 0.75rem; padding: 1rem; background: var(--bg-input); border-radius: var(--radius-md); border: 1px solid var(--border-gold);">
+                    {{ form.auto_renew_membership }}
+                    <label for="{{ form.auto_renew_membership.id_for_label }}" class="form-label" style="margin-bottom: 0; cursor: pointer; color: var(--gold-primary); font-weight: 600;">
+                        ⚡ Extender y Activar Membresía del socio automáticamente (Calcula nuevo vencimiento y cambia estado a ACTIVA)
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-actions-footer">
+                <a href="{% url 'payments:list' %}" class="btn-outline">
+                    Cancelar
+                </a>
+                <button type="submit" class="btn-gold">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                        <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                        <polyline points="7 3 7 8 15 8"></polyline>
+                    </svg>
+                    Confirmar Pago y Emitir Recibo
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{{ plans_json|json_script:"plans-data" }}
+
+<script>
+    // Autocompletado de monto al cambiar el plan seleccionado
+    const planSelect = document.getElementById('payment-plan-select');
+    const amountInput = document.getElementById('payment-amount-input');
+    const plansDataElement = document.getElementById('plans-data');
+    
+    if (planSelect && amountInput && plansDataElement) {
+        const plansData = JSON.parse(plansDataElement.textContent);
+        planSelect.addEventListener('change', function() {
+            const selectedPlanId = this.value;
+            if (selectedPlanId && plansData[selectedPlanId]) {
+                amountInput.value = plansData[selectedPlanId];
+            }
+        });
+    }
+</script>
+{% endblock %}

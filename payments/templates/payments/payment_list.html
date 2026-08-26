@@ -1,0 +1,223 @@
+{% extends 'base.html' %}
+
+{% block title %}Gestión de Pagos & Finanzas | Vitalis Fitness{% endblock %}
+
+{% block content %}
+<!-- 1. Cabecera -->
+<div class="calendar-header-section">
+    <div>
+        <h1 class="page-title">Gestión de Pagos & Cobranzas</h1>
+        <p class="page-subtitle">Control de ingresos, cobro de cuotas, emisión de recibos y métodos de pago.</p>
+    </div>
+    
+    <div class="calendar-header-actions">
+        <a href="{% url 'payments:create' %}" class="btn-gold" style="font-size: 0.85rem; padding: 0.6rem 1.25rem; text-decoration: none;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            Registrar Pago
+        </a>
+    </div>
+</div>
+
+<!-- 2. Tarjetas KPI Financieras -->
+<div class="kpis-grid" style="margin-bottom: 2rem;">
+    <!-- Recaudación del Mes -->
+    <div class="kpi-card" style="border-left: 3px solid var(--gold-primary);">
+        <div class="kpi-content">
+            <span class="kpi-label">Ingresos del Mes</span>
+            <div class="kpi-value" style="color: var(--gold-primary);">
+                ${{ kpis.monthly_income|floatformat:0 }}
+            </div>
+            <div class="kpi-trend positive">
+                <span>● {{ kpis.monthly_completed_count }} pagos completados</span>
+            </div>
+        </div>
+        <div class="kpi-icon-pill" style="border-color: var(--border-gold); background: rgba(245, 184, 46, 0.1); color: var(--gold-primary);">
+            💰
+        </div>
+    </div>
+
+    <!-- Pagos Completados -->
+    <div class="kpi-card" style="border-left: 3px solid #10b981;">
+        <div class="kpi-content">
+            <span class="kpi-label">Transacciones Aprobadas</span>
+            <div class="kpi-value" style="color: #10b981;">
+                {{ kpis.monthly_completed_count }}
+            </div>
+            <div class="kpi-trend positive">
+                <span>● Mes en curso</span>
+            </div>
+        </div>
+        <div class="kpi-icon-pill" style="border-color: rgba(16, 185, 129, 0.3); background: rgba(16, 185, 129, 0.1); color: #10b981;">
+            ✅
+        </div>
+    </div>
+
+    <!-- Pagos Pendientes -->
+    <div class="kpi-card" style="border-left: 3px solid #f59e0b;">
+        <div class="kpi-content">
+            <span class="kpi-label">Cobros Pendientes</span>
+            <div class="kpi-value" style="color: #f59e0b;">
+                {{ kpis.pending_count }}
+            </div>
+            <div class="kpi-trend" style="color: var(--text-muted);">
+                <span>● Por confirmar</span>
+            </div>
+        </div>
+        <div class="kpi-icon-pill" style="border-color: rgba(245, 158, 11, 0.3); background: rgba(245, 158, 11, 0.1); color: #f59e0b;">
+            ⏳
+        </div>
+    </div>
+
+    <!-- Ticket Promedio -->
+    <div class="kpi-card" style="border-left: 3px solid #06b6d4;">
+        <div class="kpi-content">
+            <span class="kpi-label">Ticket Promedio</span>
+            <div class="kpi-value" style="color: #06b6d4;">
+                ${{ kpis.monthly_avg|floatformat:0 }}
+            </div>
+            <div class="kpi-trend" style="color: var(--text-muted);">
+                <span>● Promedio por cuota</span>
+            </div>
+        </div>
+        <div class="kpi-icon-pill" style="border-color: rgba(6, 182, 212, 0.3); background: rgba(6, 182, 212, 0.1); color: #06b6d4;">
+            📊
+        </div>
+    </div>
+</div>
+
+<!-- 3. Barra de Filtros y Búsqueda -->
+<div class="calendar-nav-card" style="margin-bottom: 1.5rem;">
+    <form method="get" class="filter-form" style="display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; width: 100%;">
+        <div style="position: relative; flex: 1; min-width: 220px;">
+            <input type="text" name="q" value="{{ current_q }}" placeholder="Buscar por socio, DNI o N° de recibo..." class="form-control" style="padding-left: 2.2rem; font-size: 0.85rem;">
+            <span style="position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); opacity: 0.5;">
+                🔍
+            </span>
+        </div>
+
+        <!-- Filtro por Método -->
+        <select name="method" class="filter-select" onchange="this.form.submit()">
+            <option value="">Todos los Métodos</option>
+            {% for code, label in methods %}
+                <option value="{{ code }}" {% if current_method == code %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+        </select>
+
+        <!-- Filtro por Estado -->
+        <select name="status" class="filter-select" onchange="this.form.submit()">
+            <option value="">Todos los Estados</option>
+            {% for code, label in statuses %}
+                <option value="{{ code }}" {% if current_status == code %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit" class="btn-outline" style="padding: 0.55rem 1rem; font-size: 0.85rem;">
+            Filtrar
+        </button>
+
+        {% if current_q or current_method or current_status or date_from or date_to %}
+            <a href="{% url 'payments:list' %}" class="btn-filter-clear">
+                ✕ Limpiar
+            </a>
+        {% endif %}
+    </form>
+</div>
+
+<!-- 4. Tabla de Transacciones -->
+<div class="table-card">
+    <div class="card-header-flex">
+        <div>
+            <h3 class="card-title">Historial de Pagos y Facturación</h3>
+            <p class="card-subtitle">Listado cronológico de transacciones registradas</p>
+        </div>
+        <div style="font-size: 0.85rem; color: var(--text-muted);">
+            Mostrando <strong>{{ payments|length }}</strong> transacción(es)
+        </div>
+    </div>
+
+    {% if payments %}
+    <div class="table-responsive">
+        <table class="custom-table">
+            <thead>
+                <tr>
+                    <th>N° Comprobante</th>
+                    <th>Socio / Cliente</th>
+                    <th>Concepto / Plan</th>
+                    <th>Método de Pago</th>
+                    <th>Fecha</th>
+                    <th>Monto</th>
+                    <th>Estado</th>
+                    <th style="text-align: right;">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for payment in payments %}
+                <tr>
+                    <td>
+                        <a href="{% url 'payments:detail' payment.pk %}" style="font-family: monospace; font-weight: 700; color: var(--gold-primary); text-decoration: none;">
+                            {{ payment.invoice_number }}
+                        </a>
+                    </td>
+                    <td>
+                        <div class="member-cell">
+                            <img src="{{ payment.member.avatar_url }}" alt="{{ payment.member.full_name }}" class="member-avatar">
+                            <div>
+                                <a href="{% url 'members:detail' payment.member.pk %}" style="font-weight: 700; color: #ffffff; text-decoration: none;">
+                                    {{ payment.member.full_name }}
+                                </a>
+                                <div class="member-meta">DNI: {{ payment.member.dni }}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        {% if payment.plan %}
+                            <span class="badge" style="background: rgba(245, 184, 46, 0.1); border: 1px solid var(--border-gold); color: var(--gold-primary);">
+                                {{ payment.plan.name }}
+                            </span>
+                        {% else %}
+                            <span style="font-size: 0.85rem; color: var(--text-secondary);">Cuota / Otro</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <span style="font-size: 0.85rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+                            <span>{{ payment.method_icon }}</span>
+                            <span>{{ payment.get_payment_method_display }}</span>
+                        </span>
+                    </td>
+                    <td style="font-size: 0.85rem; color: var(--text-secondary);">
+                        {{ payment.payment_date|date:"d/m/Y" }}
+                    </td>
+                    <td>
+                        <span style="font-family: monospace; font-size: 1rem; font-weight: 700; color: #ffffff;">
+                            ${{ payment.amount|floatformat:0 }}
+                        </span>
+                    </td>
+                    <td>
+                        <span class="badge {{ payment.status_badge_class }}">
+                            {{ payment.get_status_display }}
+                        </span>
+                    </td>
+                    <td style="text-align: right;">
+                        <a href="{% url 'payments:detail' payment.pk %}" class="btn-outline" style="padding: 0.3rem 0.65rem; font-size: 0.8rem; text-decoration: none;" title="Ver e imprimir recibo digital">
+                            🧾 Recibo
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div style="text-align: center; padding: 3rem 1rem; color: var(--text-muted);">
+        <p style="font-size: 1.1rem; color: #ffffff; margin-bottom: 0.5rem;">No se encontraron registros de pagos</p>
+        <p style="font-size: 0.85rem; margin-bottom: 1.5rem;">Aún no se han registrado cobros con los filtros seleccionados.</p>
+        <a href="{% url 'payments:create' %}" class="btn-gold" style="text-decoration: none; padding: 0.6rem 1.25rem;">
+            + Registrar Primer Pago
+        </a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

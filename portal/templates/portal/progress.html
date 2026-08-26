@@ -1,0 +1,288 @@
+﻿{% extends 'portal/base_portal.html' %}
+{% load static %}
+
+{% block title %}Mis Avances y Métricas | Vitalis Fitness Club{% endblock %}
+
+{% block content %}
+
+<!-- 1. Header with Actions -->
+<div class="content-card-header" style="margin-bottom: 1.5rem;">
+  <div>
+    <h1 style="font-size: 2rem; font-weight: 800; color: #ffffff; margin-bottom: 0.25rem;">Mis Avances y Métricas</h1>
+    <p style="color: var(--text-muted); font-size: 0.95rem;">
+      Monitorea tu evolución física, marcas personales y mediciones periódicas
+    </p>
+  </div>
+
+  <div style="display: flex; gap: 0.75rem;">
+    <button onclick="window.print()" class="btn-dark">
+      <i class="fa-solid fa-file-pdf"></i> Exportar Reporte PDF
+    </button>
+    <button onclick="openModal('addMetricModal')" class="btn-gold-solid">
+      <i class="fa-solid fa-plus"></i> Añadir Nueva Métrica
+    </button>
+  </div>
+</div>
+
+<!-- 2. 3 Top KPI Cards -->
+<div class="progress-3-kpis">
+  <!-- Peso Corporal -->
+  <div class="kpi-card">
+    <div class="kpi-header">
+      <span class="kpi-label">Peso Corporal</span>
+      <span class="metric-pill-tag">{{ stats.weight_change }}</span>
+    </div>
+    <div>
+      <div class="kpi-value">{{ stats.weight }} kg</div>
+      <div class="kpi-subtext">Última medición: hace 2 días</div>
+    </div>
+  </div>
+
+  <!-- Porcentaje de Grasa -->
+  <div class="kpi-card">
+    <div class="kpi-header">
+      <span class="kpi-label">Porcentaje de Grasa</span>
+      <span class="metric-pill-tag">{{ stats.fat_change }}</span>
+    </div>
+    <div>
+      <div class="kpi-value">{{ stats.fat }}%</div>
+      <div class="kpi-subtext">Objetivo ideal: 15.0%</div>
+    </div>
+  </div>
+
+  <!-- Masa Muscular Estimada -->
+  <div class="kpi-card">
+    <div class="kpi-header">
+      <span class="kpi-label">Masa Muscular Estimada</span>
+      <span class="metric-pill-tag">{{ stats.muscle_change }}</span>
+    </div>
+    <div>
+      <div class="kpi-value">{{ stats.muscle }} kg</div>
+      <div class="kpi-subtext">Masa libre de grasa aumentada</div>
+    </div>
+  </div>
+</div>
+
+<!-- 3. Two Column Section (Chart & PRs) -->
+<div class="portal-two-col">
+  
+  <!-- Left: Historial de Peso Chart -->
+  <div class="content-card">
+    <div class="content-card-header">
+      <div class="card-title-group">
+        <h3>Historial de Peso (Últimos 3 Meses)</h3>
+        <span class="card-subtitle">Tendencia de descenso controlado</span>
+      </div>
+      <div style="font-size: 0.8rem; font-weight: 700; color: var(--primary-gold); display: flex; align-items: center; gap: 0.35rem;">
+        <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--primary-gold); display: inline-block;"></span>
+        Peso (kg)
+      </div>
+    </div>
+
+    <div style="position: relative; width: 100%; height: 230px; margin-top: 0.5rem;">
+      <canvas id="weightHistoryChart" data-chart-json='{{ chart_data_json }}' style="width: 100%; height: 230px;"></canvas>
+    </div>
+  </div>
+
+  <!-- Right: Récords Personales (PRs) -->
+  <div class="content-card">
+    <div class="content-card-header">
+      <div class="card-title-group">
+        <h3>Récords Personales (PRs)</h3>
+      </div>
+    </div>
+
+    <div class="prs-list">
+      {% if personal_records %}
+        {% for pr in personal_records %}
+        <div class="pr-item-card">
+          <div class="pr-left-group">
+            <span class="pr-icon-badge">
+              {% if pr.badge_type == 'fire' %}🔥{% elif pr.badge_type == 'crown' %}👑{% elif pr.badge_type == 'bolt' %}⚡{% else %}⭐{% endif %}
+            </span>
+            <div>
+              <div class="pr-exercise-name">{{ pr.exercise_name }}</div>
+              <div class="pr-date-subtext">Logrado: {{ pr.achieved_date|date:"d M Y" }}</div>
+            </div>
+          </div>
+          <div class="pr-weight-value">{{ pr.weight_kg }} kg</div>
+        </div>
+        {% endfor %}
+      {% else %}
+        <div class="pr-item-card">
+          <div class="pr-left-group">
+            <span class="pr-icon-badge">🔥</span>
+            <div>
+              <div class="pr-exercise-name">Press de Banca Plano</div>
+              <div class="pr-date-subtext">Logrado: 12 Ago 2026</div>
+            </div>
+          </div>
+          <div class="pr-weight-value">85 kg</div>
+        </div>
+        <div class="pr-item-card">
+          <div class="pr-left-group">
+            <span class="pr-icon-badge">👑</span>
+            <div>
+              <div class="pr-exercise-name">Sentadilla Trasera</div>
+              <div class="pr-date-subtext">Logrado: 05 Jul 2026</div>
+            </div>
+          </div>
+          <div class="pr-weight-value">120 kg</div>
+        </div>
+        <div class="pr-item-card">
+          <div class="pr-left-group">
+            <span class="pr-icon-badge">⚡</span>
+            <div>
+              <div class="pr-exercise-name">Peso Muerto Convencional</div>
+              <div class="pr-date-subtext">Logrado: 20 Jun 2026</div>
+            </div>
+          </div>
+          <div class="pr-weight-value">140 kg</div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+</div>
+
+<!-- 4. Historial de Mediciones Corporales Table -->
+<div class="content-card" style="margin-bottom: 1.5rem;">
+  <div class="content-card-header">
+    <div class="card-title-group">
+      <h3>Historial de Mediciones Corporales</h3>
+    </div>
+  </div>
+
+  <table class="metrics-history-table">
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Peso</th>
+        <th>Porcentaje Grasa</th>
+        <th>Masa Muscular</th>
+        <th>Cintura</th>
+        <th>Pecho</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for m in metrics %}
+      <tr>
+        <td style="font-weight: 700; color: #ffffff;">{{ m.date|date:"d M Y" }}</td>
+        <td>{{ m.weight_kg }} kg</td>
+        <td>{{ m.body_fat_pct|default:"-" }}%</td>
+        <td>{{ m.muscle_mass_kg|default:"-" }} kg</td>
+        <td>{{ m.waist_cm|default:"-" }} cm</td>
+        <td>{{ m.chest_cm|default:"-" }} cm</td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td style="font-weight: 700; color: #ffffff;">24 Ago 2026</td>
+        <td>78.5 kg</td>
+        <td>18.2%</td>
+        <td>42.1 kg</td>
+        <td>86 cm</td>
+        <td>102 cm</td>
+      </tr>
+      <tr>
+        <td style="font-weight: 700; color: #ffffff;">10 Ago 2026</td>
+        <td>79.3 kg</td>
+        <td>18.6%</td>
+        <td>41.8 kg</td>
+        <td>87 cm</td>
+        <td>101.5 cm</td>
+      </tr>
+      <tr>
+        <td style="font-weight: 700; color: #ffffff;">27 Jul 2026</td>
+        <td>80.2 kg</td>
+        <td>19.1%</td>
+        <td>41.5 kg</td>
+        <td>88.5 cm</td>
+        <td>101 cm</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<!-- 5. Comparativa Visual de Progreso (Figma Bottom Cards) -->
+<div class="content-card">
+  <div class="content-card-header">
+    <div class="card-title-group">
+      <h3>Comparativa Visual de Progreso</h3>
+    </div>
+  </div>
+
+  <div class="visual-comparison-grid">
+    <!-- Inicio (Semana 1) -->
+    <div class="visual-photo-card">
+      <div class="photo-header-tag">Inicio (Semana 1)</div>
+      <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=800&auto=format&fit=crop&q=80" alt="Inicio" class="visual-progress-img">
+      <div class="photo-footer-stats">80.8 kg • 19.5% Grasa</div>
+    </div>
+
+    <!-- Actual (Semana 3) -->
+    <div class="visual-photo-card current">
+      <div class="photo-header-tag">Actual (Semana 3)</div>
+      <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=800&auto=format&fit=crop&q=80" alt="Actual" class="visual-progress-img">
+      <div class="photo-footer-stats">78.5 kg • 18.2% Grasa</div>
+    </div>
+  </div>
+</div>
+
+<!-- 6. Modal: Añadir Nueva Métrica -->
+<div id="addMetricModal" class="form-modal-overlay">
+  <div class="form-modal-box">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+      <h3 style="color: var(--primary-gold); font-size: 1.25rem;">Añadir Nueva Métrica</h3>
+      <button onclick="closeModal('addMetricModal')" style="background: none; border: none; color: var(--text-muted); font-size: 1.5rem; cursor: pointer;">&times;</button>
+    </div>
+
+    <form method="post" action="{% url 'portal:add_metric' %}" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div class="form-group">
+          <label class="form-label">Fecha</label>
+          {{ metric_form.date }}
+        </div>
+        <div class="form-group">
+          <label class="form-label">Peso Corporal (kg) *</label>
+          {{ metric_form.weight_kg }}
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div class="form-group">
+          <label class="form-label">% Grasa Corporal</label>
+          {{ metric_form.body_fat_pct }}
+        </div>
+        <div class="form-group">
+          <label class="form-label">Masa Muscular (kg)</label>
+          {{ metric_form.muscle_mass_kg }}
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div class="form-group">
+          <label class="form-label">Cintura (cm)</label>
+          {{ metric_form.waist_cm }}
+        </div>
+        <div class="form-group">
+          <label class="form-label">Pecho (cm)</label>
+          {{ metric_form.chest_cm }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Notas / Observaciones</label>
+        {{ metric_form.notes }}
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.5rem;">
+        <button type="button" onclick="closeModal('addMetricModal')" class="btn-dark">Cancelar</button>
+        <button type="submit" class="btn-gold-solid">Guardar Métrica</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,274 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ session.title }} | Vitalis Fitness{% endblock %}
+
+{% block content %}
+<div class="profile-page-container">
+    
+    <div class="form-header-flex">
+        <div>
+            <a href="{% url 'classes:calendar' %}" class="back-link">
+                &larr; Volver al Almanaque
+            </a>
+            <h1 class="page-title" style="margin-top: 0.5rem;">{{ session.title }}</h1>
+        </div>
+        <div style="display: flex; gap: 0.75rem; align-items: center;">
+            <form action="{% url 'classes:delete' session.pk %}" method="post" onsubmit="return confirm('¿Estás seguro de cancelar esta sesión del calendario?');" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="logout-icon-btn" style="border: 1px solid rgba(239, 68, 68, 0.3); padding: 0.55rem 0.85rem; border-radius: var(--radius-md);" title="Cancelar Sesión">
+                    🗑️ Cancelar Sesión
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="profile-grid">
+        <!-- Columna Izquierda: Información de la Clase y Entrenador -->
+        <div class="profile-card">
+            <div class="profile-header-center">
+                <div class="discipline-tag" style="border-color: {{ session.category.color }}; display: inline-flex; margin-bottom: 0.75rem;">
+                    <span class="discipline-dot" style="background-color: {{ session.category.color }};"></span>
+                    <span>{{ session.category.name }}</span>
+                </div>
+                <h2 class="profile-name">{{ session.title }}</h2>
+                <div class="profile-dni">Salón / Box: {{ session.room }}</div>
+            </div>
+
+            <div class="profile-divider"></div>
+
+            <div class="profile-detail-list">
+                <div class="profile-detail-item">
+                    <span class="detail-label">Fecha:</span>
+                    <span class="detail-val">{{ session.date|date:"l, d \d\e F, Y" }}</span>
+                </div>
+
+                <div class="profile-detail-item">
+                    <span class="detail-label">Horario:</span>
+                    <span class="detail-val" style="color: var(--gold-primary); font-family: monospace; font-size: 0.95rem;">
+                        {{ session.time_range }}
+                    </span>
+                </div>
+                <div class="profile-detail-item">
+                    <span class="detail-label">Cupo Total:</span>
+                    <span class="detail-val">{{ session.capacity }} alumnos</span>
+                </div>
+                <div class="profile-detail-item">
+                    <span class="detail-label">Inscriptos:</span>
+                    <span class="detail-val" style="color: #ffffff; font-weight: 700;">
+                        {{ session.booked_count }} alumnos
+                    </span>
+                </div>
+                <div class="profile-detail-item">
+                    <span class="detail-label">Cupos Disponibles:</span>
+                    <span class="detail-val" style="color: {% if session.is_full %}var(--badge-danger-text){% else %}var(--badge-success-text){% endif %}; font-weight: 700;">
+                        {{ session.available_spots }} libres
+                    </span>
+                </div>
+                <div class="profile-detail-item">
+                    <span class="detail-label">Estado:</span>
+                    <span class="badge badge-success">{{ session.get_status_display }}</span>
+                </div>
+            </div>
+
+            <div class="profile-divider"></div>
+
+            <!-- Entrenador Asignado -->
+            <div style="padding-top: 0.5rem;">
+                <h3 style="font-size: 0.95rem; font-weight: 700; color: var(--gold-primary); margin-bottom: 0.75rem;">
+                    🏋️ Entrenador Asignado
+                </h3>
+
+                <div class="member-cell" style="margin-bottom: 0.5rem;">
+                    <img src="{{ session.trainer.avatar_url }}" alt="{{ session.trainer.full_name }}" class="profile-big-avatar" style="width: 50px; height: 50px;">
+                    <div>
+                        <h4 style="font-size: 1rem; font-weight: 700; color: #ffffff;">{{ session.trainer.full_name }}</h4>
+                        <p style="font-size: 0.8rem; color: var(--gold-primary);">{{ session.trainer.specialty }}</p>
+                        <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem;">{{ session.trainer.email }} | {{ session.trainer.phone }}</p>
+                    </div>
+                </div>
+
+                {% if session.trainer.bio %}
+                    <div class="medical-notes-box" style="margin-top: 0.75rem; font-size: 0.8rem;">
+                        {{ session.trainer.bio }}
+                    </div>
+                {% endif %}
+            </div>
+
+            {% if session.schedule %}
+            <div style="margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--border-color);">
+                <p style="font-size: 0.75rem; color: var(--text-muted);">
+                    ⚡ Horario fijo recurrente: <strong>{{ session.schedule.get_day_of_week_display }}s de {{ session.schedule.start_time|time:"H:i" }} a {{ session.schedule.end_time|time:"H:i" }}</strong>
+                </p>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Columna Derecha: Inscripción de Socios y Lista de Asistencia -->
+        <div class="profile-right-col">
+            
+            <!-- 1. Tarjeta para Inscribir Socio -->
+            <div class="table-card" style="margin-bottom: 1.5rem; border-left: 3px solid var(--gold-primary);">
+                <div class="card-header-flex" style="margin-bottom: 1rem;">
+                    <div>
+                        <h3 class="card-title" style="color: var(--gold-primary); display: flex; align-items: center; gap: 0.5rem;">
+                            <span>➕ Inscribir Socio a esta Clase</span>
+                        </h3>
+                        <p class="card-subtitle">Selecciona un socio con membresía activa para agregarlo a la lista de asistentes.</p>
+                    </div>
+                    {% if session.is_full %}
+                        <span class="badge badge-danger">Cupo Lleno</span>
+                    {% else %}
+                        <span class="badge badge-success">{{ session.available_spots }} cupos libres</span>
+                    {% endif %}
+                </div>
+
+                {% if session.is_full %}
+                    <div class="alert alert-warning" style="background-color: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); color: #fca5a5; padding: 0.75rem 1rem; border-radius: var(--radius-md); font-size: 0.85rem;">
+                        ⚠️ Esta clase ha alcanzado su capacidad máxima ({{ session.capacity }} alumnos). Para inscribir a otro socio, amplía el cupo o cancela una reserva existente.
+                    </div>
+                {% else %}
+                    <form method="post" action="{% url 'classes:booking_create' session.pk %}" style="display: flex; flex-direction: column; gap: 1rem;">
+                        {% csrf_token %}
+                        <div class="form-grid" style="grid-template-columns: 1.5fr 1fr; gap: 1rem;">
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label for="member-select" class="form-label" style="font-size: 0.8rem;">Socio Activo *</label>
+                                {{ booking_form.member }}
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label for="{{ booking_form.notes.id_for_label }}" class="form-label" style="font-size: 0.8rem;">Observaciones (Opcional)</label>
+                                {{ booking_form.notes }}
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: flex-end;">
+                            <button type="submit" class="btn-gold" style="padding: 0.65rem 1.5rem; font-size: 0.9rem;">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="9" cy="7" r="4"/>
+                                    <line x1="19" x2="19" y1="8" y2="14"/>
+                                    <line x1="22" x2="16" y1="11" y2="11"/>
+                                </svg>
+                                Inscribir Socio
+                            </button>
+                        </div>
+                    </form>
+                {% endif %}
+            </div>
+
+            <!-- 2. Barra de Ocupación y Lista de Inscriptos -->
+            <div class="table-card">
+                <div class="card-header-flex" style="margin-bottom: 1rem;">
+                    <div>
+                        <h3 class="card-title">Alumnos Inscriptos y Control de Asistencia</h3>
+                        <p class="card-subtitle">{{ bookings.count }} socios registrados para esta sesión</p>
+                    </div>
+                    <div style="text-align: right;">
+                        <span style="font-family: monospace; font-size: 1rem; font-weight: 700; color: var(--gold-primary);">
+                            {{ session.booked_count }} / {{ session.capacity }}
+                        </span>
+                        <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">cupos ocupados ({{ occupancy_pct }}%)</span>
+                    </div>
+                </div>
+
+                <!-- Barra de Progreso de Ocupación -->
+                <div style="width: 100%; background: var(--bg-input); height: 8px; border-radius: 4px; overflow: hidden; margin-bottom: 1.5rem; border: 1px solid var(--border-color);">
+                    <div style="width: {{ occupancy_pct }}%; height: 100%; background: {% if occupancy_pct >= 90 %}#ef4444{% elif occupancy_pct >= 60 %}var(--gold-primary){% else %}#10b981{% endif %}; transition: width 0.3s ease;"></div>
+                </div>
+
+                {% if bookings %}
+                <div class="table-responsive">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Socio</th>
+                                <th>Plan</th>
+                                <th>Fecha Reserva</th>
+                                <th>Estado</th>
+                                <th style="text-align: right;">Acciones de Asistencia</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for b in bookings %}
+                            <tr>
+                                <td>
+                                    <div class="member-cell">
+                                        <img src="{{ b.member.avatar_url }}" alt="{{ b.member.full_name }}" class="member-avatar">
+                                        <div>
+                                            <a href="{% url 'members:detail' b.member.pk %}" style="font-weight: 700; color: #ffffff; text-decoration: none;">
+                                                {{ b.member.full_name }}
+                                            </a>
+                                            <div class="member-meta">DNI: {{ b.member.dni }}</div>
+                                            {% if b.notes %}
+                                                <div style="font-size: 0.7rem; color: var(--gold-primary); margin-top: 0.15rem;">💬 {{ b.notes }}</div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    {% if b.member.plan %}
+                                        <span class="badge" style="background: rgba(245, 184, 46, 0.1); border: 1px solid var(--border-gold); color: var(--gold-primary);">
+                                            {{ b.member.plan.name }}
+                                        </span>
+                                    {% else %}
+                                        <span class="badge badge-secondary">Sin Plan</span>
+                                    {% endif %}
+                                </td>
+                                <td style="font-size: 0.8rem; color: var(--text-secondary);">
+                                    {{ b.booking_date|date:"d/m/Y H:i" }}
+                                </td>
+                                <td>
+                                    <span class="badge {{ b.status_badge_class }}">
+                                        {{ b.get_status_display }}
+                                    </span>
+                                </td>
+                                <td style="text-align: right;">
+                                    <div style="display: inline-flex; gap: 0.4rem; align-items: center;">
+                                        
+                                        <!-- Botón Presente -->
+                                        <form method="post" action="{% url 'classes:booking_status_update' b.pk %}" style="display: inline;">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="status" value="PRESENTE">
+                                            <button type="submit" class="btn-outline" style="padding: 0.25rem 0.5rem; font-size: 0.75rem; border-color: {% if b.status == 'PRESENTE' %}#10b981{% else %}var(--border-color){% endif %}; background: {% if b.status == 'PRESENTE' %}rgba(16, 185, 129, 0.2){% else %}transparent{% endif %}; color: {% if b.status == 'PRESENTE' %}#10b981{% else %}var(--text-secondary){% endif %};" title="Marcar como Presente">
+                                                ✅ Presente
+                                            </button>
+                                        </form>
+
+                                        <!-- Botón Ausente -->
+                                        <form method="post" action="{% url 'classes:booking_status_update' b.pk %}" style="display: inline;">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="status" value="AUSENTE">
+                                            <button type="submit" class="btn-outline" style="padding: 0.25rem 0.5rem; font-size: 0.75rem; border-color: {% if b.status == 'AUSENTE' %}#ef4444{% else %}var(--border-color){% endif %}; background: {% if b.status == 'AUSENTE' %}rgba(239, 68, 68, 0.2){% else %}transparent{% endif %}; color: {% if b.status == 'AUSENTE' %}#ef4444{% else %}var(--text-secondary){% endif %};" title="Marcar como Ausente">
+                                                ❌ Ausente
+                                            </button>
+                                        </form>
+
+                                        <!-- Botón Dar de baja / Cancelar reserva -->
+                                        <form method="post" action="{% url 'classes:booking_delete' b.pk %}" onsubmit="return confirm('¿Desinscribir a {{ b.member.full_name }} y liberar el cupo?');" style="display: inline;">
+                                            {% csrf_token %}
+                                            <button type="submit" class="logout-icon-btn" style="padding: 0.3rem 0.5rem; border-radius: var(--radius-sm); border: 1px solid rgba(239, 68, 68, 0.3); font-size: 0.75rem;" title="Cancelar reserva y liberar cupo">
+                                                🗑️
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div style="text-align: center; padding: 2.5rem 1rem; color: var(--text-muted);">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 0.75rem; opacity: 0.5;">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    <p style="font-size: 0.95rem; color: #ffffff; font-weight: 600; margin-bottom: 0.25rem;">Aún no hay alumnos inscriptos</p>
+                    <p style="font-size: 0.85rem;">Utiliza el formulario de arriba para buscar y anotar al primer socio a esta clase.</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
